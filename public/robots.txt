@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: trocar pelo domínio real quando comprar
+Sitemap: https://kouichi.dev/sitemap.xml

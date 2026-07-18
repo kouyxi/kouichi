@@ -1,0 +1,211 @@
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* ---------- lenis smooth scroll ---------- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4, p, figure { margin: 0; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; border: none; background: none; cursor: pointer; }
+ul { margin: 0; padding: 0; list-style: none; }
+::selection { background: var(--clay); color: var(--paper); }
+
+/* ---------- palette (light) ---------- */
+:root {
+  --paper: #F3EAD8;
+  --paper-2: #E9DBC1;
+  --card: #FBF6EC;
+  --ink: #171309;
+  --ink-2: #3B342400;
+  --clay: #DC5B2C;
+  --clay-deep: #B0401C;
+  --moss: #3D4B2C;
+  --moss-lit: #6F8347;
+
+  --line: rgba(23, 19, 9, 0.16);
+  --grid-line: rgba(23, 19, 9, 0.07);
+  --hard: 4px 4px 0 0 var(--ink);
+  --hard-lg: 6px 6px 0 0 var(--ink);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+
+  --container: 1240px;
+  --edge: clamp(1.25rem, 5vw, 4rem);
+  --ease: cubic-bezier(0.22, 0.7, 0.2, 1);
+}
+
+/* ---------- type scale ---------- */
+.display-1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(3rem, 8.5vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+}
+.display-2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.15rem, 5vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.76rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.body-lg {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.35vw, 1.22rem);
+  line-height: 1.55;
+}
+.index {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  opacity: 0.55;
+}
+
+/* ---------- layout helpers ---------- */
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--edge);
+}
+.section-light { background: var(--paper); color: var(--ink); position: relative; }
+.section-ink { background: var(--ink); color: var(--paper); position: relative; }
+
+/* ---------- craft: graph-paper grid (used sparingly) ---------- */
+.craft-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 30px 30px;
+  -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 45%, #000 0%, transparent 78%);
+  mask-image: radial-gradient(ellipse 60% 55% at 50% 45%, #000 0%, transparent 78%);
+}
+
+/* ---------- grain (subtle paper tooth) ---------- */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- buttons (brutalist: hard border + offset shadow) ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.5rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: var(--hard);
+  transition: box-shadow 0.2s var(--ease), color 0.3s var(--ease);
+}
+.btn > * { position: relative; z-index: 1; }
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transform: translateY(102%);
+  transition: transform 0.4s var(--ease);
+}
+.btn:hover { box-shadow: 2px 2px 0 0 var(--ink); }
+.btn:active { box-shadow: 0 0 0 0 var(--ink); }
+.btn .arrow, .btn .wa { transition: transform 0.25s var(--ease), color 0.3s var(--ease); }
+.btn:hover .arrow { transform: translateX(3px); }
+.btn:hover .wa { transform: scale(1.08); }
+
+.btn-cta { background: var(--clay); color: var(--ink); }
+.btn-cta::before { background: var(--clay-deep); }
+.btn-cta:hover { color: var(--paper); }
+
+.btn-outline { background: var(--card); color: var(--ink); }
+.btn-outline::before { background: var(--ink); }
+.btn-outline:hover { color: var(--paper); }
+
+/* ---------- animated link underline ---------- */
+.link-sweep { position: relative; }
+.link-sweep::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 100%;
+  background: var(--clay);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+.link-sweep:hover::after { transform: scaleX(1); }
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------- marquee ---------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- staggered headline reveal (on load) ---------- */
+.title-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  animation: titleUp 0.9s var(--ease) forwards;
+}
+.title-line:nth-child(1) { animation-delay: 0.08s; }
+.title-line:nth-child(2) { animation-delay: 0.2s; }
+.title-line:nth-child(3) { animation-delay: 0.32s; }
+@keyframes titleUp {
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .title-line { opacity: 1; transform: none; animation: none; }
+  .btn::before { display: none; }
+}
