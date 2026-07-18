@@ -30,6 +30,7 @@ const year = new Date().getFullYear()
           :href="whatsapp"
           target="_blank"
           rel="noopener"
+          data-track="wa_footer"
           class="btn btn-cta close-cta"
         >
           <WaIcon class="wa" :size="22" />

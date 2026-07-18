@@ -8,6 +8,7 @@ const whatsapp = 'https://wa.me/556200000000'
     :href="whatsapp"
     target="_blank"
     rel="noopener"
+    data-track="wa_fab"
     class="wa-fab"
     aria-label="Falar no WhatsApp"
   >

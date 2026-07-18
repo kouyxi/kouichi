@@ -40,7 +40,7 @@ const whatsapp = 'https://wa.me/556200000000?text=' + encodeURIComponent('Oi! Fi
         <p class="faq-note">
           Não achou o que precisava? Manda no WhatsApp — respondo direto.
         </p>
-        <a :href="whatsapp" target="_blank" rel="noopener" class="btn btn-cta faq-cta" v-magnetic="{ strength: 0.24 }">
+        <a :href="whatsapp" target="_blank" rel="noopener" data-track="wa_faq" class="btn btn-cta faq-cta" v-magnetic="{ strength: 0.24 }">
           <WaIcon class="wa" :size="18" />
           Tirar dúvida
         </a>

@@ -22,7 +22,7 @@ const whatsapp = 'https://wa.me/556200000000'
         </a>
       </nav>
 
-      <a v-magnetic="{ strength: 0.2 }" :href="whatsapp" target="_blank" rel="noopener" class="btn btn-cta header-cta">
+      <a v-magnetic="{ strength: 0.2 }" :href="whatsapp" target="_blank" rel="noopener" data-track="wa_header" class="btn btn-cta header-cta">
         <WaIcon class="wa" :size="17" />
         WhatsApp
       </a>

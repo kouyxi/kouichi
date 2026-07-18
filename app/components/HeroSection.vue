@@ -57,7 +57,7 @@ onMounted(() => {
           </p>
 
           <div class="hero-actions" v-reveal="{ delay: 160 }">
-            <a v-magnetic="{ strength: 0.28 }" :href="whatsapp" target="_blank" rel="noopener" class="btn btn-cta">
+            <a v-magnetic="{ strength: 0.28 }" :href="whatsapp" target="_blank" rel="noopener" data-track="wa_hero" class="btn btn-cta">
               <WaIcon class="wa" :size="19" />
               Começar no WhatsApp
             </a>
