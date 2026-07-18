@@ -24,15 +24,13 @@ export default defineNuxtConfig({
     ]
   },
 
-  // IDs de métricas — preenchidos por variável de ambiente (build-time no SSG).
-  // Cloudflare Pages → Settings → Variables:
-  //   NUXT_PUBLIC_CLARITY_ID = xxxxxxxxxx
-  //   NUXT_PUBLIC_GA_ID       = G-XXXXXXXXXX
-  // Enquanto vazios, nenhum script de métrica é carregado.
+  // IDs de métricas (públicos — aparecem no HTML de qualquer forma).
+  // Cravados como padrão pra funcionar sem depender de env var; ainda dá pra
+  // sobrescrever via NUXT_PUBLIC_CLARITY_ID / NUXT_PUBLIC_GA_ID no Cloudflare.
   runtimeConfig: {
     public: {
-      clarityId: '',
-      gaId: ''
+      clarityId: 'xoelmjczir',
+      gaId: 'G-FSXL9WXYXS'
     }
   },
 
