@@ -8,7 +8,8 @@ const steps = [
 </script>
 
 <template>
-  <section id="como-funciona" class="section-light process">
+  <section id="como-funciona" class="process">
+    <div class="craft-grid proc-grid" aria-hidden="true" />
     <div class="container">
       <header class="sec-head" v-reveal>
         <span class="index">(02)</span>
@@ -33,18 +34,32 @@ const steps = [
 </template>
 
 <style scoped>
-.process { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+.process {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  background: var(--moss);
+  color: var(--paper);
+  border-block: 2px solid var(--ink);
+}
+.proc-grid {
+  inset: 0;
+  --grid-line: rgba(243, 234, 216, 0.08);
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 40%, #000, transparent 80%);
+          mask-image: radial-gradient(ellipse 75% 70% at 50% 40%, #000, transparent 80%);
+}
+.container { position: relative; z-index: 2; }
 
 .sec-head {
   display: grid;
   gap: 1.5rem;
   padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
 }
-.sec-head .index { display: block; }
+.sec-head .index { display: block; color: var(--paper); opacity: 0.5; }
 .sec-head-main .eyebrow { margin-bottom: 0.75rem; }
 .accent { color: var(--clay); }
 .sec-head-main em { font-style: italic; color: var(--clay); }
-.sec-note { max-width: 30rem; opacity: 0.78; line-height: 1.55; font-size: 0.98rem; }
+.sec-note { max-width: 30rem; opacity: 0.75; line-height: 1.55; font-size: 0.98rem; }
 @media (min-width: 900px) {
   .sec-head { grid-template-columns: auto 1fr auto; align-items: end; column-gap: 2.5rem; }
   .sec-note { max-width: 22rem; }
@@ -53,7 +68,7 @@ const steps = [
 .steps { display: grid; gap: 1.75rem; list-style: none; padding: 0; margin: 0; }
 @media (min-width: 820px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
 
-.step { padding-top: 1.25rem; border-top: 2px solid var(--ink); }
+.step { padding-top: 1.25rem; border-top: 2px solid rgba(243, 234, 216, 0.35); }
 .step-num {
   display: block;
   font-family: var(--font-display);

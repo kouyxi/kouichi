@@ -18,6 +18,9 @@ export default defineAppConfig({
     // Imagem grande do topo (arquivo em public/img/)
     heroImage: '/img/hero-placeholder.jpg',
 
+    // Sua foto na seção "Sobre" (arquivo em public/img/). Vazio = mostra placeholder "Sua foto aqui".
+    aboutPhoto: '',
+
     // ── PLANOS ─────────────────────────────────────────────────
     // Ordem = ordem na página. highlight:true dá o destaque visual.
     // badge: texto do selo (deixe '' pra não mostrar).
@@ -27,9 +30,9 @@ export default defineAppConfig({
         price: 'A partir de R$350',
         forWhom: 'Você tem um serviço ou uma oferta e quer um lugar simples e convincente pra mandar quem vê seu anúncio, Instagram ou Google. Uma página só, que rola de cima a baixo e termina no WhatsApp.',
         features: [
-          '1 página só — rola tudo numa tela, sem menu',
-          'Design sob medida (nada de template pronto)',
           'Copy de conversão + WhatsApp fixo',
+          '1 página responsiva — foco numa ação só',
+          'Design sob medida (nada de template pronto)',
           'Métrica de visita inclusa (GA4 + mapa de calor)',
           'HTTPS e boas práticas — sem porta aberta',
           'Ajustes inclusos por 15 dias'
@@ -45,9 +48,9 @@ export default defineAppConfig({
         forWhom: 'Você tem vários serviços (ou quer explicar bem quem é) e precisa parecer estabelecido. Um site de verdade, com menu e várias páginas — Início, Serviços, Sobre, Contato.',
         features: [
           'Tudo do One Page, e mais:',
+          'Uma página pra cada serviço → achado no Google de cada busca',
           'Várias páginas com menu (Início, Serviços, Sobre, Contato)',
           'Blog pronto pra publicar (autoridade + SEO)',
-          'Uma página pra cada serviço → achado no Google de cada busca',
           'Espaço pra prova social, equipe e diferenciais',
           'Ajustes inclusos por 30 dias'
         ],

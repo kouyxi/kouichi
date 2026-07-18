@@ -50,8 +50,9 @@ const link = (text: string) => waLink(text)
               :class="p.highlight ? 'btn-cta' : 'btn-outline'"
             >
               <WaIcon class="wa" :size="17" />
-              Falar sobre
+              Quero este plano
             </a>
+            <span class="cta-trigger">Resposta no mesmo dia · sem compromisso</span>
           </div>
         </article>
       </div>
@@ -161,6 +162,7 @@ const link = (text: string) => waLink(text)
 }
 .pkg-prazo { font-size: 0.82rem; opacity: 0.7; }
 .pkg-foot .btn { width: 100%; justify-content: center; }
+.cta-trigger { width: 100%; text-align: center; font-size: 0.72rem; opacity: 0.65; margin-top: -0.35rem; }
 .pkg.hot .btn-outline { background: transparent; color: var(--paper); }
 .pkg.hot .btn-outline::before { background: var(--paper); }
 .pkg.hot .btn-outline:hover { color: var(--ink); }

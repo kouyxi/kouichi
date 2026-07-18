@@ -46,14 +46,14 @@ onMounted(() => {
       <div class="hero-grid">
         <div class="hero-copy">
           <h1 class="display-1 hero-title">
-            <span class="title-line">Seu site pode</span>
-            <span class="title-line">fazer o <em>telefone</em></span>
-            <span class="title-line"><em>tocar.</em></span>
+            <span class="title-line">Seu trabalho é bom.</span>
+            <span class="title-line">Seu site precisa</span>
+            <span class="title-line"><em>mostrar isso.</em></span>
           </h1>
 
           <p class="body-lg hero-sub" v-reveal="{ delay: 90 }">
-            Sites e landing pages desenhados pra transformar visita em contato —
-            cada seção pensada pra gerar cliente, não só pra ficar bonita.
+            Sites e landing pages que transformam quem te encontra em contato no
+            WhatsApp — cada detalhe pensado pra gerar cliente, não só pra ficar bonito.
           </p>
 
           <div class="hero-actions" v-reveal="{ delay: 160 }">
@@ -63,6 +63,7 @@ onMounted(() => {
             </a>
             <a href="#como-funciona" class="btn btn-outline">Ver como funciona</a>
           </div>
+          <p class="cta-note" v-reveal="{ delay: 190 }">Resposta no mesmo dia · sem compromisso</p>
 
           <ul class="provas" v-reveal="{ delay: 220 }">
             <li v-for="p in provas" :key="p">{{ p }}</li>
@@ -97,7 +98,7 @@ onMounted(() => {
 
 <style scoped>
 .hero {
-  padding-block: clamp(1.75rem, 4vw, 2.75rem) clamp(2rem, 5vw, 3.5rem);
+  padding-block: clamp(1.25rem, 2.5vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
   overflow: hidden;
   position: relative;
 }
@@ -137,7 +138,7 @@ onMounted(() => {
   align-items: center;
   gap: 1.25rem;
   flex-wrap: wrap;
-  padding-bottom: clamp(1.75rem, 4vw, 3rem);
+  padding-bottom: clamp(1rem, 2.5vw, 1.75rem);
   border-bottom: 2px solid var(--line);
 }
 .meta-row .eyebrow { opacity: 0.9; }
@@ -164,9 +165,9 @@ onMounted(() => {
 
 .hero-grid {
   display: grid;
-  gap: clamp(2.5rem, 6vw, 4rem);
+  gap: clamp(2rem, 5vw, 3.25rem);
   align-items: center;
-  padding-top: clamp(2rem, 5vw, 3.5rem);
+  padding-top: clamp(1.25rem, 3vw, 2.25rem);
 }
 
 .accent { color: var(--clay); }
@@ -175,22 +176,25 @@ onMounted(() => {
   font-style: italic;
   color: var(--clay);
 }
+.hero-title { font-size: clamp(2.15rem, 5.4vw, 4.1rem); }
+.hero-title .title-line { display: block; }
 .hero-sub {
-  margin-top: 1.6rem;
+  margin-top: 1.2rem;
   max-width: 33rem;
   opacity: 0.82;
 }
+.cta-note { margin-top: 0.85rem; font-size: 0.8rem; opacity: 0.6; }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 2.25rem;
+  margin-top: 1.6rem;
 }
 
 .provas {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.1rem;
   border-top: 2px solid var(--ink);
   display: flex;
   flex-wrap: wrap;
@@ -210,8 +214,8 @@ onMounted(() => {
 .hero-visual {
   position: relative;
   justify-self: center;
-  width: min(100%, 28rem);
-  aspect-ratio: 4 / 5;
+  width: min(100%, 24rem);
+  aspect-ratio: 4 / 4.4;
 }
 .layer { position: absolute; transition: transform 0.14s var(--ease); will-change: transform; }
 
@@ -309,7 +313,7 @@ onMounted(() => {
 }
 
 @media (min-width: 900px) {
-  .hero-grid { grid-template-columns: 1.08fr 0.92fr; }
+  .hero-grid { grid-template-columns: 1.2fr 0.8fr; }
   .hero-visual { justify-self: end; margin-right: -1rem; }
   .scroll-cue { display: inline-flex; }
 }

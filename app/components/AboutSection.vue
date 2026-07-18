@@ -4,13 +4,19 @@ const principios = [
   { n: '02', t: 'Cada elemento tem função', d: 'Nada entra só por enfeite. Se não ajuda o visitante a agir, sai.' },
   { n: '03', t: 'Preço e escopo claros', d: 'Você sabe o que está incluso e quanto custa antes de fechar. Sem surpresa depois.' }
 ]
+
+const { aboutPhoto } = useSite()
 </script>
 
 <template>
-  <section id="sobre" class="section-light about">
+  <section id="sobre" class="section-ink about">
     <div class="craft-grid about-craft" aria-hidden="true" data-parallax="6" />
     <div class="container about-grid">
       <div class="about-copy" v-reveal>
+        <div class="portrait" :class="{ empty: !aboutPhoto }">
+          <img v-if="aboutPhoto" :src="aboutPhoto" alt="Kouichi" />
+          <span v-else>Sua foto<br>aqui</span>
+        </div>
         <span class="index">(04)</span>
         <p class="eyebrow accent">Sobre</p>
         <h2 class="display-2">
@@ -47,7 +53,7 @@ const principios = [
 
 <style scoped>
 .about { padding-block: clamp(3.5rem, 8vw, 6.5rem); position: relative; overflow: hidden; }
-.about-craft { inset: 10% -5% 10% 45%; opacity: 0.7; }
+.about-craft { inset: 10% -5% 10% 45%; opacity: 0.7; --grid-line: rgba(243, 234, 216, 0.07); }
 
 .about-grid {
   position: relative;
@@ -59,13 +65,42 @@ const principios = [
   .about-grid { grid-template-columns: 1.05fr 0.95fr; align-items: start; }
 }
 
+.portrait {
+  width: clamp(6.5rem, 14vw, 8.5rem);
+  aspect-ratio: 4 / 5;
+  border: 2px solid var(--paper);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 5px 5px 0 0 var(--clay);
+  background: var(--card);
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.portrait.empty {
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border-color: rgba(243, 234, 216, 0.35);
+  border-style: dashed;
+  box-shadow: none;
+}
+.portrait.empty span {
+  font-size: 0.72rem;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(243, 234, 216, 0.55);
+}
+
 .about-copy .index { display: block; }
 .about-copy .eyebrow { margin: 0.75rem 0; }
 .accent { color: var(--clay); }
 .about-copy em { font-style: italic; color: var(--clay); }
 .about-text { margin-top: 1.75rem; display: grid; gap: 1rem; max-width: 34rem; }
 .about-text p { line-height: 1.6; opacity: 0.85; }
-.about-text strong { color: var(--ink); opacity: 1; }
+.about-text strong { color: var(--paper); opacity: 1; }
 
 .principios {
   display: grid;
@@ -74,7 +109,8 @@ const principios = [
   border-radius: 12px;
   overflow: hidden;
   background: var(--card);
-  box-shadow: var(--hard-lg);
+  color: var(--ink);
+  box-shadow: 6px 6px 0 0 var(--clay);
 }
 .principio {
   display: flex;

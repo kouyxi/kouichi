@@ -39,6 +39,7 @@ const year = new Date().getFullYear()
       </div>
     </div>
 
+    <div class="footer-base">
     <div class="container footer-bottom">
       <a href="#topo" class="foot-logo">
         <MikanMark class="foot-mark" />
@@ -69,6 +70,7 @@ const year = new Date().getFullYear()
       <p>© {{ year }} Kouichi — design &amp; desenvolvimento próprios.</p>
       <p class="made">Feito em Goiânia, com café.</p>
     </div>
+    </div>
   </footer>
 </template>
 
@@ -91,7 +93,12 @@ const year = new Date().getFullYear()
   position: relative;
   z-index: 2;
   padding-bottom: clamp(3rem, 6vw, 4.5rem);
-  border-bottom: 2px solid rgba(243, 234, 216, 0.18);
+}
+.footer-base {
+  position: relative;
+  z-index: 2;
+  background: #0a0703;
+  border-top: 2px solid rgba(243, 234, 216, 0.16);
 }
 .footer-close .index { display: block; color: var(--paper); opacity: 0.5; }
 .footer-close .eyebrow { margin: 0.9rem 0 1.25rem; }

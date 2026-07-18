@@ -31,6 +31,7 @@ const whatsapp = useSite().waLink('Oi! Fiquei com uma dúvida sobre o site.')
 
 <template>
   <section id="faq" class="section-light faq">
+    <div class="craft-grid faq-bg" aria-hidden="true" />
     <div class="container faq-grid">
       <header class="faq-head" v-reveal>
         <span class="index">(06)</span>
@@ -60,8 +61,9 @@ const whatsapp = useSite().waLink('Oi! Fiquei com uma dúvida sobre o site.')
 </template>
 
 <style scoped>
-.faq { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
-.faq-grid { display: grid; gap: clamp(2.5rem, 5vw, 4rem); }
+.faq { padding-block: clamp(3.5rem, 8vw, 6.5rem); background: var(--paper-2); position: relative; overflow: hidden; }
+.faq-bg { --grid-line: rgba(23, 19, 9, 0.06); }
+.faq-grid { position: relative; z-index: 2; display: grid; gap: clamp(2.5rem, 5vw, 4rem); }
 @media (min-width: 900px) {
   .faq-grid { grid-template-columns: 0.85fr 1.15fr; align-items: start; }
   .faq-head { position: sticky; top: 6rem; }

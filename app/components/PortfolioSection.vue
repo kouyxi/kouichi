@@ -9,7 +9,7 @@ const { projects: projetos } = useSite()
         <span class="index">(05)</span>
         <div>
           <p class="eyebrow accent">Portfólio</p>
-          <h2 class="display-2">Projetos <em>demonstrativos.</em></h2>
+          <h2 class="display-2">O método, <em>aplicado.</em></h2>
         </div>
         <p class="sec-note">
           Conceitos que mostram o método aplicado a nichos reais de Goiânia.
@@ -51,7 +51,7 @@ const { projects: projetos } = useSite()
 </template>
 
 <style scoped>
-.portfolio { padding-block: clamp(3.5rem, 8vw, 6.5rem); background: var(--paper-2); }
+.portfolio { padding-block: clamp(3.5rem, 8vw, 6.5rem); background: var(--paper); }
 
 .sec-head {
   display: grid;
