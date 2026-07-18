@@ -13,7 +13,7 @@ const whatsapp = 'https://wa.me/556200000000'
   <header class="header">
     <div class="container bar">
       <a href="#topo" class="logo">
-        <NeroliMark class="logo-mark" />
+        <MikanMark class="logo-mark" />
         <span class="logo-word">Kouichi<span class="dot">.</span></span>
       </a>
 
@@ -53,7 +53,7 @@ const whatsapp = 'https://wa.me/556200000000'
   gap: 0.5rem;
   font-size: 1.5rem;
 }
-.logo-mark { width: 1.4em; height: 1.4em; flex-shrink: 0; }
+.logo-mark { width: 1.55em; height: 1.55em; flex-shrink: 0; }
 .logo-word {
   font-family: var(--font-display);
   font-style: italic;

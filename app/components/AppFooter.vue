@@ -42,7 +42,7 @@ const year = new Date().getFullYear()
 
     <div class="container footer-bottom">
       <a href="#topo" class="foot-logo">
-        <NeroliMark class="foot-mark" />
+        <MikanMark class="foot-mark" />
         <span class="foot-word">Kouichi<span class="dot">.</span></span>
       </a>
 
@@ -153,7 +153,7 @@ const year = new Date().getFullYear()
   gap: 0.55rem;
   font-size: 1.8rem;
 }
-.foot-mark { width: 1.35em; height: 1.35em; flex-shrink: 0; }
+.foot-mark { width: 1.5em; height: 1.5em; flex-shrink: 0; --mark-shadow: var(--paper); }
 .foot-word {
   font-family: var(--font-display);
   font-style: italic;
