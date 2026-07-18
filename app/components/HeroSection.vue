@@ -139,7 +139,7 @@ onMounted(() => {
   gap: 1.25rem;
   flex-wrap: wrap;
   padding-bottom: clamp(1.75rem, 4vw, 3rem);
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 2px solid var(--line);
 }
 .meta-row .eyebrow { opacity: 0.9; }
 .status {
