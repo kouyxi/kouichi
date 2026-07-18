@@ -41,7 +41,10 @@ const year = new Date().getFullYear()
     </div>
 
     <div class="container footer-bottom">
-      <a href="#topo" class="foot-logo">Kouichi<span class="dot">.</span></a>
+      <a href="#topo" class="foot-logo">
+        <NeroliMark class="foot-mark" />
+        <span class="foot-word">Kouichi<span class="dot">.</span></span>
+      </a>
 
       <div class="footer-cols">
         <div class="footer-col">
@@ -145,10 +148,16 @@ const year = new Date().getFullYear()
   padding-block: clamp(2.5rem, 5vw, 3.5rem);
 }
 .foot-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1.8rem;
+}
+.foot-mark { width: 1.35em; height: 1.35em; flex-shrink: 0; }
+.foot-word {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 600;
-  font-size: 1.8rem;
 }
 .foot-logo .dot { color: var(--clay); }
 
