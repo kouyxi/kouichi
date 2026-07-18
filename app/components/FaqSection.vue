@@ -2,7 +2,7 @@
 const faqs = [
   {
     q: 'Quanto custa e como funciona o pagamento?',
-    a: 'Os pacotes começam em R$500 (ver seção de pacotes). O pagamento é 50% pra iniciar e 50% na entrega, antes de publicar. Pix à vista é o padrão.'
+    a: 'Os pacotes começam em R$350 (ver seção de pacotes). O pagamento é 50% pra iniciar e 50% na entrega, antes de publicar. Pix à vista é o padrão.'
   },
   {
     q: 'Qual o prazo de entrega?',
@@ -26,15 +26,14 @@ const faqs = [
   }
 ]
 
-// TODO: trocar pelo número real de WhatsApp
-const whatsapp = 'https://wa.me/556200000000?text=' + encodeURIComponent('Oi! Fiquei com uma dúvida sobre o site.')
+const whatsapp = useSite().waLink('Oi! Fiquei com uma dúvida sobre o site.')
 </script>
 
 <template>
   <section id="faq" class="section-light faq">
     <div class="container faq-grid">
       <header class="faq-head" v-reveal>
-        <span class="index">(05)</span>
+        <span class="index">(06)</span>
         <p class="eyebrow accent">Dúvidas</p>
         <h2 class="display-2">Antes de você <em>perguntar.</em></h2>
         <p class="faq-note">

@@ -1,38 +1,28 @@
 <script setup lang="ts">
-const projetos = [
-  {
-    nicho: 'Clínica odontológica',
-    objetivo: 'Transformar busca no Google em agendamento pelo WhatsApp.',
-    tags: ['Landing page', 'Agendamento', 'SEO local'],
-    tone: 'moss'
-  },
-  {
-    nicho: 'Escritório de advocacia',
-    objetivo: 'Passar autoridade e qualificar o contato antes da primeira conversa.',
-    tags: ['Institucional', 'Prova social', 'FAQ'],
-    tone: 'clay'
-  }
-]
+const { projects: projetos } = useSite()
 </script>
 
 <template>
   <section id="portfolio" class="section-light portfolio">
     <div class="container">
       <header class="sec-head" v-reveal>
-        <span class="index">(04)</span>
+        <span class="index">(05)</span>
         <div>
           <p class="eyebrow accent">Portfólio</p>
           <h2 class="display-2">Projetos <em>demonstrativos.</em></h2>
         </div>
         <p class="sec-note">
           Conceitos que mostram o método aplicado a nichos reais de Goiânia.
-          Casos com clientes reais entram aqui conforme forem ao ar.
+          Casos com clientes reais entram aqui conforme forem ao ar — os
+          primeiros projetos saem a valor de lançamento.
         </p>
       </header>
 
       <div class="grid">
         <article v-for="(p, i) in projetos" :key="p.nicho" class="proj" v-reveal="{ delay: i * 110 }">
           <div class="preview" :class="p.tone">
+            <img v-if="p.image" :src="p.image" :alt="p.nicho" class="proj-photo" />
+            <template v-else>
             <div class="craft-grid preview-grid" />
             <div class="browser" data-parallax="7">
               <span class="dots"><i /><i /><i /></span>
@@ -43,7 +33,8 @@ const projetos = [
                 <span class="wire-cta">WhatsApp</span>
               </div>
             </div>
-            <span class="demo-tag">Projeto demonstrativo</span>
+            </template>
+            <span v-if="!p.image" class="demo-tag">Projeto demonstrativo</span>
           </div>
 
           <div class="proj-body">
@@ -103,6 +94,7 @@ const projetos = [
 .preview.moss { background: var(--moss); }
 .preview.clay { background: var(--clay); }
 .preview-grid { inset: 0; opacity: 0.5; --grid-line: rgba(255,255,255,0.14); -webkit-mask-image: none; mask-image: none; }
+.proj-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 .browser {
   position: relative;

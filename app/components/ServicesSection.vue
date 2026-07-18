@@ -1,53 +1,20 @@
 <script setup lang="ts">
-// TODO: trocar pelo número real de WhatsApp (formato: 55DDDNÚMERO)
-const wa = '556200000000'
-function link(text: string) {
-  return `https://wa.me/${wa}?text=${encodeURIComponent(text)}`
-}
-
-const packages = [
-  {
-    name: 'One Page',
-    price: 'R$500–700',
-    forWhom: 'Autônomo ou serviço único que precisa de um canal direto pro WhatsApp.',
-    features: ['1 página responsiva', 'Copy focada em contato', 'Botão de WhatsApp fixo', 'Publicação + 2 ajustes'],
-    prazo: '5–7 dias úteis',
-    highlight: false,
-    waText: 'Oi! Tenho interesse no pacote One Page.'
-  },
-  {
-    name: 'Institucional',
-    price: 'R$700–1.200',
-    forWhom: 'Clínica, escritório ou empresa local que precisa passar autoridade.',
-    features: ['Múltiplas seções', 'Prova social + FAQ', 'SEO técnico de base', 'Publicação + 2 ajustes'],
-    prazo: '7–10 dias úteis',
-    highlight: true,
-    waText: 'Oi! Tenho interesse no pacote Institucional.'
-  },
-  {
-    name: 'Completo',
-    price: 'R$1.200+',
-    forWhom: 'Negócio com mais serviços, páginas extras e estrutura mais robusta.',
-    features: ['Várias páginas', 'Integrações sob medida', 'Rastreio de conversão', 'Publicação + 2 ajustes'],
-    prazo: '10–15 dias úteis',
-    highlight: false,
-    waText: 'Oi! Tenho interesse no pacote Completo.'
-  }
-]
+const { waLink, plans: packages } = useSite()
+const link = (text: string) => waLink(text)
 </script>
 
 <template>
   <section id="servicos" class="section-light services">
     <div class="container">
       <header class="sec-head" v-reveal>
-        <span class="index">(02)</span>
+        <span class="index">(03)</span>
         <div class="sec-head-main">
           <p class="eyebrow accent">Serviços &amp; pacotes</p>
           <h2 class="display-2">O que eu construo pra <em>você vender mais.</em></h2>
         </div>
         <p class="sec-note">
-          Preço aberto de propósito — pra você já saber onde entra antes da conversa.
-          O valor final depende do que o seu negócio precisa incluir.
+          Preço aberto de propósito — você já sabe onde entra antes da conversa.
+          São <strong>valores de lançamento</strong>: sobem conforme a agenda enche.
         </p>
       </header>
 
@@ -59,7 +26,7 @@ const packages = [
           :class="{ hot: p.highlight }"
           v-reveal="{ delay: i * 90 }"
         >
-          <span v-if="p.highlight" class="badge">Mais escolhido</span>
+          <span v-if="p.badge" class="badge">{{ p.badge }}</span>
           <div class="pkg-top">
             <span class="index">0{{ i + 1 }}</span>
             <h3 class="pkg-name">{{ p.name }}</h3>
@@ -90,8 +57,10 @@ const packages = [
       </div>
 
       <p class="ajuste-note" v-reveal>
-        Todo pacote inclui <strong>2 rodadas de ajuste</strong>. Depois disso,
-        novas alterações entram como orçamento à parte — combinado por escrito antes de começar.
+        <strong>Você aprova antes de publicar</strong> — 50% só na entrega, sem risco.
+        Ajuste = texto, imagem, cor e correção, dentro do período de cada plano;
+        página nova ou mudança de escopo entra à parte, combinada por escrito.
+        Depois do período, cuido do site por uma <strong>mensalidade opcional</strong>.
       </p>
     </div>
   </section>

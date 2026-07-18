@@ -11,7 +11,7 @@ const principios = [
     <div class="craft-grid about-craft" aria-hidden="true" data-parallax="6" />
     <div class="container about-grid">
       <div class="about-copy" v-reveal>
-        <span class="index">(03)</span>
+        <span class="index">(04)</span>
         <p class="eyebrow accent">Sobre</p>
         <h2 class="display-2">
           Um dev que <em>audita</em> o próprio código — não só escreve.

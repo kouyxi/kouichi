@@ -1,7 +1,6 @@
 <script setup lang="ts">
-// TODO: trocar pelos dados reais
-const whatsapp = 'https://wa.me/556200000000?text=' + encodeURIComponent('Oi! Quero começar meu site.')
-const email = 'contato@kouichi.dev'
+const { waLink, email } = useSite()
+const whatsapp = waLink('Oi! Quero começar meu site.')
 
 const links = [
   { label: 'Serviços', href: '#servicos' },
@@ -19,7 +18,7 @@ const year = new Date().getFullYear()
     <div class="grain" />
 
     <div class="container footer-close" v-reveal>
-      <span class="index">(06)</span>
+      <span class="index">(07)</span>
       <p class="eyebrow accent">Vamos conversar</p>
       <h2 class="close-title">
         Seu próximo cliente já está <em>procurando</em> você.
@@ -58,7 +57,7 @@ const year = new Date().getFullYear()
           <ul>
             <li><a :href="whatsapp" target="_blank" rel="noopener" class="link-sweep">WhatsApp</a></li>
             <li><a :href="`mailto:${email}`" class="link-sweep">{{ email }}</a></li>
-            <li>Goiânia — GO</li>
+            <li>{{ useSite().location }}</li>
           </ul>
         </div>
       </div>

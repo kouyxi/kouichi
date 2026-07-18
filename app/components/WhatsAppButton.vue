@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// TODO: trocar pelo número real de WhatsApp (formato: 55DDDNÚMERO)
-const whatsapp = 'https://wa.me/556200000000'
+const { waLink, waHello } = useSite()
+const whatsapp = waLink(waHello)
 </script>
 
 <template>
