@@ -19,7 +19,7 @@ export default defineAppConfig({
     heroImage: '/img/hero-placeholder.jpg',
 
     // Sua foto na seção "Sobre" (arquivo em public/img/). Vazio = mostra placeholder "Sua foto aqui".
-    aboutPhoto: '',
+    aboutPhoto: '/img/kouichi.jpg',
 
     // ── PLANOS ─────────────────────────────────────────────────
     // Ordem = ordem na página. highlight:true dá o destaque visual.
