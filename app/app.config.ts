@@ -88,20 +88,6 @@ export default defineAppConfig({
         tags: ['Landing page', 'SEO local', 'Antes/depois interativo', 'WhatsApp'],
         tone: 'clay',
         image: '/img/japan-parachoques.jpg'
-      },
-      {
-        nicho: 'Clínica odontológica',
-        objetivo: 'Transformar busca no Google em agendamento pelo WhatsApp.',
-        tags: ['Landing page', 'Agendamento', 'SEO local'],
-        tone: 'moss',
-        image: ''
-      },
-      {
-        nicho: 'Escritório de advocacia',
-        objetivo: 'Passar autoridade e qualificar o contato antes da primeira conversa.',
-        tags: ['Institucional', 'Prova social', 'FAQ'],
-        tone: 'clay',
-        image: ''
       }
     ]
   }

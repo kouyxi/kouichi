@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// TODO: trocar pelo domínio real quando publicar
-const siteUrl = 'https://kouichi.dev'
+const siteUrl = 'https://kouichi.com.br'
 const title = 'Kouichi — Sites e landing pages que convertem | Goiânia'
 const description =
   'Desenvolvimento de sites e landing pages focados em conversão para negócios de Goiânia e região. Estrutura, copy e design a serviço de gerar contato no WhatsApp.'
