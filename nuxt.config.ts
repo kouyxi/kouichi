@@ -21,7 +21,10 @@ export default defineNuxtConfig({
     families: [
       { name: 'Fraunces', provider: 'google', weights: [400, 500, 600, 700, 900], styles: ['normal', 'italic'] },
       { name: 'Space Grotesk', provider: 'google', weights: [400, 500, 600, 700] }
-    ]
+    ],
+    // Cloudflare Pages mishandles asset folders starting with "_" (flattens them,
+    // breaking the relative url() paths) — default prefix is "/_fonts/".
+    assets: { prefix: '/fonts/' }
   },
 
   // IDs de métricas (públicos — aparecem no HTML de qualquer forma).
