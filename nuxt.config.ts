@@ -2,17 +2,23 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/fonts'],
+  modules: ["nitro-cloudflare-dev"],
   css: ['~/assets/css/main.css'],
 
   // Static site: prerender everything to HTML → served from CDN, zero cold-start.
   ssr: true,
   nitro: {
-    preset: 'static',
+    preset: "cloudflare_module",
+
     prerender: {
       crawlLinks: true,
       routes: ['/'],
       failOnError: true
+    },
+
+    cloudflare: {
+      deployConfig: true,
+      nodeCompat: true
     }
   },
 
