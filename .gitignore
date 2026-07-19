@@ -25,3 +25,8 @@ logs
 
 # mockup local (não vai pro deploy)
 public/logo-lab.html
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
