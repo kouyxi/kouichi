@@ -83,6 +83,13 @@ export default defineAppConfig({
     // tone:  'moss' (verde) ou 'clay' (terracota) — cor do fundo do card.
     projects: [
       {
+        nicho: 'Japan Parachoques',
+        objetivo: 'Recuperação de parachoque em Goiânia — busca no Google e Instagram virando orçamento no WhatsApp.',
+        tags: ['Landing page', 'SEO local', 'Antes/depois interativo', 'WhatsApp'],
+        tone: 'clay',
+        image: '/img/japan-parachoques.jpg'
+      },
+      {
         nicho: 'Clínica odontológica',
         objetivo: 'Transformar busca no Google em agendamento pelo WhatsApp.',
         tags: ['Landing page', 'Agendamento', 'SEO local'],
