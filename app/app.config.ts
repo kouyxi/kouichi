@@ -87,7 +87,8 @@ export default defineAppConfig({
         objetivo: 'Recuperação de parachoque em Goiânia — busca no Google e Instagram virando orçamento no WhatsApp.',
         tags: ['Landing page', 'SEO local', 'Antes/depois interativo', 'WhatsApp'],
         tone: 'clay',
-        image: '/img/japan-parachoques.jpg'
+        image: '/img/japan-parachoques.jpg',
+        url: 'https://japan-parachoque.pages.dev/'
       }
     ]
   }

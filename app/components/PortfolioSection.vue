@@ -19,7 +19,16 @@ const { projects: projetos } = useSite()
       </header>
 
       <div class="grid">
-        <article v-for="(p, i) in projetos" :key="p.nicho" class="proj" v-reveal="{ delay: i * 110 }">
+        <component
+          :is="p.url ? 'a' : 'article'"
+          v-for="(p, i) in projetos"
+          :key="p.nicho"
+          class="proj"
+          :class="{ 'is-link': p.url }"
+          :href="p.url || undefined"
+          :target="p.url ? '_blank' : undefined"
+          :rel="p.url ? 'noopener' : undefined"
+          v-reveal="{ delay: i * 110 }">
           <div class="preview" :class="p.tone">
             <img v-if="p.image" :src="p.image" :alt="p.nicho" class="proj-photo" />
             <template v-else>
@@ -44,7 +53,7 @@ const { projects: projetos } = useSite()
               <li v-for="t in p.tags" :key="t">{{ t }}</li>
             </ul>
           </div>
-        </article>
+        </component>
       </div>
     </div>
   </section>
@@ -80,6 +89,7 @@ const { projects: projetos } = useSite()
   transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
 .proj:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--ink); }
+.proj.is-link { display: block; color: inherit; text-decoration: none; cursor: pointer; }
 
 .preview {
   position: relative;
