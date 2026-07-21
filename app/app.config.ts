@@ -16,10 +16,10 @@ export default defineAppConfig({
     location: 'Goiânia — GO',
 
     // Imagem grande do topo (arquivo em public/img/)
-    heroImage: '/img/hero-placeholder.jpg',
+    heroImage: '/img/hero-placeholder.webp',
 
     // Sua foto na seção "Sobre" (arquivo em public/img/). Vazio = mostra placeholder "Sua foto aqui".
-    aboutPhoto: '/img/kouichi.jpg',
+    aboutPhoto: '/img/kouichi.webp',
 
     // ── PLANOS ─────────────────────────────────────────────────
     // Ordem = ordem na página. highlight:true dá o destaque visual.
@@ -87,7 +87,7 @@ export default defineAppConfig({
         objetivo: 'Recuperação de parachoque em Goiânia — busca no Google e Instagram virando orçamento no WhatsApp.',
         tags: ['Landing page', 'SEO local', 'Antes/depois interativo', 'WhatsApp'],
         tone: 'clay',
-        image: '/img/japan-parachoques.jpg',
+        image: '/img/japan-parachoques.webp',
         url: 'https://japan-parachoque.pages.dev/'
       }
     ]

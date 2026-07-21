@@ -73,7 +73,7 @@ onMounted(() => {
         <div ref="visualEl" class="hero-visual" @mousemove="onMove" @mouseleave="onLeave" data-parallax="3">
           <div class="layer panel-terracotta" :style="layer(16)" />
           <div class="layer photo-frame" :style="layer(6)">
-            <img :src="heroImage" alt="" class="photo" />
+            <img :src="heroImage" alt="" class="photo" width="800" height="999" fetchpriority="high" decoding="async" />
             <div class="photo-tint" />
           </div>
           <div class="layer blueprint-layer" :style="layer(11)"><BlueprintOverlay /></div>

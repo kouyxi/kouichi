@@ -5,6 +5,7 @@ const description =
   'Desenvolvimento de sites e landing pages focados em conversão para negócios de Goiânia e região. Estrutura, copy e design a serviço de gerar contato no WhatsApp.'
 // Cartão de compartilhamento (1200x630) em /public/og.png
 const ogImage = `${siteUrl}/og.png`
+const { heroImage } = useSite()
 
 useHead({
   title,
@@ -25,6 +26,7 @@ useHead({
   ],
   link: [
     { rel: 'canonical', href: siteUrl },
+    { rel: 'preload', as: 'image', href: heroImage, fetchpriority: 'high' },
     { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }

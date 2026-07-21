@@ -14,7 +14,7 @@ const { aboutPhoto } = useSite()
     <div class="container about-grid">
       <div class="about-copy" v-reveal>
         <div class="portrait" :class="{ empty: !aboutPhoto }">
-          <img v-if="aboutPhoto" :src="aboutPhoto" alt="Kouichi" />
+          <img v-if="aboutPhoto" :src="aboutPhoto" alt="Kouichi" width="480" height="600" loading="lazy" decoding="async" />
           <span v-else>Sua foto<br>aqui</span>
         </div>
         <span class="index">(04)</span>

@@ -30,7 +30,7 @@ const { projects: projetos } = useSite()
           :rel="p.url ? 'noopener' : undefined"
           v-reveal="{ delay: i * 110 }">
           <div class="preview" :class="p.tone">
-            <img v-if="p.image" :src="p.image" :alt="p.nicho" class="proj-photo" />
+            <img v-if="p.image" :src="p.image" :alt="p.nicho" class="proj-photo" width="1000" height="625" loading="lazy" decoding="async" />
             <template v-else>
             <div class="craft-grid preview-grid" />
             <div class="browser" data-parallax="7">
