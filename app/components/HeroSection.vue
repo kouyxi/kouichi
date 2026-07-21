@@ -3,8 +3,8 @@ const { waLink, heroImage, waHello } = useSite()
 const whatsapp = waLink(waHello)
 
 const provas = [
+  'Você aprova antes de publicar · 50% só na entrega',
   'Conversão medida, não achismo',
-  'Contato direto pelo WhatsApp',
   'Goiânia & região'
 ]
 
@@ -33,8 +33,9 @@ onMounted(() => {
 <template>
   <section id="topo" class="section-light hero">
     <div class="craft-grid hero-craft" aria-hidden="true" />
+    <div class="hero-glow" aria-hidden="true" />
     <div class="grain" />
-    <p class="ghost-word" aria-hidden="true" data-parallax="7">CONVERTE</p>
+    <span class="hero-spine" aria-hidden="true">Design de conversão · Goiânia</span>
 
     <div class="container hero-inner">
       <div class="meta-row" v-reveal>
@@ -46,7 +47,8 @@ onMounted(() => {
       <div class="hero-grid">
         <div class="hero-copy">
           <h1 class="display-1 hero-title">
-            <span class="title-line">Seu trabalho é bom.</span>
+            <span class="title-line">Seu trabalho</span>
+            <span class="title-line">é bom.</span>
             <span class="title-line">Seu site precisa</span>
             <span class="title-line"><em>mostrar isso.</em></span>
           </h1>
@@ -61,7 +63,7 @@ onMounted(() => {
               <WaIcon class="wa" :size="19" />
               Começar no WhatsApp
             </a>
-            <a href="#como-funciona" class="btn btn-outline">Ver como funciona</a>
+            <a href="#como-funciona" class="text-link">Ver como funciona <span aria-hidden="true">→</span></a>
           </div>
           <p class="cta-note" v-reveal="{ delay: 190 }">Resposta no mesmo dia · sem compromisso</p>
 
@@ -71,19 +73,14 @@ onMounted(() => {
         </div>
 
         <div ref="visualEl" class="hero-visual" @mousemove="onMove" @mouseleave="onLeave" data-parallax="3">
-          <div class="layer panel-terracotta" :style="layer(16)" />
+          <div class="layer panel-terracotta" :style="layer(14)" />
           <div class="layer photo-frame" :style="layer(6)">
             <img :src="heroImage" alt="" class="photo" width="800" height="999" fetchpriority="high" decoding="async" />
-            <div class="photo-tint" />
+            <div class="photo-scrim" />
           </div>
-          <div class="layer blueprint-layer" :style="layer(11)"><BlueprintOverlay /></div>
-
-          <div class="layer floating-card card-a" :style="layer(28)">
+          <div class="layer floating-card card-a" :style="layer(24)">
             <span class="eyebrow accent">Método</span>
-            <p>UX &amp; design comportamental aplicado a negócio local</p>
-          </div>
-          <div class="layer floating-card card-b" :style="layer(20)">
-            <span class="tag">Traçado&nbsp;N.01</span>
+            <p>Cada decisão — estrutura, texto e visual — pensada pra virar contato.</p>
           </div>
         </div>
       </div>
@@ -98,36 +95,29 @@ onMounted(() => {
 
 <style scoped>
 .hero {
-  padding-block: clamp(1.25rem, 2.5vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
+  padding-block: clamp(1.5rem, 3vw, 2.75rem) clamp(1.5rem, 3vw, 2.5rem);
   overflow: hidden;
   position: relative;
 }
 
-/* craft grid patch — confined to the visual side, subtle */
+/* substrate 1 — faint blueprint grid: structure + "designed" texture, fades at edges */
 .hero-craft {
-  left: auto;
-  right: -4%;
-  width: 55%;
-  top: 8%;
-  bottom: 0;
-  opacity: 0.9;
-}
-
-.ghost-word {
-  position: absolute;
-  top: 6rem;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(6rem, 20vw, 16rem);
-  color: var(--ink);
-  opacity: 0.05;
-  letter-spacing: -0.03em;
-  white-space: nowrap;
-  pointer-events: none;
+  inset: 0;
   z-index: 0;
+  --grid-line: rgba(23, 19, 9, 0.08);
+  /* center the substrate low + right so it stays clear of the meta banner strip up top */
+  -webkit-mask-image: radial-gradient(ellipse 78% 70% at 66% 60%, #000 0%, transparent 82%);
+          mask-image: radial-gradient(ellipse 78% 70% at 66% 60%, #000 0%, transparent 82%);
+}
+/* substrate 2 — atmospheric depth: warm mikan light top-right, cool leaf pool bottom-left */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 52% at 80% 26%, rgba(234, 106, 30, 0.12), transparent 62%),
+    radial-gradient(48% 48% at 10% 92%, rgba(61, 75, 44, 0.08), transparent 60%);
 }
 
 .hero-inner { position: relative; z-index: 2; }
@@ -141,14 +131,15 @@ onMounted(() => {
   padding-bottom: clamp(1rem, 2.5vw, 1.75rem);
   border-bottom: 2px solid var(--line);
 }
-.meta-row .eyebrow { opacity: 0.9; }
+.meta-row .eyebrow { opacity: 1; }
+.meta-row .index { opacity: 0.75; }
 .status {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   margin-left: auto;
   font-size: 0.82rem;
-  opacity: 0.75;
+  opacity: 0.85;
 }
 .pulse {
   width: 8px; height: 8px;
@@ -165,21 +156,22 @@ onMounted(() => {
 
 .hero-grid {
   display: grid;
-  gap: clamp(2rem, 5vw, 3.25rem);
+  gap: clamp(2rem, 5vw, 3.75rem);
   align-items: center;
-  padding-top: clamp(1.25rem, 3vw, 2.25rem);
+  padding-top: clamp(1.75rem, 4vw, 3rem);
 }
 
 .accent { color: var(--clay); }
 
+/* one focal move: the headline is bigger and carries the hero */
 .hero-copy .display-1 em {
   font-style: italic;
   color: var(--clay);
 }
-.hero-title { font-size: clamp(2.15rem, 5.4vw, 4.1rem); }
+.hero-title { font-size: clamp(2.35rem, 5.6vw, 4.25rem); text-wrap: balance; }
 .hero-title .title-line { display: block; }
 .hero-sub {
-  margin-top: 1.2rem;
+  margin-top: 1.4rem;
   max-width: 33rem;
   opacity: 0.82;
 }
@@ -188,12 +180,56 @@ onMounted(() => {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
   margin-top: 1.6rem;
+}
+/* secondary action demoted to a text link so the orange CTA is the single clear choice */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding-block: 0.9rem;
+  position: relative;
+}
+.text-link span { transition: transform 0.25s var(--ease); }
+.text-link:hover span { transform: translateX(4px); }
+.text-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0.65rem;
+  width: 100%; height: 2px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+}
+.text-link:hover::after { transform: scaleX(1); }
+
+/* editorial spine — vertical margin label, a tategaki nod; desktop only */
+.hero-spine {
+  display: none;
+  position: absolute;
+  left: clamp(0.5rem, 1.8vw, 1.6rem);
+  top: 50%;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .provas {
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
   padding-top: 1.1rem;
   border-top: 2px solid var(--ink);
   display: flex;
@@ -210,48 +246,47 @@ onMounted(() => {
   border: 1px solid var(--ink);
 }
 
-/* collage visual */
+/* collage visual — pared to 3 elements: accent panel, framed photo, one credibility chip */
 .hero-visual {
   position: relative;
   justify-self: center;
-  width: min(100%, 24rem);
-  aspect-ratio: 4 / 4.4;
+  width: min(100%, 25rem);
+  aspect-ratio: 4 / 4.5;
 }
 .layer { position: absolute; transition: transform 0.14s var(--ease); will-change: transform; }
 
 .photo-frame {
-  inset: 6% 10% 4% 0;
-  border-radius: 999px 999px 30px 30px;
+  inset: 4% 8% 3% 2%;
+  border-radius: 999px 999px 28px 28px;
   overflow: hidden;
   border: 2px solid var(--ink);
   box-shadow: var(--hard-lg);
-  transform: rotate(-3deg);
+  transform: rotate(-2.5deg);
   background: var(--moss);
 }
 .photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(0.2) contrast(1.05) brightness(0.86);
+  filter: grayscale(0.15) contrast(1.04);
 }
-.photo-tint {
+/* scrim (layout.md): subtle bottom-anchored gradient for legibility/depth — not a muddy color wash */
+.photo-scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, var(--clay) 0%, transparent 45%, var(--moss) 100%);
-  mix-blend-mode: color;
-  opacity: 0.6;
+  background: linear-gradient(180deg, transparent 45%, rgba(23, 19, 9, 0.32) 100%);
+  pointer-events: none;
 }
 .panel-terracotta {
-  top: -5%;
-  right: -6%;
-  width: 46%;
-  height: 34%;
+  top: -4%;
+  right: -5%;
+  width: 44%;
+  height: 32%;
   background: var(--clay);
   border: 2px solid var(--ink);
   border-radius: 22px;
-  transform: rotate(9deg);
+  transform: rotate(8deg);
 }
-.blueprint-layer { inset: 4% 6%; opacity: 0.9; }
 
 .floating-card {
   background: var(--card);
@@ -261,26 +296,13 @@ onMounted(() => {
   box-shadow: var(--hard-lg);
 }
 .card-a {
-  bottom: -5%;
-  left: -9%;
+  bottom: -4%;
+  left: -8%;
   max-width: 12.5rem;
   padding: 1.05rem 1.2rem;
 }
 .card-a .eyebrow { display: block; margin-bottom: 0.4rem; }
 .card-a p { font-size: 0.85rem; line-height: 1.4; }
-.card-b {
-  top: 5%;
-  left: -4%;
-  padding: 0.55rem 0.9rem;
-  transform: rotate(-6deg);
-}
-.card-b .tag {
-  font-weight: 600;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--moss);
-}
 
 /* scroll cue */
 .scroll-cue {
@@ -313,12 +335,15 @@ onMounted(() => {
 }
 
 @media (min-width: 900px) {
-  .hero-grid { grid-template-columns: 1.2fr 0.8fr; }
-  .hero-visual { justify-self: end; margin-right: -1rem; }
+  .hero-grid { grid-template-columns: 1.25fr 0.75fr; }
+  .hero-visual { justify-self: end; margin-right: -0.5rem; }
   .scroll-cue { display: inline-flex; }
 }
-@media (max-width: 899px) {
-  .hero-craft { display: none; }
+@media (min-width: 1180px) {
+  .hero-spine { display: block; }
+}
+@media (max-width: 560px) {
+  .status { margin-left: 0; width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .pulse, .cue-line::after { animation: none; }

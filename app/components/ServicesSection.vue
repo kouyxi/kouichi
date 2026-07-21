@@ -39,7 +39,7 @@ const link = (text: string) => waLink(text)
           </ul>
 
           <div class="pkg-foot">
-            <span class="pkg-prazo">⏱ {{ p.prazo }}</span>
+            <span class="pkg-prazo">Prazo · {{ p.prazo }}</span>
             <a
               v-magnetic="{ strength: 0.2 }"
               :href="link(p.waText)"

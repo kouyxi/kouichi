@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     // self-hosted at build time (no external Google request → faster LCP, privacy-friendly)
     families: [
       { name: 'Fraunces', provider: 'google', weights: [400, 500, 600, 700, 900], styles: ['normal', 'italic'] },
-      { name: 'Space Grotesk', provider: 'google', weights: [400, 500, 600, 700] }
+      { name: 'Hanken Grotesk', provider: 'google', weights: [400, 500, 600, 700] }
     ],
     // Cloudflare Pages mishandles asset folders starting with "_" (flattens them,
     // breaking the relative url() paths) — default prefix is "/_fonts/".

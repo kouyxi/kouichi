@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const siteUrl = 'https://kouichi.com.br'
-const title = 'Kouichi — Sites e landing pages que convertem | Goiânia'
+const title = 'mikan — Sites e landing pages que convertem | Goiânia'
 const description =
   'Desenvolvimento de sites e landing pages focados em conversão para negócios de Goiânia e região. Estrutura, copy e design a serviço de gerar contato no WhatsApp.'
 // Cartão de compartilhamento (1200x630) em /public/og.png
@@ -11,9 +11,9 @@ useHead({
   title,
   meta: [
     { name: 'description', content: description },
-    { name: 'theme-color', content: '#F3EAD8' },
+    { name: 'theme-color', content: '#EAE3D5' },
     { property: 'og:type', content: 'website' },
-    { property: 'og:site_name', content: 'Kouichi' },
+    { property: 'og:site_name', content: 'mikan' },
     { property: 'og:title', content: title },
     { property: 'og:description', content: description },
     { property: 'og:url', content: siteUrl },
@@ -37,7 +37,7 @@ useHead({
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'ProfessionalService',
-        name: 'Kouichi — Desenvolvimento Web',
+        name: 'mikan — Desenvolvimento Web',
         description,
         url: siteUrl,
         areaServed: { '@type': 'City', name: 'Goiânia' },

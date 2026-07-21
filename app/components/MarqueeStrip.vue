@@ -15,7 +15,7 @@ const items = [
       <div v-for="n in 2" :key="n" class="marquee-group" aria-hidden="true">
         <span v-for="item in items" :key="item + n" class="marquee-item">
           {{ item }}
-          <span class="star">✳</span>
+          <span class="star">・</span>
         </span>
       </div>
     </div>

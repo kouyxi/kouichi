@@ -43,7 +43,7 @@ const year = new Date().getFullYear()
     <div class="container footer-bottom">
       <a href="#topo" class="foot-logo">
         <MikanMark class="foot-mark" />
-        <span class="foot-word">Kouichi<span class="dot">.</span></span>
+        <span class="foot-word">mikan<span class="dot">.</span></span>
       </a>
 
       <div class="footer-cols">
@@ -67,7 +67,7 @@ const year = new Date().getFullYear()
     </div>
 
     <div class="container colophon">
-      <p>© {{ year }} Kouichi — design &amp; desenvolvimento próprios.</p>
+      <p>© {{ year }} mikan — design &amp; desenvolvimento por Kouichi.</p>
       <p class="made">Feito em Goiânia, com café.</p>
     </div>
     </div>

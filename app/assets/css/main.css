@@ -25,15 +25,15 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* ---------- palette (light) ---------- */
 :root {
-  --paper: #F3EAD8;
-  --paper-2: #E9DBC1;
-  --card: #FBF6EC;
+  --paper: #EAE3D5;       /* warm oat/greige — off the yellow-cream default, lets the mandarin sing */
+  --paper-2: #DDD4C2;
+  --card: #F5F0E7;
   --ink: #171309;
-  --ink-2: #3B342400;
-  --clay: #DC5B2C;
-  --clay-deep: #B0401C;
-  --amber: #EFC15C;
-  --moss: #3D4B2C;
+  --ink-2: #5B5236;
+  --clay: #EA6A1E;        /* mikan — vivid mandarin, the brand color (juicy, not muddy terracotta) */
+  --clay-deep: #C6540F;
+  --amber: #EFC15C;       /* inner-segment warm */
+  --moss: #3D4B2C;        /* leaf/olive — grounds the citrus, wabi feel */
   --moss-lit: #6F8347;
 
   --line: rgba(23, 19, 9, 0.16);
@@ -42,7 +42,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   --hard-lg: 6px 6px 0 0 var(--ink);
 
   --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', system-ui, sans-serif;
 
   --container: 1240px;
   --edge: clamp(1.25rem, 5vw, 4rem);
@@ -198,8 +198,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   animation: titleUp 0.9s var(--ease) forwards;
 }
 .title-line:nth-child(1) { animation-delay: 0.08s; }
-.title-line:nth-child(2) { animation-delay: 0.2s; }
-.title-line:nth-child(3) { animation-delay: 0.32s; }
+.title-line:nth-child(2) { animation-delay: 0.18s; }
+.title-line:nth-child(3) { animation-delay: 0.28s; }
+.title-line:nth-child(4) { animation-delay: 0.38s; }
 @keyframes titleUp {
   to { opacity: 1; transform: none; }
 }

@@ -16,13 +16,11 @@ const open = ref(false)
     <div class="container bar">
       <a href="#topo" class="logo">
         <MikanMark class="logo-mark" />
-        <span class="logo-word">Kouichi<span class="dot">.</span></span>
+        <span class="logo-word">mikan<span class="dot">.</span></span>
       </a>
 
       <nav class="nav">
-        <a v-for="(l, i) in links" :key="l.href" :href="l.href" class="link-sweep">
-          <span class="nav-idx">0{{ i + 1 }}</span>{{ l.label }}
-        </a>
+        <a v-for="l in links" :key="l.href" :href="l.href" class="link-sweep">{{ l.label }}</a>
       </nav>
 
       <a v-magnetic="{ strength: 0.2 }" :href="whatsapp" target="_blank" rel="noopener" data-track="wa_header" class="btn btn-cta header-cta">
@@ -44,14 +42,12 @@ const open = ref(false)
     <Transition name="sheet">
       <nav v-if="open" class="mobile-menu">
         <a
-          v-for="(l, i) in links"
+          v-for="l in links"
           :key="l.href"
           :href="l.href"
           class="mobile-link"
           @click="open = false"
-        >
-          <span class="nav-idx">0{{ i + 1 }}</span>{{ l.label }}
-        </a>
+        >{{ l.label }}</a>
         <a
           :href="whatsapp"
           target="_blank"
@@ -73,7 +69,7 @@ const open = ref(false)
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(243, 234, 216, 0.82);
+  background: rgba(234, 227, 213, 0.82);
   backdrop-filter: blur(14px);
   border-bottom: 2px solid var(--ink);
 }
@@ -106,18 +102,10 @@ const open = ref(false)
   font-weight: 500;
 }
 .nav a {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.4rem;
   opacity: 0.82;
   transition: opacity 0.2s var(--ease);
 }
 .nav a:hover { opacity: 1; }
-.nav-idx {
-  font-size: 0.65rem;
-  color: var(--clay);
-  font-variant-numeric: tabular-nums;
-}
 
 .header-cta { font-size: 0.85rem; padding: 0.55rem 1.1rem; }
 
@@ -152,19 +140,15 @@ const open = ref(false)
   flex-direction: column;
   padding: 0.75rem 1.25rem 1.5rem;
   border-top: 2px solid var(--ink);
-  background: rgba(243, 234, 216, 0.98);
+  background: rgba(234, 227, 213, 0.98);
   backdrop-filter: blur(14px);
 }
 .mobile-link {
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
   padding: 0.9rem 0.25rem;
   font-size: 1.1rem;
   font-weight: 500;
   border-bottom: 1.5px solid var(--line);
 }
-.mobile-link .nav-idx { font-size: 0.7rem; color: var(--clay); }
 .mobile-cta { margin-top: 1.1rem; width: 100%; justify-content: center; }
 
 .sheet-enter-active, .sheet-leave-active { transition: opacity 0.2s var(--ease), transform 0.25s var(--ease); }

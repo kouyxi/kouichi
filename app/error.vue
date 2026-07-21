@@ -6,7 +6,7 @@ const { waLink, waHello } = useSite()
 const whatsapp = waLink(waHello)
 
 const is404 = computed(() => props.error?.statusCode === 404)
-useHead({ title: (is404.value ? '404' : 'Erro') + ' — Kouichi' })
+useHead({ title: (is404.value ? '404' : 'Erro') + ' — mikan' })
 </script>
 
 <template>
