@@ -68,7 +68,12 @@ const link = (text: string) => waLink(text)
 </template>
 
 <style scoped>
-.services { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+.services {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  background:
+    radial-gradient(58% 42% at 88% 12%, rgba(234, 106, 30, 0.06), transparent 60%),
+    var(--paper);
+}
 
 .sec-head {
   display: grid;

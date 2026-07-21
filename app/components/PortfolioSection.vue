@@ -60,7 +60,12 @@ const { projects: projetos } = useSite()
 </template>
 
 <style scoped>
-.portfolio { padding-block: clamp(3.5rem, 8vw, 6.5rem); background: var(--paper); }
+.portfolio {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  background:
+    radial-gradient(52% 42% at 10% 16%, rgba(61, 75, 44, 0.05), transparent 60%),
+    var(--paper);
+}
 
 .sec-head {
   display: grid;

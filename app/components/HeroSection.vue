@@ -22,7 +22,8 @@ function onMove(e: MouseEvent) {
 function onLeave() { mx.value = 0; my.value = 0 }
 function layer(depth: number) {
   if (reduceMotion.value) return {}
-  return { transform: `translate(${mx.value * depth}px, ${my.value * depth}px)` }
+  // parallax offset as CSS vars so each layer keeps its own base rotate()
+  return { '--px': `${mx.value * depth}px`, '--py': `${my.value * depth}px` }
 }
 
 onMounted(() => {
@@ -82,6 +83,7 @@ onMounted(() => {
             <span class="eyebrow accent">Método</span>
             <p>Cada decisão — estrutura, texto e visual — pensada pra virar contato.</p>
           </div>
+          <span class="fig-caption" aria-hidden="true">Fig. 01 — método aplicado</span>
         </div>
       </div>
 
@@ -261,7 +263,7 @@ onMounted(() => {
   overflow: hidden;
   border: 2px solid var(--ink);
   box-shadow: var(--hard-lg);
-  transform: rotate(-2.5deg);
+  transform: translate(var(--px, 0), var(--py, 0)) rotate(-2.5deg);
   background: var(--moss);
 }
 .photo {
@@ -282,10 +284,13 @@ onMounted(() => {
   right: -5%;
   width: 44%;
   height: 32%;
-  background: var(--clay);
+  /* halftone/riso tooth — the panel is now a textured decision, not a flat block */
+  background-color: var(--clay);
+  background-image: radial-gradient(rgba(23, 19, 9, 0.16) 1px, transparent 1.5px);
+  background-size: 9px 9px;
   border: 2px solid var(--ink);
   border-radius: 22px;
-  transform: rotate(8deg);
+  transform: translate(var(--px, 0), var(--py, 0)) rotate(8deg);
 }
 
 .floating-card {
@@ -300,9 +305,27 @@ onMounted(() => {
   left: -8%;
   max-width: 12.5rem;
   padding: 1.05rem 1.2rem;
+  transform: translate(var(--px, 0), var(--py, 0)) rotate(-1.5deg);
 }
-.card-a .eyebrow { display: block; margin-bottom: 0.4rem; }
+.card-a .eyebrow { margin-bottom: 0.4rem; }
 .card-a p { font-size: 0.85rem; line-height: 1.4; }
+
+/* blueprint figure caption — ties the collage to the "design studio" story */
+.fig-caption {
+  position: absolute;
+  bottom: -2.1rem;
+  right: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--ink);
+  opacity: 0.5;
+  z-index: 3;
+  pointer-events: none;
+}
 
 /* scroll cue */
 .scroll-cue {
@@ -334,9 +357,25 @@ onMounted(() => {
   60%, 100% { transform: translateX(100%); }
 }
 
+/* swing 2 — orchestrated load reveal; uses clip-path/opacity only, so it never
+   fights the parallax transform on these same layers */
+@keyframes heroPhotoWipe { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes heroLayerIn { from { opacity: 0; } to { opacity: 1; } }
+.photo { animation: heroPhotoWipe 0.9s var(--ease) 0.35s both; }
+.panel-terracotta { animation: heroLayerIn 0.6s var(--ease) 0.5s both; }
+.card-a { animation: heroLayerIn 0.55s var(--ease) 0.68s both; }
+
 @media (min-width: 900px) {
-  .hero-grid { grid-template-columns: 1.25fr 0.75fr; }
-  .hero-visual { justify-self: end; margin-right: -0.5rem; }
+  .hero-grid { grid-template-columns: 1.25fr 0.75fr; column-gap: clamp(1rem, 2.5vw, 2rem); }
+  .hero-copy { position: relative; z-index: 2; }
+  /* swing 1 — break the two-column box: the arch tucks under the headline's tail.
+     --hero-overlap is the tunable amount the visual slides left under the copy. */
+  .hero-visual {
+    justify-self: end;
+    z-index: 1;
+    margin-left: calc(-1 * var(--hero-overlap, clamp(1.5rem, 4vw, 4.5rem)));
+    margin-right: -0.5rem;
+  }
   .scroll-cue { display: inline-flex; }
 }
 @media (min-width: 1180px) {
@@ -346,6 +385,7 @@ onMounted(() => {
   .status { margin-left: 0; width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pulse, .cue-line::after { animation: none; }
+  .pulse, .cue-line::after,
+  .photo, .panel-terracotta, .card-a { animation: none; }
 }
 </style>

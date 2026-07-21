@@ -13,9 +13,12 @@ const { aboutPhoto } = useSite()
     <div class="craft-grid about-craft" aria-hidden="true" data-parallax="6" />
     <div class="container about-grid">
       <div class="about-copy" v-reveal>
-        <div class="portrait" :class="{ empty: !aboutPhoto }">
-          <img v-if="aboutPhoto" :src="aboutPhoto" alt="Kouichi" width="480" height="600" loading="lazy" decoding="async" />
-          <span v-else>Sua foto<br>aqui</span>
+        <div class="portrait-wrap">
+          <span class="portrait-panel" aria-hidden="true" />
+          <div class="portrait" :class="{ empty: !aboutPhoto }">
+            <img v-if="aboutPhoto" :src="aboutPhoto" alt="Kouichi" width="480" height="600" loading="lazy" decoding="async" />
+            <span v-else>Sua foto<br>aqui</span>
+          </div>
         </div>
         <span class="index">(04)</span>
         <p class="eyebrow accent">Sobre</p>
@@ -65,16 +68,38 @@ const { aboutPhoto } = useSite()
   .about-grid { grid-template-columns: 1.05fr 0.95fr; align-items: start; }
 }
 
+/* mini-colagem do retrato — ecoa a do hero (foto inclinada + painel mandarina + hard-shadow),
+   em tons claros porque o fundo desta seção é escuro */
+.portrait-wrap {
+  position: relative;
+  width: clamp(9rem, 20vw, 13rem);
+  margin-bottom: 2.25rem;
+}
+.portrait-panel {
+  position: absolute;
+  z-index: 1;
+  top: -0.7rem;
+  right: -0.9rem;
+  width: 58%;
+  height: 52%;
+  background-color: var(--clay);
+  background-image: radial-gradient(rgba(23, 19, 9, 0.18) 1px, transparent 1.5px);
+  background-size: 9px 9px;
+  border: 2px solid var(--paper);
+  border-radius: 14px;
+  transform: rotate(7deg);
+}
 .portrait {
-  width: clamp(6.5rem, 14vw, 8.5rem);
+  position: relative;
+  z-index: 2;
   aspect-ratio: 4 / 5;
   border: 2px solid var(--paper);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 5px 5px 0 0 var(--clay);
+  box-shadow: 6px 6px 0 0 var(--clay);
   background: var(--card);
   color: var(--ink);
-  margin-bottom: 1.5rem;
+  transform: rotate(-3deg);
 }
 .portrait img { width: 100%; height: 100%; object-fit: cover; }
 .portrait.empty {

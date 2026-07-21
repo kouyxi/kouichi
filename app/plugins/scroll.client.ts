@@ -18,7 +18,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     // --- smooth scroll ---
     document.documentElement.style.scrollBehavior = 'auto'
-    const lenis = new Lenis({ duration: 1.05, smoothWheel: true })
+    const lenis = new Lenis({ duration: 0.8, smoothWheel: true })
     lenis.on('scroll', ScrollTrigger.update)
     gsap.ticker.add((t: number) => lenis.raf(t * 1000))
     gsap.ticker.lagSmoothing(0)
@@ -32,11 +32,11 @@ export default defineNuxtPlugin((nuxtApp) => {
       const target = document.querySelector(id)
       if (!target) return
       e.preventDefault()
-      lenis.scrollTo(target as HTMLElement, { offset: -76, duration: 1.1 })
+      lenis.scrollTo(target as HTMLElement, { offset: -76, duration: 0.9 })
     })
 
     // --- scrubbed parallax (elements with no mouse-transform, so no conflict) ---
-    gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((el) => {
+    gsap.utils.toArray('[data-parallax]').forEach((el: HTMLElement) => {
       const amount = parseFloat(el.dataset.parallax || '0')
       gsap.fromTo(
         el,
