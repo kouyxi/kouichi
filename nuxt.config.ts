@@ -11,7 +11,9 @@ export default defineNuxtConfig({
     preset: 'static',
     prerender: {
       crawlLinks: true,
-      routes: ['/'],
+      // /lab não é linkado de lugar nenhum (é experimento, e está noindex),
+      // então o crawler não acha sozinho — precisa ser listado na mão.
+      routes: ['/', '/lab'],
       failOnError: true
     }
   },

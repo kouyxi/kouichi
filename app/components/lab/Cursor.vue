@@ -1,0 +1,94 @@
+<script setup lang="ts">
+// Cursor próprio. Só entra em ponteiro fino (mouse de verdade): em touch
+// não existe posição de cursor, e num tablet isso vira um ponto morto
+// grudado num canto da tela.
+const ativo = ref(false)
+const rotulo = ref('')
+const dot = ref<HTMLElement | null>(null)
+const ring = ref<HTMLElement | null>(null)
+
+onMounted(async () => {
+  const fino = window.matchMedia('(pointer: fine)').matches
+  if (!fino || prefersReducedMotion()) return
+  ativo.value = true
+  document.documentElement.classList.add('lab-has-cursor')
+  onBeforeUnmount(() => document.documentElement.classList.remove('lab-has-cursor'))
+  await nextTick()
+  if (!dot.value || !ring.value) return
+
+  const { gsap } = await useGsap()
+
+  // quickTo: um setter compilado por eixo. Anima a cada mousemove sem
+  // criar um tween novo a cada evento.
+  const dx = gsap.quickTo(dot.value, 'x', { duration: 0.12, ease: 'power3' })
+  const dy = gsap.quickTo(dot.value, 'y', { duration: 0.12, ease: 'power3' })
+  const rx = gsap.quickTo(ring.value, 'x', { duration: 0.5, ease: 'power3' })
+  const ry = gsap.quickTo(ring.value, 'y', { duration: 0.5, ease: 'power3' })
+
+  function mover(e: MouseEvent) {
+    dx(e.clientX); dy(e.clientY)
+    rx(e.clientX); ry(e.clientY)
+
+    const alvo = (e.target as HTMLElement)?.closest?.('[data-cursor], a, button') as HTMLElement | null
+    const modo = alvo?.dataset?.cursor
+    rotulo.value = modo === 'ver' ? 'Ver' : ''
+    // cores literais, não var(): o GSAP precisa interpolar entre dois valores
+    gsap.to(ring.value, {
+      scale: alvo ? (modo === 'ver' ? 2.6 : 1.9) : 1,
+      borderColor: alvo ? '#DC5B2C' : 'rgba(243, 234, 216, 0.28)',
+      duration: 0.35,
+      ease: 'power3.out',
+      overwrite: 'auto'
+    })
+  }
+
+  window.addEventListener('mousemove', mover, { passive: true })
+  onBeforeUnmount(() => window.removeEventListener('mousemove', mover))
+})
+</script>
+
+<template>
+  <ClientOnly>
+    <div v-if="ativo" class="cur" aria-hidden="true">
+      <span ref="ring" class="cur-ring"><span class="cur-label">{{ rotulo }}</span></span>
+      <span ref="dot" class="cur-dot" />
+    </div>
+  </ClientOnly>
+</template>
+
+<style scoped>
+.cur { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+.cur-dot,
+.cur-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+.cur-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--lab-accent);
+}
+.cur-ring {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid var(--lab-line-2);
+}
+.cur-label {
+  font-size: 0.34rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lab-accent);
+}
+
+/* o cursor do sistema some só quando o nosso está de pé */
+:global(.lab-has-cursor), :global(.lab-has-cursor *) { cursor: none; }
+</style>
