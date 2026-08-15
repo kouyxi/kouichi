@@ -115,7 +115,7 @@ onMounted(async () => {
             :href="waLink(p.wa)"
             target="_blank"
             rel="noopener"
-            :data-track="`wa_lab_${p.nome.toLowerCase().replace(/\s+/g, '_')}`"
+            :data-track="`wa_plano_${p.nome.toLowerCase().replace(/\s+/g, '_')}`"
             class="sv-cta"
             data-cursor="grow"
           >

@@ -91,7 +91,7 @@ onMounted(async () => {
         :href="whatsapp"
         target="_blank"
         rel="noopener"
-        data-track="wa_lab_hero"
+        data-track="wa_hero"
         class="intro-cta intro-fade"
         data-cursor="grow"
       >

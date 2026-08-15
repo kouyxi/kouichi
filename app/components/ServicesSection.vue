@@ -73,7 +73,7 @@ const packages = [
               :href="link(p.waText)"
               target="_blank"
               rel="noopener"
-              :data-track="'wa_plano_' + p.name.toLowerCase().replace(/\s+/g, '')"
+              :data-track="`wa_plano_${p.name.toLowerCase().replace(/\s+/g, '_')}`"
               class="btn"
               :class="p.highlight ? 'btn-cta' : 'btn-outline'"
             >

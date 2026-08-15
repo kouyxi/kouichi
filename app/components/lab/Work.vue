@@ -79,7 +79,7 @@ onMounted(async () => {
       :href="real.url"
       target="_blank"
       rel="noopener"
-      data-track="proj_gabo_lab"
+      data-track="proj_gabo"
       class="wk-shot"
       data-cursor="ver"
     >

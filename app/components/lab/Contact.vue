@@ -79,7 +79,7 @@ onMounted(async () => {
         :href="whatsapp"
         target="_blank"
         rel="noopener"
-        data-track="wa_lab_final"
+        data-track="wa_final"
         class="ct-huge"
         data-cursor="grow"
       >
@@ -89,7 +89,7 @@ onMounted(async () => {
 
       <div class="ct-baixo">
         <div class="ct-lines">
-          <a :href="whatsapp" target="_blank" rel="noopener" data-track="wa_lab_num" class="ct-line">
+          <a :href="whatsapp" target="_blank" rel="noopener" data-track="wa_numero" class="ct-line">
             {{ whatsappDisplay }}
           </a>
           <a :href="`mailto:${email}`" class="ct-line">{{ email }}</a>
@@ -100,7 +100,7 @@ onMounted(async () => {
 
       <footer class="ct-foot">
         <span>Kouichi, {{ ano }}</span>
-        <NuxtLink to="/" class="ct-back">Ver a versão atual do site</NuxtLink>
+        <NuxtLink to="/lab" class="ct-back" rel="nofollow">Ver a versão anterior</NuxtLink>
       </footer>
     </div>
   </section>
