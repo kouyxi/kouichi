@@ -25,7 +25,6 @@ const props = withDefaults(
 // x/y em %, escala, giro, e a velocidade com que cada uma reage ao mouse
 const marcas = [
   { t: 'cruz', x: 8, y: 18, s: 1, r: 0, v: 22 },
-  { t: 'alvo', x: 91, y: 12, s: 1.3, r: 0, v: 38 },
   { t: 'cruz', x: 78, y: 74, s: 0.8, r: 0, v: 30 },
   // Aqui morava um círculo tracejado. Saiu: com parallax de mouse ele
   // derivava junto do ponteiro sem estar em volta dele, e lia como cursor
@@ -90,12 +89,6 @@ onMounted(async () => {
       <span class="dec-forma" :style="{ transform: `scale(${m.s}) rotate(${m.r}deg)` }">
         <svg v-if="m.t === 'cruz'" width="14" height="14" viewBox="0 0 14 14">
           <path d="M7 0v14M0 7h14" stroke="currentColor" stroke-width="1" />
-        </svg>
-
-        <svg v-else-if="m.t === 'alvo'" width="26" height="26" viewBox="0 0 26 26">
-          <circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1" />
-          <circle cx="13" cy="13" r="5" fill="none" stroke="currentColor" stroke-width="1" />
-          <path d="M13 0v6M13 20v6M0 13h6M20 13h6" stroke="currentColor" stroke-width="1" />
         </svg>
 
         <svg v-else-if="m.t === 'pontos'" width="52" height="52" viewBox="0 0 52 52">
