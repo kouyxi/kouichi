@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relatório de 30 dias</title>
+
+<script>
+/* ┌──────────────────────────────────────────────────────────────┐
+   │  EDITE SÓ ESTE BLOCO. O resto do arquivo se vira sozinho.    │
+   │  Onde achar cada número está em COMO-PREENCHER.md, ao lado.  │
+   └──────────────────────────────────────────────────────────────┘ */
+const dados = {
+  cliente: 'Clínica Exemplo',
+  site: 'clinicaexemplo.com.br',
+  periodo: '15 de agosto a 14 de setembro de 2026',
+
+  // GA4 → Relatórios → Aquisição → Aquisição de tráfego
+  pessoas: 0,          // "Usuários ativos" no período
+  pessoasMesAnterior: null,  // null = primeiro relatório, some a comparação
+
+  // GA4 → Relatórios → Engajamento → Eventos → whatsapp_click
+  cliquesWhatsapp: 0,
+
+  // De onde vieram. Some qualquer linha com 0.
+  origens: [
+    { nome: 'Google',            pessoas: 0 },
+    { nome: 'Instagram',         pessoas: 0 },
+    { nome: 'Direto (digitou o endereço ou salvou)', pessoas: 0 },
+    { nome: 'Outros',            pessoas: 0 }
+  ],
+
+  // GA4 → evento scroll_depth, quebrado pela dimensão "percent"
+  // Quantas pessoas passaram de cada marca da página.
+  rolagem: { p25: 0, p50: 0, p75: 0, p100: 0 },
+
+  // GA4 → Relatórios → Tecnologia → Visão geral (categoria do dispositivo)
+  celular: 0,          // % de pessoas no celular, número inteiro
+  computador: 0,
+
+  // Em qual botão as pessoas clicaram. Vem do parâmetro "location"
+  // do evento whatsapp_click. Deixe [] se ainda não configurou.
+  botoes: [
+    // { nome: 'Botão do topo', cliques: 0 },
+    // { nome: 'Botão flutuante', cliques: 0 }
+  ],
+
+  // A parte que vale o relatório. UMA recomendação, concreta,
+  // que o cliente consiga executar ou aprovar. Nada de "melhorar o SEO".
+  recomendacao: {
+    titulo: 'O que eu faria no próximo mês',
+    texto: 'Escreva aqui.'
+  },
+
+  // Opcional: uma observação honesta sobre o número ser pequeno,
+  // se for o caso. Deixe '' pra não aparecer.
+  contexto: '',
+
+  autor: 'Kouichi',
+  contato: '+55 62 98127-7721'
+}
+</script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --paper: #F3EAD8;
+    --card: #FBF6EC;
+    --ink: #171309;
+    --clay: #DC5B2C;
+    --moss: #3D4B2C;
+    --line: rgba(23, 19, 9, 0.16);
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  body {
+    margin: 0;
+    padding: clamp(1.25rem, 4vw, 3rem);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .folha {
+    max-width: 46rem;
+    margin-inline: auto;
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    box-shadow: 6px 6px 0 0 var(--ink);
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+  }
+
+  .topo { border-bottom: 2px solid var(--ink); padding-bottom: 1.25rem; }
+  .eyebrow {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--clay);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    line-height: 1.1; margin: 0.5rem 0 0.35rem;
+  }
+  .sub { font-size: 0.9rem; opacity: 0.7; margin: 0; }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 1.15rem; margin: 2rem 0 0.75rem;
+  }
+
+  /* números grandes */
+  .destaques { display: grid; gap: 0.75rem; margin-top: 1.5rem; }
+  @media (min-width: 34rem) { .destaques { grid-template-columns: 1fr 1fr; } }
+  .num {
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    padding: 1rem 1.15rem;
+    background: var(--paper);
+  }
+  .num.forte { background: var(--clay); color: var(--card); }
+  .num .valor {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 7vw, 2.9rem);
+    line-height: 1; font-weight: 700;
+  }
+  .num .rotulo { font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem; }
+  .num .leitura { font-size: 0.76rem; opacity: 0.75; margin-top: 0.3rem; line-height: 1.4; }
+  .num.forte .leitura { opacity: 0.9; }
+
+  /* listas de barras */
+  .barras { display: grid; gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
+  .barra-linha { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem 1rem; font-size: 0.88rem; }
+  .barra-nome { font-weight: 500; }
+  .barra-val { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .barra-trilho {
+    grid-column: 1 / -1;
+    height: 8px; border: 1.5px solid var(--ink); border-radius: 999px;
+    background: var(--paper); overflow: hidden;
+  }
+  .barra-fill { display: block; height: 100%; background: var(--moss); }
+  .barra-fill.clay { background: var(--clay); }
+
+  .nota {
+    margin-top: 0.75rem; font-size: 0.82rem; opacity: 0.72; line-height: 1.5;
+  }
+
+  .reco {
+    margin-top: 2rem; padding: 1.25rem 1.4rem;
+    border: 2px solid var(--ink); border-radius: 10px;
+    background: var(--paper); border-left: 8px solid var(--clay);
+  }
+  .reco h2 { margin-top: 0; }
+  .reco p { margin: 0; }
+
+  .pe {
+    margin-top: 2rem; padding-top: 1.25rem; border-top: 2px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
+    font-size: 0.82rem; opacity: 0.75;
+  }
+
+  .vazio { font-size: 0.88rem; opacity: 0.7; font-style: italic; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .folha { box-shadow: none; border: none; max-width: none; }
+  }
+</style>
+</head>
+<body>
+<div class="folha">
+  <header class="topo">
+    <p class="eyebrow">Relatório de 30 dias</p>
+    <h1 id="t-cliente"></h1>
+    <p class="sub" id="t-periodo"></p>
+  </header>
+
+  <section class="destaques">
+    <div class="num">
+      <div class="valor" id="v-pessoas"></div>
+      <div class="rotulo">pessoas entraram no site</div>
+      <div class="leitura" id="v-pessoas-comp"></div>
+    </div>
+    <div class="num forte">
+      <div class="valor" id="v-cliques"></div>
+      <div class="rotulo">clicaram pra falar no WhatsApp</div>
+      <div class="leitura" id="v-taxa"></div>
+    </div>
+  </section>
+
+  <h2>De onde essas pessoas vieram</h2>
+  <ul class="barras" id="lista-origens"></ul>
+
+  <h2>Até onde elas leram a página</h2>
+  <ul class="barras" id="lista-rolagem"></ul>
+  <p class="nota">
+    A página inteira é 100%. Quem passa de 75% chegou até a parte de baixo,
+    onde ficam as dúvidas e o contato.
+  </p>
+
+  <h2>Celular ou computador</h2>
+  <ul class="barras" id="lista-dispositivo"></ul>
+
+  <section id="bloco-botoes" hidden>
+    <h2>Qual botão as pessoas usaram</h2>
+    <ul class="barras" id="lista-botoes"></ul>
+  </section>
+
+  <section class="reco">
+    <h2 id="r-titulo"></h2>
+    <p id="r-texto"></p>
+  </section>
+
+  <p class="nota" id="t-contexto" hidden></p>
+
+  <footer class="pe">
+    <span id="t-autor"></span>
+    <span id="t-contato"></span>
+    <span id="t-site"></span>
+  </footer>
+</div>
+
+<script>
+/* Renderização. Não precisa mexer aqui. */
+const $ = (id) => document.getElementById(id)
+const n = (v) => (v ?? 0).toLocaleString('pt-BR')
+
+function barras(alvo, itens, total, cor) {
+  const ul = $(alvo)
+  const visiveis = itens.filter((i) => i.valor > 0)
+  if (!visiveis.length) {
+    ul.innerHTML = '<li class="vazio">Ainda sem dados suficientes neste período.</li>'
+    return
+  }
+  ul.innerHTML = visiveis.map((i) => {
+    // O total pode ser 0 no primeiro mês; nesse caso a barra fica vazia
+    // em vez de virar NaN%.
+    const pct = total > 0 ? Math.round((i.valor / total) * 100) : 0
+    return `
+      <li class="barra-linha">
+        <span class="barra-nome">${i.nome}</span>
+        <span class="barra-val">${n(i.valor)}${i.sufixo || ''} ${total > 0 && !i.sufixo ? `<span style="opacity:.6;font-weight:400">(${pct}%)</span>` : ''}</span>
+        <span class="barra-trilho"><span class="barra-fill ${cor || ''}" style="width:${Math.min(pct, 100)}%"></span></span>
+      </li>`
+  }).join('')
+}
+
+;(function render() {
+  const d = dados
+  $('t-cliente').textContent = d.cliente
+  $('t-periodo').textContent = `${d.site} · ${d.periodo}`
+  $('t-autor').textContent = d.autor
+  $('t-contato').textContent = d.contato
+  $('t-site').textContent = d.site
+
+  $('v-pessoas').textContent = n(d.pessoas)
+  $('v-cliques').textContent = n(d.cliquesWhatsapp)
+
+  // Comparação só aparece se existir mês anterior. Sem isso, o primeiro
+  // relatório mostraria uma variação inventada.
+  if (d.pessoasMesAnterior === null || d.pessoasMesAnterior === undefined) {
+    $('v-pessoas-comp').textContent = 'Primeiro mês no ar, então ainda não há com o que comparar.'
+  } else {
+    const dif = d.pessoas - d.pessoasMesAnterior
+    const sinal = dif > 0 ? '+' : ''
+    $('v-pessoas-comp').textContent =
+      `${sinal}${n(dif)} em relação aos 30 dias anteriores (${n(d.pessoasMesAnterior)}).`
+  }
+
+  const taxa = d.pessoas > 0 ? (d.cliquesWhatsapp / d.pessoas) * 100 : 0
+  $('v-taxa').textContent = d.pessoas > 0
+    ? `${taxa.toFixed(1).replace('.', ',')}% de quem entrou. A cada 100 pessoas, ${Math.round(taxa)} te chamaram.`
+    : 'Sem visitas registradas ainda.'
+
+  barras('lista-origens', d.origens.map((o) => ({ nome: o.nome, valor: o.pessoas })), d.pessoas)
+
+  barras('lista-rolagem', [
+    { nome: 'Passaram de 25% da página', valor: d.rolagem.p25 },
+    { nome: 'Passaram da metade',        valor: d.rolagem.p50 },
+    { nome: 'Passaram de 75%',           valor: d.rolagem.p75 },
+    { nome: 'Chegaram até o fim',        valor: d.rolagem.p100 }
+  ], d.pessoas, 'clay')
+
+  barras('lista-dispositivo', [
+    { nome: 'Celular',    valor: d.celular,    sufixo: '%' },
+    { nome: 'Computador', valor: d.computador, sufixo: '%' }
+  ], 100)
+
+  if (d.botoes && d.botoes.length) {
+    $('bloco-botoes').hidden = false
+    const tot = d.botoes.reduce((s, b) => s + b.cliques, 0)
+    barras('lista-botoes', d.botoes.map((b) => ({ nome: b.nome, valor: b.cliques })), tot, 'clay')
+  }
+
+  $('r-titulo').textContent = d.recomendacao.titulo
+  $('r-texto').textContent = d.recomendacao.texto
+
+  if (d.contexto) {
+    $('t-contexto').hidden = false
+    $('t-contexto').textContent = d.contexto
+  }
+})()
+</script>
+</body>
+</html>
