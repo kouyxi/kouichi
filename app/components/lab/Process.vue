@@ -63,6 +63,7 @@ onMounted(async () => {
 
 <template>
   <section id="processo" ref="root" class="pr">
+    <LabDecor grade="fina" tom="claro" halo="nenhum" />
     <header class="pr-head">
       <span class="lab-index">(03)</span>
       <h2 class="pr-title">
@@ -103,7 +104,8 @@ onMounted(async () => {
   color: var(--lab-bg);
 }
 
-.pr-head { max-width: 60rem; margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+.pr-head { position: relative; z-index: 1; max-width: 60rem; margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+.pr-stack, .pr-garantia { position: relative; z-index: 1; }
 .pr-head .lab-index { color: rgba(23, 19, 9, 0.5); }
 .pr-title {
   margin-top: 1rem;

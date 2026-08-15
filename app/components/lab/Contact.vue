@@ -73,6 +73,7 @@ onMounted(async () => {
     </div>
 
     <div class="ct-final">
+      <LabDecor grade="fina" halo="base-centro" />
       <p class="ct-kicker">Sem compromisso, respondo no mesmo dia</p>
       <a
         :href="whatsapp"
@@ -86,12 +87,15 @@ onMounted(async () => {
         <span class="ct-arrow" aria-hidden="true">→</span>
       </a>
 
-      <div class="ct-lines">
-        <a :href="whatsapp" target="_blank" rel="noopener" data-track="wa_lab_num" class="ct-line">
-          {{ whatsappDisplay }}
-        </a>
-        <a :href="`mailto:${email}`" class="ct-line">{{ email }}</a>
-        <span class="ct-line ct-mute">{{ cidade }}</span>
+      <div class="ct-baixo">
+        <div class="ct-lines">
+          <a :href="whatsapp" target="_blank" rel="noopener" data-track="wa_lab_num" class="ct-line">
+            {{ whatsappDisplay }}
+          </a>
+          <a :href="`mailto:${email}`" class="ct-line">{{ email }}</a>
+          <span class="ct-line ct-mute">{{ cidade }}</span>
+        </div>
+        <LabBadge class="ct-selo" />
       </div>
 
       <footer class="ct-foot">
@@ -178,7 +182,9 @@ onMounted(async () => {
   padding: clamp(3rem, 8vh, 5rem) var(--lab-edge);
   border-top: 1px solid var(--lab-line);
   overflow: hidden;
+  position: relative;
 }
+.ct-final > *:not(.dec) { position: relative; z-index: 1; }
 .ct-kicker {
   font-size: 0.72rem;
   letter-spacing: 0.2em;
@@ -201,13 +207,24 @@ onMounted(async () => {
 .ct-arrow { display: inline-block; transition: transform 0.4s var(--ease); }
 .ct-huge:hover .ct-arrow { transform: translateX(0.12em); }
 
+.ct-baixo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: clamp(1.5rem, 4vh, 2.5rem);
+  border-top: 1px solid var(--lab-line);
+}
 .ct-lines {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem 2.5rem;
-  padding-top: clamp(1.5rem, 4vh, 2.5rem);
-  border-top: 1px solid var(--lab-line);
   font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+}
+/* o selo é o único elemento à direita aqui; abaixo de 700px ele vai pra baixo
+   das linhas de contato, senão espreme o e-mail */
+@media (max-width: 700px) {
+  .ct-baixo { flex-direction: column; align-items: flex-start; }
 }
 .ct-line { transition: color 0.3s var(--ease); }
 a.ct-line:hover { color: var(--lab-accent); }

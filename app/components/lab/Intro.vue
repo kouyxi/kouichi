@@ -62,7 +62,7 @@ onMounted(async () => {
 
 <template>
   <section id="topo" ref="root" class="intro">
-    <div class="intro-grid" aria-hidden="true" />
+    <LabDecor grade="fina" halo="topo-dir" reticula />
 
     <figure class="intro-media">
       <img
@@ -118,18 +118,6 @@ onMounted(async () => {
   padding: clamp(5rem, 9vh, 7rem) var(--lab-edge) clamp(1.5rem, 4vh, 2.5rem);
   overflow: hidden;
   isolation: isolate;
-}
-
-.intro-grid {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image:
-    linear-gradient(var(--lab-rule) 1px, transparent 1px),
-    linear-gradient(90deg, var(--lab-rule) 1px, transparent 1px);
-  background-size: 7.5vw 7.5vw;
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 60% 45%, #000, transparent 80%);
-  mask-image: radial-gradient(ellipse 70% 60% at 60% 45%, #000, transparent 80%);
 }
 
 /* foto: alta, encostada na direita, atravessada pelas linhas do título */

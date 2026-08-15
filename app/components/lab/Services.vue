@@ -88,6 +88,7 @@ onMounted(async () => {
 
 <template>
   <section id="servicos" ref="root" class="sv">
+    <LabDecor grade="larga" halo="centro-esq" />
     <div class="sv-track">
       <header class="sv-panel sv-intro">
         <span class="lab-index">(02)</span>
@@ -134,6 +135,8 @@ onMounted(async () => {
 <style scoped>
 .sv { position: relative; overflow: hidden; background: var(--lab-bg); }
 .sv-track {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: stretch;
   height: 100svh;

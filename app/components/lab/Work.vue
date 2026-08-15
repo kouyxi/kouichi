@@ -66,6 +66,7 @@ onMounted(async () => {
 
 <template>
   <section id="portfolio" ref="root" class="wk">
+    <LabDecor grade="larga" halo="base-centro" />
     <header class="wk-head">
       <span class="lab-index">(04)</span>
       <h2 class="wk-title">
@@ -111,7 +112,8 @@ onMounted(async () => {
   background: var(--lab-bg);
   color: var(--lab-fg);
 }
-.wk-head { padding-inline: var(--lab-edge); margin-bottom: clamp(2rem, 5vh, 3.25rem); }
+.wk-head { position: relative; z-index: 1; padding-inline: var(--lab-edge); margin-bottom: clamp(2rem, 5vh, 3.25rem); }
+.wk-shot, .wk-real, .wk-concepts { position: relative; z-index: 1; }
 .wk-title {
   margin-top: 1rem;
   font-family: var(--font-display);

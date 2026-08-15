@@ -54,6 +54,7 @@ onMounted(async () => {
 
 <template>
   <section id="sobre" ref="root" class="mf">
+    <LabDecor grade="fina" halo="centro-esq" reticula />
     <div class="mf-inner">
       <span class="lab-index">(05)</span>
       <p class="mf-big">
@@ -91,7 +92,7 @@ onMounted(async () => {
   color: var(--lab-fg);
   border-top: 1px solid var(--lab-line);
 }
-.mf-inner { max-width: 68rem; margin-inline: auto; width: 100%; }
+.mf-inner { position: relative; z-index: 1; max-width: 68rem; margin-inline: auto; width: 100%; }
 
 .mf-big {
   margin-top: 1.25rem;
