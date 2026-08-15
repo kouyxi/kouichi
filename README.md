@@ -31,7 +31,7 @@ npx serve .output/public   # preview local do build
 ## TODO antes de divulgar
 
 - [x] WhatsApp e e-mail reais (ficam em `app/data/contato.ts`, um lugar só)
-- [ ] Trocar domínio `kouichi.dev` (em `app/app.vue`, `public/robots.txt`, `public/sitemap.xml`)
+- [x] Domínio real `kouichi.com.br` (em `app/app.vue`, `public/robots.txt`, `public/sitemap.xml`)
 - [x] Imagem do hero: foto própria tratada em halftone (`public/img/hero-kouichi.jpg`)
-- [ ] Gerar imagem OG 1200×630 em `public/og.png` (preview ao compartilhar no WhatsApp)
+- [x] Imagem OG 1200×630 em `public/og.png` (preview ao compartilhar no WhatsApp)
 - [ ] Adicionar métricas (Microsoft Clarity + GA4), ver passo 3

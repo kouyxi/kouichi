@@ -2,12 +2,10 @@
 import { faqs } from '~/data/faqs'
 import { email } from '~/data/contato'
 
-// TODO: trocar pelo domínio real quando publicar
-const siteUrl = 'https://kouichi.dev'
+const siteUrl = 'https://kouichi.com.br'
 const title = 'Kouichi | Sites e landing pages que convertem em Goiânia'
 const description =
   'Desenvolvimento de sites e landing pages focados em conversão para negócios de Goiânia e região. Estrutura, copy e design a serviço de gerar contato no WhatsApp.'
-// TODO: gerar uma imagem de compartilhamento real (1200x630) e colocar em /public/og.png
 const ogImage = `${siteUrl}/og.png`
 
 useHead({
