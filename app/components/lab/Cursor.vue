@@ -66,13 +66,20 @@ onMounted(async () => {
 
 <style scoped>
 .cur { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+/* Centralização por margem negativa, e SÓ por ela.
+   Tinha também um transform: translate(-50%, -50%) aqui, e os dois se
+   somavam. O GSAP não descarta a parte percentual de um transform que já
+   existe: ele lê translate(-50%, -50%) como xPercent/yPercent -50 e
+   preserva isso ao escrever x/y. Resultado, cada peça saía deslocada
+   metade do próprio tamanho pra cima e pra esquerda: 3px o ponto, 17px o
+   anel. A diferença de 14px entre eles é o raio do anel, que é
+   exatamente por que o ponto aparecia grudado na borda em vez do centro. */
 .cur-dot,
 .cur-ring {
   position: absolute;
   top: 0;
   left: 0;
   border-radius: 999px;
-  transform: translate(-50%, -50%);
   will-change: transform;
 }
 .cur-dot {
