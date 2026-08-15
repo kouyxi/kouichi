@@ -72,7 +72,9 @@ onMounted(async () => {
 .vel {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(1.75rem, 4vw, 3rem);
+  /* Era 4vw de respiro com fonte de 4vw, o que dava uns 144px de altura a
+     1440px. É faixa de transição, não seção: pesava mais que o conteúdo. */
+  padding-block: clamp(0.85rem, 1.5vw, 1.4rem);
   border-block: 1px solid var(--lab-line);
   background: var(--lab-accent);
   color: var(--lab-bg);
@@ -86,11 +88,11 @@ onMounted(async () => {
 .vel-item {
   display: inline-flex;
   align-items: center;
-  gap: clamp(1.5rem, 3vw, 3rem);
-  padding-right: clamp(1.5rem, 3vw, 3rem);
+  gap: clamp(1.1rem, 2.2vw, 2.2rem);
+  padding-right: clamp(1.1rem, 2.2vw, 2.2rem);
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.6rem, 4vw, 3.25rem);
+  font-size: clamp(1.05rem, 2.1vw, 1.8rem);
   line-height: 1;
   letter-spacing: -0.02em;
   white-space: nowrap;

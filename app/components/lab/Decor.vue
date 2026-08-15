@@ -30,7 +30,9 @@ const marcas = [
   // Aqui morava um círculo tracejado. Saiu: com parallax de mouse ele
   // derivava junto do ponteiro sem estar em volta dele, e lia como cursor
   // quebrado. Campo de pontos não tem como ser confundido com cursor.
-  { t: 'pontos', x: 14, y: 68, s: 1.2, r: 0, v: 46 },
+  // Opacidade menor que as outras: essa marca cai por cima do subtítulo do
+  // topo, e ali embaixo tem copy de conversão, não só respiro.
+  { t: 'pontos', x: 14, y: 68, s: 1.2, r: 0, v: 46, o: 0.3 },
   { t: 'canto', x: 95, y: 46, s: 1, r: 0, v: 26 },
   { t: 'canto', x: 4, y: 88, s: 1, r: 180, v: 34 },
   { t: 'hachura', x: 66, y: 8, s: 1, r: -12, v: 42 },
@@ -83,7 +85,7 @@ onMounted(async () => {
         :key="i"
         class="dec-marca"
         :data-v="m.v"
-        :style="{ left: m.x + '%', top: m.y + '%' }"
+        :style="{ left: m.x + '%', top: m.y + '%', opacity: m.o ?? undefined }"
       >
       <span class="dec-forma" :style="{ transform: `scale(${m.s}) rotate(${m.r}deg)` }">
         <svg v-if="m.t === 'cruz'" width="14" height="14" viewBox="0 0 14 14">

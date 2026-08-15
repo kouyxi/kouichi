@@ -149,7 +149,7 @@ onMounted(async () => {
   font-weight: 900;
   /* Preso também à altura: são 4 linhas a 0.82 de entrelinha, então
      12vw num monitor baixo empurrava o CTA pra fora da dobra. */
-  font-size: clamp(2.4rem, min(12.4vw, 15.5vh), 12rem);
+  font-size: clamp(2.4rem, min(12.4vw, 14vh), 12rem);
   line-height: 0.82;
   letter-spacing: -0.045em;
   text-transform: uppercase;
@@ -176,15 +176,19 @@ onMounted(async () => {
 .ln:nth-child(1), .ln:nth-child(3) { position: relative; z-index: 1; }
 .ln:nth-child(2), .ln:nth-child(4) { position: relative; z-index: 4; }
 
+/* Coluna, não linha. Lado a lado o botão parava no meio do vão, sem
+   alinhar com a coluna de texto nem com a foto, e quase encostava nela.
+   Empilhado, ele herda a mesma margem esquerda do título e do parágrafo,
+   e a leitura vira uma linha vertical só: manchete, promessa, botão. */
 .intro-foot {
   position: relative;
   z-index: 5;
   grid-row: 2;
   display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  gap: 1.5rem 3rem;
-  padding-top: clamp(1.5rem, 4vh, 2.75rem);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(1rem, 2.5vh, 1.5rem);
+  padding-top: clamp(1.25rem, 3.5vh, 2.25rem);
 }
 .intro-sub {
   max-width: 27rem;
