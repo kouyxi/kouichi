@@ -1,18 +1,26 @@
 <script setup lang="ts">
-// Cursor próprio. Só entra em ponteiro fino (mouse de verdade): em touch
-// não existe posição de cursor, e num tablet isso vira um ponto morto
-// grudado num canto da tela.
+// Cursor próprio. O teste é por ponteiro GROSSO, não por ponteiro fino:
+// (pointer: fine) volta falso em ambiente que não declara dispositivo
+// apontador, e aí o cursor simplesmente nunca aparecia no desktop.
+// (pointer: coarse) é o sinal confiável de toque, que é o caso a excluir.
 const ativo = ref(false)
 const rotulo = ref('')
 const dot = ref<HTMLElement | null>(null)
 const ring = ref<HTMLElement | null>(null)
 
+// Registrado no setup, não depois de um await: hook de ciclo de vida
+// registrado após await não acha mais a instância ativa e nunca roda.
+let limpar: (() => void) | null = null
+onBeforeUnmount(() => {
+  document.documentElement.classList.remove('lab-has-cursor')
+  limpar?.()
+})
+
 onMounted(async () => {
-  const fino = window.matchMedia('(pointer: fine)').matches
-  if (!fino || prefersReducedMotion()) return
+  const toque = window.matchMedia('(pointer: coarse)').matches
+  if (toque || prefersReducedMotion()) return
   ativo.value = true
   document.documentElement.classList.add('lab-has-cursor')
-  onBeforeUnmount(() => document.documentElement.classList.remove('lab-has-cursor'))
   await nextTick()
   if (!dot.value || !ring.value) return
 
@@ -43,7 +51,7 @@ onMounted(async () => {
   }
 
   window.addEventListener('mousemove', mover, { passive: true })
-  onBeforeUnmount(() => window.removeEventListener('mousemove', mover))
+  limpar = () => window.removeEventListener('mousemove', mover)
 })
 </script>
 

@@ -58,10 +58,11 @@ onMounted(async () => {
     <div class="mf-inner">
       <span class="lab-index">(05)</span>
       <p class="mf-big">
-        Sou o Kouichi, de Goiânia. Trabalho com backend e estudo segurança de
-        aplicação, que é a mania de ficar procurando onde as coisas quebram.
-        Isso me estragou de um jeito útil: eu não consigo olhar um site e ver
-        só se está bonito. Site bonito que não gera contato é despesa.
+        Sou o Kouichi, de Goiânia. Passo o dia procurando onde as coisas
+        quebram: o formulário que não envia, a página que abre torta no
+        celular, a porta aberta que derruba o site num sábado. E estudo o que
+        faz alguém decidir, porque uma página faz a pessoa te chamar e a
+        outra faz ela fechar a aba. Site bonito que não gera contato é despesa.
       </p>
 
       <p class="mf-honesto">

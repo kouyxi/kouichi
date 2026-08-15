@@ -18,16 +18,17 @@ const principios = [
         </h2>
         <div class="about-text">
           <p>
-            Sou o Kouichi, de Goiânia. Trabalho com backend (Laravel e Vue) e
-            estudo segurança de aplicação, que é a mania de ficar procurando
-            <strong>onde as coisas quebram</strong>. Isso me estragou de um jeito
-            útil: eu não consigo olhar um site e ver só se está bonito.
+            Sou o Kouichi, de Goiânia. Passo o dia procurando
+            <strong>onde as coisas quebram</strong>: o formulário que não envia,
+            a página que abre torta no celular, a porta aberta que derruba o
+            site num sábado. Isso me estragou de um jeito útil, porque eu não
+            consigo olhar um site e ver só se está bonito.
           </p>
           <p>
             Site bonito que não gera contato é despesa. Então eu construo pensando
-            em uma pergunta só, que é o que faz alguém parar de rolar a página e
-            te chamar. Se a resposta não estiver clara pra mim, também não vai
-            estar pro seu cliente.
+            no que faz alguém decidir: por que uma página faz a pessoa parar de
+            rolar e te chamar, e a outra faz ela fechar a aba. Se a resposta não
+            estiver clara pra mim, também não vai estar pro seu cliente.
           </p>
           <p class="about-honest">
             Minha carteira ainda é curta. É por isso que eu topo prazo curto, valor

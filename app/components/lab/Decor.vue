@@ -27,7 +27,10 @@ const marcas = [
   { t: 'cruz', x: 8, y: 18, s: 1, r: 0, v: 22 },
   { t: 'alvo', x: 91, y: 12, s: 1.3, r: 0, v: 38 },
   { t: 'cruz', x: 78, y: 74, s: 0.8, r: 0, v: 30 },
-  { t: 'circulo', x: 14, y: 68, s: 1.6, r: 0, v: 46 },
+  // Aqui morava um círculo tracejado. Saiu: com parallax de mouse ele
+  // derivava junto do ponteiro sem estar em volta dele, e lia como cursor
+  // quebrado. Campo de pontos não tem como ser confundido com cursor.
+  { t: 'pontos', x: 14, y: 68, s: 1.2, r: 0, v: 46 },
   { t: 'canto', x: 95, y: 46, s: 1, r: 0, v: 26 },
   { t: 'canto', x: 4, y: 88, s: 1, r: 180, v: 34 },
   { t: 'hachura', x: 66, y: 8, s: 1, r: -12, v: 42 },
@@ -93,12 +96,10 @@ onMounted(async () => {
           <path d="M13 0v6M13 20v6M0 13h6M20 13h6" stroke="currentColor" stroke-width="1" />
         </svg>
 
-        <svg v-else-if="m.t === 'circulo'" width="46" height="46" viewBox="0 0 46 46">
-          <circle
-            cx="23" cy="23" r="22"
-            fill="none" stroke="currentColor" stroke-width="1"
-            stroke-dasharray="3 6"
-          />
+        <svg v-else-if="m.t === 'pontos'" width="52" height="52" viewBox="0 0 52 52">
+          <g fill="currentColor">
+            <circle v-for="p in 25" :key="p" :cx="6 + ((p - 1) % 5) * 10" :cy="6 + Math.floor((p - 1) / 5) * 10" r="1.4" />
+          </g>
         </svg>
 
         <svg v-else-if="m.t === 'canto'" width="18" height="18" viewBox="0 0 18 18">
