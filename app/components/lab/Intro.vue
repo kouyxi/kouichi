@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { waLink } from '~/data/contato'
+import { waLink, cidade, disponibilidade } from '~/data/contato'
 
 const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu negócio é ')
 
@@ -66,10 +66,12 @@ onMounted(async () => {
 
     <figure class="intro-media">
       <img
-        src="/img/hero-kouichi.jpg"
-        alt="Kouichi, desenvolvedor, em Goiânia"
-        width="1000"
-        height="1250"
+        src="/img/hero-kouichi.webp"
+        alt="Kouichi, desenvolvedor de sites, em Goiânia"
+        width="800"
+        height="1000"
+        fetchpriority="high"
+        decoding="async"
       />
     </figure>
 
@@ -100,8 +102,8 @@ onMounted(async () => {
 
     <div class="intro-meta intro-fade">
       <span>(01)</span>
-      <span>Goiânia — GO</span>
-      <span class="intro-vaga"><i />2 vagas este mês</span>
+      <span>{{ cidade }}</span>
+      <span class="intro-vaga"><i />{{ disponibilidade }}</span>
     </div>
 
     <div class="intro-veil" aria-hidden="true" />

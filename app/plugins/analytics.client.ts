@@ -47,14 +47,54 @@ export default defineNuxtPlugin((nuxtApp) => {
     } catch { /* silencioso */ }
   }
 
-  // --- rastreio delegado de clique nos CTAs de WhatsApp ---
+  // --- rastreio delegado de clique ---
   // Um listener só pega todos os botões; o rótulo vem de data-track.
+  // O evento depende do destino, não do data-track: antes qualquer
+  // [data-track] virava whatsapp_click, então clicar no projeto do
+  // portfólio inflava a métrica de conversão com um clique que não é
+  // conversão nenhuma.
   document.addEventListener('click', (e) => {
-    const el = (e.target as HTMLElement).closest('a[href*="wa.me"], [data-track]') as HTMLElement | null
+    const el = (e.target as HTMLElement).closest('a[href], [data-track]') as HTMLElement | null
     if (!el) return
-    const location = el.getAttribute('data-track') || 'wa_desconhecido'
-    track('whatsapp_click', { location })
+    const rotulo = el.getAttribute('data-track')
+    const href = el.getAttribute('href') || ''
+
+    if (href.includes('wa.me')) {
+      track('whatsapp_click', { location: rotulo || 'wa_desconhecido' })
+    } else if (href.startsWith('mailto:')) {
+      track('email_click', { location: rotulo || 'email' })
+    } else if (rotulo) {
+      track('link_click', { location: rotulo })
+    }
   })
+
+  // --- profundidade de rolagem ---
+  // Sem isso não dá pra saber onde a pessoa desiste, nem comparar a home
+  // com a /lab, que é bem mais longa. Cada marca dispara uma vez só.
+  const marcas = [25, 50, 75, 100]
+  const vistas = new Set<number>()
+  let agendado = false
+
+  function medirRolagem() {
+    agendado = false
+    const alturaRolavel = document.documentElement.scrollHeight - window.innerHeight
+    if (alturaRolavel <= 0) return
+    const pct = (window.scrollY / alturaRolavel) * 100
+    for (const m of marcas) {
+      if (pct >= m && !vistas.has(m)) {
+        vistas.add(m)
+        track('scroll_depth', { percent: m, page: location.pathname })
+      }
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    // rAF em vez de disparar a cada evento de scroll: com Lenis são
+    // dezenas por segundo, e cada uma faria a conta inteira
+    if (agendado) return
+    agendado = true
+    requestAnimationFrame(medirRolagem)
+  }, { passive: true })
 
   nuxtApp.provide('track', track)
 })

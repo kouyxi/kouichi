@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { waLink } from '~/data/contato'
+import { waLink, disponibilidade } from '~/data/contato'
 
 // Selo giratório. É ornamento, mas não só: carrega escassez real ("2 vagas")
 // no ponto de decisão. Perda pesa mais que ganho equivalente, então o
 // contador de vagas trabalha mais que qualquer adjetivo aqui.
 const whatsapp = waLink('Oi, Kouichi! Vi que tem vaga esse mês. Meu negócio é ')
-const texto = 'DISPONÍVEL PARA 2 PROJETOS ESTE MÊS • FALE COMIGO • '
+const texto = `${disponibilidade.toUpperCase()} • FALE COMIGO • `
 const letras = texto.split('')
 const passo = 360 / letras.length
 </script>
@@ -18,7 +18,7 @@ const passo = 360 / letras.length
     data-track="wa_lab_selo"
     class="selo"
     data-cursor="grow"
-    :aria-label="`${texto.replace(/•/g, '').trim()} — abrir WhatsApp`"
+    :aria-label="`${disponibilidade}. Falar no WhatsApp`"
   >
     <span class="selo-anel" aria-hidden="true">
       <span

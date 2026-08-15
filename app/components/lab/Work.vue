@@ -4,14 +4,14 @@
 const real = {
   nome: 'Gabo Garcia Gallery',
   url: 'https://gabogarciagallery.pages.dev/',
-  shot: '/img/proj-gabo.jpg',
+  shot: '/img/proj-gabo.webp',
   objetivo: 'Vitrine pro trabalho de um ilustrador. No ar e crescendo.',
   tags: ['Portfólio', 'Sanity CMS']
 }
 
 const conceitos = [
   { nicho: 'Clínica odontológica', objetivo: 'Busca no Google virando agendamento no WhatsApp.' },
-  { nicho: 'Escritório de advocacia', objetivo: 'Autoridade primeiro, contato já qualificado depois.' }
+  { nicho: 'Escritório de advocacia', objetivo: 'Passar confiança antes de a pessoa ligar.' }
 ]
 
 const root = ref<HTMLElement | null>(null)
@@ -83,7 +83,14 @@ onMounted(async () => {
       class="wk-shot"
       data-cursor="ver"
     >
-      <img :src="real.shot" :alt="`Site ${real.nome}`" width="1200" height="750" loading="lazy" />
+      <img
+        :src="real.shot"
+        :alt="`Site do ${real.nome}, feito por Kouichi`"
+        width="1600"
+        height="1000"
+        loading="lazy"
+        decoding="async"
+      />
       <span class="wk-live"><i />No ar</span>
     </a>
 

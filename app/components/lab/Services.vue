@@ -8,7 +8,7 @@ const pacotes = [
     n: '01',
     nome: 'Uma página',
     para: 'Você vende um serviço só e precisa de um caminho curto até o WhatsApp.',
-    itens: ['1 página, boa no celular', 'Texto escrito pra gerar contato', 'Botão de WhatsApp sempre à vista', 'No ar + 2 rodadas de ajuste'],
+    itens: ['1 página, rápida no celular', 'Texto escrito pra gerar contato', 'Botão de WhatsApp sempre à vista', 'Publicado, com 2 rodadas de ajuste'],
     prazo: '5 a 7 dias úteis',
     wa: 'Oi, Kouichi! Queria um site de uma página. Meu negócio é '
   },
@@ -16,7 +16,7 @@ const pacotes = [
     n: '02',
     nome: 'Institucional',
     para: 'Clínica, escritório e consultório, onde o cliente pesquisa bastante antes de escolher.',
-    itens: ['Várias seções, uma pergunta por vez', 'Espaço pra prova e dúvidas', 'SEO técnico pra achar no Google', 'No ar + 2 rodadas de ajuste'],
+    itens: ['Uma seção pra cada dúvida do cliente', 'Lugar pra depoimento e foto do seu trabalho', 'SEO técnico pra achar no Google', 'Publicado, com 2 rodadas de ajuste'],
     prazo: '7 a 10 dias úteis',
     wa: 'Oi, Kouichi! Queria um site institucional. Meu negócio é '
   },
@@ -24,7 +24,7 @@ const pacotes = [
     n: '03',
     nome: 'Completo',
     para: 'Você tem vários serviços, mais páginas e quer medir de onde vem cada contato.',
-    itens: ['Várias páginas', 'Integrações do seu jeito', 'Rastreio de onde vem o contato', 'No ar + 2 rodadas de ajuste'],
+    itens: ['Uma página pra cada serviço', 'Formulário, agenda ou o que seu negócio já usa', 'Você vê de onde veio cada contato', 'Publicado, com 2 rodadas de ajuste'],
     prazo: '10 a 15 dias úteis',
     wa: 'Oi, Kouichi! Queria um site completo. Meu negócio é '
   }

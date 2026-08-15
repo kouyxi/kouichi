@@ -27,7 +27,7 @@ const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site.')
 
       <a v-magnetic="{ strength: 0.2 }" :href="whatsapp" target="_blank" rel="noopener" data-track="wa_header" class="btn btn-cta header-cta">
         <WaIcon class="wa" :size="17" />
-        WhatsApp
+        Pedir orçamento
       </a>
     </div>
   </header>

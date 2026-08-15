@@ -4,7 +4,7 @@ import { waLink } from '~/data/contato'
 // Experimento de layout. Fica fora do índice do Google enquanto for teste:
 // se ranquear, briga com a home pelas mesmas buscas.
 useHead({
-  title: 'Kouichi — Lab',
+  title: 'Kouichi Lab',
   meta: [
     { name: 'robots', content: 'noindex, nofollow' },
     { name: 'theme-color', content: '#0E0B04' }
@@ -88,7 +88,7 @@ onMounted(() => {
 body:has(.lab) { background: #0E0B04; }
 
 /* Grão de papel por cima de tudo. É o que mais tira o aspecto de tela
-   chapada, e custa uma textura em SVG — nada de imagem. */
+   chapada, e custa uma textura em SVG, sem imagem nenhuma. */
 .lab-grao {
   position: fixed;
   inset: 0;

@@ -99,7 +99,7 @@ onMounted(async () => {
       </div>
 
       <footer class="ct-foot">
-        <span>Kouichi — {{ ano }}</span>
+        <span>Kouichi, {{ ano }}</span>
         <NuxtLink to="/" class="ct-back">Ver a versão atual do site</NuxtLink>
       </footer>
     </div>

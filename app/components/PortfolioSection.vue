@@ -2,7 +2,7 @@
 const real = {
   nome: 'Gabo Garcia Gallery',
   url: 'https://gabogarciagallery.pages.dev/',
-  shot: '/img/proj-gabo.jpg',
+  shot: '/img/proj-gabo.webp',
   // Só o que dá pra confirmar: é vitrine, está no ar, está crescendo.
   objetivo: 'Vitrine pro trabalho de um ilustrador. No ar e crescendo.',
   tags: ['Portfólio', 'Sanity CMS']
@@ -17,7 +17,7 @@ const conceitos = [
   },
   {
     nicho: 'Escritório de advocacia',
-    objetivo: 'Passar autoridade e qualificar o contato antes da conversa.',
+    objetivo: 'Passar confiança antes de a pessoa ligar.',
     tags: ['Institucional', 'FAQ'],
     tone: 'clay'
   }
@@ -41,10 +41,11 @@ const conceitos = [
           <a :href="real.url" target="_blank" rel="noopener" data-track="proj_gabo" class="real-shot">
             <img
               :src="real.shot"
-              :alt="`Site ${real.nome}`"
-              width="1200"
-              height="750"
+              :alt="`Site do ${real.nome}, feito por Kouichi`"
+              width="1600"
+              height="1000"
               loading="lazy"
+              decoding="async"
             />
             <span class="live-tag"><span class="live-dot" />No ar</span>
           </a>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { waLink, email, cidade, whatsappDisplay } from '~/data/contato'
+import { waLink, email, cidade, whatsappDisplay, disponibilidade } from '~/data/contato'
 
 const whatsapp = waLink('Oi, Kouichi! Quero começar meu site. Meu negócio é ')
 
@@ -37,7 +37,7 @@ const year = new Date().getFullYear()
           <WaIcon class="wa" :size="22" />
           Começar meu site
         </a>
-        <span class="status"><span class="pulse" />Aberto para 2 projetos este mês</span>
+        <span class="status"><span class="pulse" />{{ disponibilidade }}</span>
       </div>
     </div>
 
@@ -69,7 +69,7 @@ const year = new Date().getFullYear()
 
     <div class="container colophon">
       <p>© {{ year }} Kouichi. Design e desenvolvimento próprios.</p>
-      <p class="made">Feito em Goiânia, com café.</p>
+      <p class="made">Feito em Goiânia.</p>
     </div>
   </footer>
 </template>

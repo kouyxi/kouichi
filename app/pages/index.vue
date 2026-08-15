@@ -4,8 +4,12 @@ import { email } from '~/data/contato'
 
 const siteUrl = 'https://kouichi.com.br'
 const title = 'Kouichi | Sites e landing pages que convertem em Goiânia'
+// Escrita na mesma voz do site, não em terceira pessoa corporativa: é o que
+// a pessoa lê no Google antes de decidir clicar, e vinha falando "copy" e
+// "estrutura", que o cliente dele não usa. 150 caracteres, dentro do que o
+// Google mostra sem cortar.
 const description =
-  'Desenvolvimento de sites e landing pages focados em conversão para negócios de Goiânia e região. Estrutura, copy e design a serviço de gerar contato no WhatsApp.'
+  'Site e landing page pra clínica, escritório e prestador de serviço em Goiânia. Feito pra gerar contato no WhatsApp, com orçamento na primeira conversa.'
 const ogImage = `${siteUrl}/og.png`
 
 useHead({
@@ -19,6 +23,11 @@ useHead({
     { property: 'og:description', content: description },
     { property: 'og:url', content: siteUrl },
     { property: 'og:image', content: ogImage },
+    // Dimensões e alt declarados: sem eles o WhatsApp às vezes não monta o
+    // card, e o WhatsApp é justamente por onde o link vai circular.
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:image:alt', content: 'Kouichi, sites que geram contato em Goiânia' },
     { property: 'og:locale', content: 'pt_BR' },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: title },

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { waLink } from '~/data/contato'
+import { waLink, disponibilidade } from '~/data/contato'
 
 const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu negócio é ')
 
 const provas = [
   'Você fala comigo, não com atendente',
-  'Layout aprovado antes de eu programar',
-  'Goiânia & região'
+  'Você aprova o desenho antes de eu programar',
+  'Goiânia e região'
 ]
 
 const reduceMotion = ref(false)
@@ -41,7 +41,7 @@ onMounted(() => {
       <div class="meta-row" v-reveal>
         <span class="index">(01)</span>
         <span class="eyebrow">Dev freelancer em Goiânia</span>
-        <span class="status"><span class="pulse" />Consigo pegar 2 projetos este mês</span>
+        <span class="status"><span class="pulse" />{{ disponibilidade }}</span>
       </div>
 
       <div class="hero-grid">
@@ -78,10 +78,12 @@ onMounted(() => {
           <div class="layer panel-terracotta" :style="layer(16)" />
           <div class="layer photo-frame" :style="layer(6)">
             <img
-              src="/img/hero-kouichi.jpg"
-              alt="Kouichi, desenvolvedor, em Goiânia"
-              width="1000"
-              height="1250"
+              src="/img/hero-kouichi.webp"
+              alt="Kouichi, desenvolvedor de sites, em Goiânia"
+              width="800"
+              height="1000"
+              fetchpriority="high"
+              decoding="async"
               class="photo"
             />
             <div class="photo-tint" />
@@ -90,7 +92,7 @@ onMounted(() => {
 
           <div class="layer floating-card card-a" :style="layer(28)">
             <span class="eyebrow accent">Método</span>
-            <p>UX &amp; design comportamental aplicado a negócio local</p>
+            <p>Cada seção da página tira uma dúvida do seu cliente</p>
           </div>
           <div class="layer floating-card card-b" :style="layer(20)">
             <span class="tag">Traçado&nbsp;N.01</span>

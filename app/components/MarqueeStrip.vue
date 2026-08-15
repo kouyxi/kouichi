@@ -1,11 +1,13 @@
 <script setup lang="ts">
+// Sai "Design de conversão" e "UX aplicado a vendas": dono de clínica não usa
+// nenhuma das duas expressões, e a faixa é lida de relance.
 const items = [
   'Landing pages',
-  'Design de conversão',
   'Sites institucionais',
   'SEO técnico',
-  'UX aplicado a vendas',
-  'Goiânia & região'
+  'Texto que vende',
+  'Rápido no celular',
+  'Goiânia e região'
 ]
 </script>
 

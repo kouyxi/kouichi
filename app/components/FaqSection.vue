@@ -17,7 +17,7 @@ const whatsapp = waLink('Oi, Kouichi! Fiquei com uma dúvida sobre o site.')
         </p>
         <a :href="whatsapp" target="_blank" rel="noopener" data-track="wa_faq" class="btn btn-cta faq-cta" v-magnetic="{ strength: 0.24 }">
           <WaIcon class="wa" :size="18" />
-          Tirar dúvida
+          Perguntar no WhatsApp
         </a>
       </header>
 

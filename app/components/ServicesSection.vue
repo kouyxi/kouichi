@@ -7,7 +7,7 @@ const packages = [
   {
     name: 'Uma página',
     forWhom: 'Pra quem vende um serviço só e precisa de um caminho curto até o WhatsApp.',
-    features: ['1 página, boa no celular', 'Texto escrito pra gerar contato', 'Botão de WhatsApp sempre à vista', 'No ar + 2 rodadas de ajuste'],
+    features: ['1 página, rápida no celular', 'Texto escrito pra gerar contato', 'Botão de WhatsApp sempre à vista', 'Publicado, com 2 rodadas de ajuste'],
     prazo: '5 a 7 dias úteis',
     highlight: false,
     waText: 'Oi, Kouichi! Queria um site de uma página. Meu negócio é '
@@ -15,7 +15,7 @@ const packages = [
   {
     name: 'Institucional',
     forWhom: 'Pra clínica, escritório e consultório, onde o cliente pesquisa bastante antes de escolher.',
-    features: ['Várias seções, uma pergunta por vez', 'Espaço pra prova e dúvidas', 'SEO técnico pra achar no Google', 'No ar + 2 rodadas de ajuste'],
+    features: ['Uma seção pra cada dúvida do cliente', 'Lugar pra depoimento e foto do seu trabalho', 'SEO técnico pra achar no Google', 'Publicado, com 2 rodadas de ajuste'],
     prazo: '7 a 10 dias úteis',
     highlight: true,
     waText: 'Oi, Kouichi! Queria um site institucional. Meu negócio é '
@@ -23,7 +23,7 @@ const packages = [
   {
     name: 'Completo',
     forWhom: 'Pra quem tem vários serviços, mais páginas e quer medir de onde vem cada contato.',
-    features: ['Várias páginas', 'Integrações do seu jeito', 'Rastreio de onde vem o contato', 'No ar + 2 rodadas de ajuste'],
+    features: ['Uma página pra cada serviço', 'Formulário, agenda ou o que seu negócio já usa', 'Você vê de onde veio cada contato', 'Publicado, com 2 rodadas de ajuste'],
     prazo: '10 a 15 dias úteis',
     highlight: false,
     waText: 'Oi, Kouichi! Queria um site completo. Meu negócio é '
