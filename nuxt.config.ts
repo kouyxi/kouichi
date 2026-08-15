@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     ]
   },
 
-  // IDs de métricas (públicos — aparecem no HTML de qualquer forma).
+  // IDs de métricas (são públicos, aparecem no HTML de qualquer forma).
   // Cravados como padrão pra funcionar sem depender de env var; ainda dá pra
   // sobrescrever via NUXT_PUBLIC_CLARITY_ID / NUXT_PUBLIC_GA_ID no Cloudflare.
   runtimeConfig: {

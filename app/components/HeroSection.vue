@@ -1,10 +1,11 @@
 <script setup lang="ts">
-// TODO: trocar pelo número real de WhatsApp (formato: 55DDDNÚMERO)
-const whatsapp = 'https://wa.me/556200000000'
+import { waLink } from '~/data/contato'
+
+const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu negócio é ')
 
 const provas = [
-  'Conversão medida, não achismo',
-  'Contato direto pelo WhatsApp',
+  'Você fala comigo, não com atendente',
+  'Layout aprovado antes de eu programar',
   'Goiânia & região'
 ]
 
@@ -34,13 +35,13 @@ onMounted(() => {
   <section id="topo" class="section-light hero">
     <div class="craft-grid hero-craft" aria-hidden="true" />
     <div class="grain" />
-    <p class="ghost-word" aria-hidden="true" data-parallax="7">CONVERTE</p>
+    <p class="ghost-word" aria-hidden="true" data-parallax="4">CONVERTE</p>
 
     <div class="container hero-inner">
       <div class="meta-row" v-reveal>
         <span class="index">(01)</span>
-        <span class="eyebrow">Estúdio de conversão</span>
-        <span class="status"><span class="pulse" />Aberto para 2 projetos este mês</span>
+        <span class="eyebrow">Dev freelancer em Goiânia</span>
+        <span class="status"><span class="pulse" />Consigo pegar 2 projetos este mês</span>
       </div>
 
       <div class="hero-grid">
@@ -52,17 +53,21 @@ onMounted(() => {
           </h1>
 
           <p class="body-lg hero-sub" v-reveal="{ delay: 90 }">
-            Sites e landing pages desenhados pra transformar visita em contato —
-            cada seção pensada pra gerar cliente, não só pra ficar bonita.
+            Eu faço site pra negócio de Goiânia que vive de cliente novo chegando.
+            Clínica, escritório, consultório, quem atende com hora marcada.
+            A conversa começa e termina no seu WhatsApp.
           </p>
 
           <div class="hero-actions" v-reveal="{ delay: 160 }">
             <a v-magnetic="{ strength: 0.28 }" :href="whatsapp" target="_blank" rel="noopener" data-track="wa_hero" class="btn btn-cta">
               <WaIcon class="wa" :size="19" />
-              Começar no WhatsApp
+              Me chamar no WhatsApp
             </a>
-            <a href="#servicos" class="btn btn-outline">Ver como funciona</a>
+            <a href="#processo" class="btn btn-outline">Ver como funciona</a>
           </div>
+          <p class="cta-trigger" v-reveal="{ delay: 190 }">
+            Respondo no mesmo dia. Falar comigo não compromete você a nada.
+          </p>
 
           <ul class="provas" v-reveal="{ delay: 220 }">
             <li v-for="p in provas" :key="p">{{ p }}</li>
@@ -72,8 +77,13 @@ onMounted(() => {
         <div ref="visualEl" class="hero-visual" @mousemove="onMove" @mouseleave="onLeave" data-parallax="3">
           <div class="layer panel-terracotta" :style="layer(16)" />
           <div class="layer photo-frame" :style="layer(6)">
-            <!-- TODO: placeholder de referência (Pinterest) — trocar por foto/arte própria ou licenciada antes de publicar -->
-            <img src="/img/hero-placeholder.jpg" alt="" class="photo" />
+            <img
+              src="/img/hero-kouichi.jpg"
+              alt="Kouichi, desenvolvedor, em Goiânia"
+              width="1000"
+              height="1250"
+              class="photo"
+            />
             <div class="photo-tint" />
           </div>
           <div class="layer blueprint-layer" :style="layer(11)"><BlueprintOverlay /></div>
@@ -103,7 +113,7 @@ onMounted(() => {
   position: relative;
 }
 
-/* craft grid patch — confined to the visual side, subtle */
+/* craft grid patch: confined to the visual side, subtle */
 .hero-craft {
   left: auto;
   right: -4%;
@@ -167,7 +177,7 @@ onMounted(() => {
   display: grid;
   gap: clamp(2.5rem, 6vw, 4rem);
   align-items: center;
-  padding-top: clamp(2rem, 5vw, 3.5rem);
+  padding-top: clamp(1.5rem, 3.5vw, 2.5rem);
 }
 
 .accent { color: var(--clay); }
@@ -187,6 +197,12 @@ onMounted(() => {
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 2.25rem;
+}
+.cta-trigger {
+  margin-top: 0.9rem;
+  font-size: 0.84rem;
+  opacity: 0.66;
+  max-width: 28rem;
 }
 
 .provas {

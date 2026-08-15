@@ -1,33 +1,38 @@
 <script setup lang="ts">
 const principios = [
-  { n: '01', t: 'Prova antes de promessa', d: 'Fato concreto no lugar de adjetivo. Se não dá pra provar, não vai pro site.' },
-  { n: '02', t: 'Cada elemento tem função', d: 'Nada entra só por enfeite. Se não ajuda o visitante a agir, sai.' },
-  { n: '03', t: 'Preço e escopo claros', d: 'Você sabe o que está incluso e quanto custa antes de fechar. Sem surpresa depois.' }
+  { n: '01', t: 'Prefiro fato a adjetivo', d: 'Se a gente não consegue provar, não entra no site. "Excelência em atendimento" não convence ninguém. "Atendo em até 24h" convence.' },
+  { n: '02', t: 'Se não serve, sai', d: 'Cada coisa na página tem que ajudar alguém a te procurar. O que só está lá pra encher espaço eu tiro, mesmo que tenha dado trabalho.' },
+  { n: '03', t: 'Você sabe onde está pisando', d: 'Escopo, prazo e valor combinados antes. Nunca vou aparecer no fim do mês com uma cobrança que a gente não conversou.' }
 ]
 </script>
 
 <template>
   <section id="sobre" class="section-light about">
-    <div class="craft-grid about-craft" aria-hidden="true" data-parallax="6" />
+    <div class="craft-grid about-craft" aria-hidden="true" data-parallax="4" />
     <div class="container about-grid">
       <div class="about-copy" v-reveal>
-        <span class="index">(03)</span>
+        <span class="index">(04)</span>
         <p class="eyebrow accent">Sobre</p>
-        <h2 class="display-2">
-          Um dev que <em>audita</em> o próprio código — não só escreve.
+        <h2 class="display-2" data-split-lines>
+          Um dev que <em>audita</em> o que escreve.
         </h2>
         <div class="about-text">
           <p>
-            Sou o Kouichi, desenvolvedor em Goiânia. Venho do backend
-            (Laravel/Vue) e do estudo de segurança de aplicações — o que
-            significa que eu olho um site pensando em <strong>o que pode
-            dar errado</strong> e <strong>o que faz o visitante agir</strong>,
-            não só se ficou bonito.
+            Sou o Kouichi, de Goiânia. Trabalho com backend (Laravel e Vue) e
+            estudo segurança de aplicação, que é a mania de ficar procurando
+            <strong>onde as coisas quebram</strong>. Isso me estragou de um jeito
+            útil: eu não consigo olhar um site e ver só se está bonito.
           </p>
           <p>
-            Não vendo "um site". Vendo um canal que transforma quem chega
-            em contato no WhatsApp — com estrutura, copy e cada decisão
-            visual a serviço disso.
+            Site bonito que não gera contato é despesa. Então eu construo pensando
+            em uma pergunta só, que é o que faz alguém parar de rolar a página e
+            te chamar. Se a resposta não estiver clara pra mim, também não vai
+            estar pro seu cliente.
+          </p>
+          <p class="about-honest">
+            Minha carteira ainda é curta. É por isso que eu topo prazo curto, valor
+            justo e a regra de você não pagar se o layout não te agradar: estou
+            construindo reputação, e isso joga a seu favor.
           </p>
         </div>
       </div>
@@ -66,6 +71,12 @@ const principios = [
 .about-text { margin-top: 1.75rem; display: grid; gap: 1rem; max-width: 34rem; }
 .about-text p { line-height: 1.6; opacity: 0.85; }
 .about-text strong { color: var(--ink); opacity: 1; }
+.about-honest {
+  margin-top: 0.5rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--clay);
+  font-size: 0.95rem;
+}
 
 .principios {
   display: grid;

@@ -1,5 +1,5 @@
 // Magnetic hover: element gently follows the cursor to pull attention toward it.
-// Applied to primary CTAs — motion with a conversion purpose, not decoration.
+// Applied to primary CTAs only, where the motion has a conversion purpose.
 // Registered universally so SSR can resolve the directive; wiring is client-only.
 export default defineNuxtPlugin((nuxtApp) => {
   const fine = import.meta.client && window.matchMedia('(pointer: fine)').matches

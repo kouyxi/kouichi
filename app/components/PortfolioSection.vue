@@ -1,15 +1,24 @@
 <script setup lang="ts">
-const projetos = [
+const real = {
+  nome: 'Gabo Garcia Gallery',
+  url: 'https://gabogarciagallery.pages.dev/',
+  shot: '/img/proj-gabo.jpg',
+  // Só o que dá pra confirmar: é vitrine, está no ar, está crescendo.
+  objetivo: 'Vitrine pro trabalho de um ilustrador. No ar e crescendo.',
+  tags: ['Portfólio', 'Sanity CMS']
+}
+
+const conceitos = [
   {
     nicho: 'Clínica odontológica',
     objetivo: 'Transformar busca no Google em agendamento pelo WhatsApp.',
-    tags: ['Landing page', 'Agendamento', 'SEO local'],
+    tags: ['Landing page', 'SEO local'],
     tone: 'moss'
   },
   {
     nicho: 'Escritório de advocacia',
-    objetivo: 'Passar autoridade e qualificar o contato antes da primeira conversa.',
-    tags: ['Institucional', 'Prova social', 'FAQ'],
+    objetivo: 'Passar autoridade e qualificar o contato antes da conversa.',
+    tags: ['Institucional', 'FAQ'],
     tone: 'clay'
   }
 ]
@@ -19,22 +28,44 @@ const projetos = [
   <section id="portfolio" class="section-light portfolio">
     <div class="container">
       <header class="sec-head" v-reveal>
-        <span class="index">(04)</span>
+        <span class="index">(05)</span>
         <div>
           <p class="eyebrow accent">Portfólio</p>
-          <h2 class="display-2">Projetos <em>demonstrativos.</em></h2>
+          <h2 class="display-2" data-split-lines>Projetos.</h2>
         </div>
-        <p class="sec-note">
-          Conceitos que mostram o método aplicado a nichos reais de Goiânia.
-          Casos com clientes reais entram aqui conforme forem ao ar.
-        </p>
+        <p class="sec-note">Um cliente real e dois conceitos.</p>
       </header>
 
       <div class="grid">
-        <article v-for="(p, i) in projetos" :key="p.nicho" class="proj" v-reveal="{ delay: i * 110 }">
+        <article class="proj" v-reveal>
+          <a :href="real.url" target="_blank" rel="noopener" data-track="proj_gabo" class="real-shot">
+            <img
+              :src="real.shot"
+              :alt="`Site ${real.nome}`"
+              width="1200"
+              height="750"
+              loading="lazy"
+            />
+            <span class="live-tag"><span class="live-dot" />No ar</span>
+          </a>
+          <div class="proj-body">
+            <h3 class="proj-nicho">{{ real.nome }}</h3>
+            <p class="proj-obj">{{ real.objetivo }}</p>
+            <ul class="proj-tags">
+              <li v-for="t in real.tags" :key="t">{{ t }}</li>
+            </ul>
+          </div>
+        </article>
+
+        <article
+          v-for="(p, i) in conceitos"
+          :key="p.nicho"
+          class="proj"
+          v-reveal="{ delay: (i + 1) * 90 }"
+        >
           <div class="preview" :class="p.tone">
             <div class="craft-grid preview-grid" />
-            <div class="browser" data-parallax="7">
+            <div class="browser">
               <span class="dots"><i /><i /><i /></span>
               <div class="wire">
                 <span class="wire-title" />
@@ -43,7 +74,7 @@ const projetos = [
                 <span class="wire-cta">WhatsApp</span>
               </div>
             </div>
-            <span class="demo-tag">Projeto demonstrativo</span>
+            <span class="demo-tag">Conceito</span>
           </div>
 
           <div class="proj-body">
@@ -60,40 +91,92 @@ const projetos = [
 </template>
 
 <style scoped>
-.portfolio { padding-block: clamp(3.5rem, 8vw, 6.5rem); background: var(--paper-2); }
+.portfolio { padding-block: clamp(3rem, 6vw, 5rem); background: var(--paper-2); }
 
 .sec-head {
   display: grid;
-  gap: 1.25rem;
-  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  gap: 1rem;
+  padding-bottom: clamp(2rem, 4vw, 2.75rem);
 }
 .sec-head .index { display: block; }
 .sec-head .eyebrow { margin-bottom: 0.6rem; }
 .accent { color: var(--clay); }
 .sec-head em { font-style: italic; color: var(--clay); }
-.sec-note { max-width: 32rem; opacity: 0.78; line-height: 1.55; font-size: 0.98rem; }
+.sec-note { max-width: 28rem; opacity: 0.72; line-height: 1.5; font-size: 0.92rem; }
 @media (min-width: 900px) {
   .sec-head { grid-template-columns: auto 1fr auto; align-items: end; column-gap: 2.5rem; }
-  .sec-note { max-width: 22rem; }
 }
 
-.grid { display: grid; gap: 1.75rem; }
-@media (min-width: 760px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+.grid { display: grid; gap: 1.25rem; }
+@media (min-width: 700px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 
 .proj {
+  display: flex;
+  flex-direction: column;
   background: var(--card);
   border: 2px solid var(--ink);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: var(--hard-lg);
+  box-shadow: var(--hard);
   transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
-.proj:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--ink); }
+.proj:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 0 var(--ink); }
 
+/* projeto real */
+.real-shot {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  background: var(--ink);
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+}
+.real-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  transition: transform 0.5s var(--ease);
+}
+.real-shot:hover img { transform: scale(1.03); }
+
+.live-tag {
+  /* à direita de propósito: à esquerda cobre a logo do cliente no screenshot */
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--card);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.18rem 0.6rem;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.live-dot {
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: var(--moss-lit, #6F8347);
+  animation: livePulse 2.4s infinite;
+}
+@keyframes livePulse {
+  0% { box-shadow: 0 0 0 0 rgba(111, 131, 71, 0.6); }
+  70% { box-shadow: 0 0 0 5px rgba(111, 131, 71, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(111, 131, 71, 0); }
+}
+
+/* conceitos */
 .preview {
   position: relative;
   aspect-ratio: 16 / 10;
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,59 +190,60 @@ const projetos = [
 .browser {
   position: relative;
   z-index: 1;
-  width: min(80%, 20rem);
+  width: min(82%, 15rem);
   background: var(--card);
   border: 2px solid var(--ink);
-  border-radius: 8px;
-  box-shadow: 4px 4px 0 0 rgba(0,0,0,0.35);
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 0 rgba(0,0,0,0.35);
   overflow: hidden;
 }
-.dots { display: flex; gap: 5px; padding: 0.5rem 0.65rem; border-bottom: 1.5px solid var(--ink); }
-.dots i { width: 8px; height: 8px; border-radius: 999px; border: 1.5px solid var(--ink); }
+.dots { display: flex; gap: 4px; padding: 0.4rem 0.55rem; border-bottom: 1.5px solid var(--ink); }
+.dots i { width: 7px; height: 7px; border-radius: 999px; border: 1.5px solid var(--ink); }
 .dots i:nth-child(1) { background: var(--clay); }
 .dots i:nth-child(2) { background: var(--paper-2); }
 .dots i:nth-child(3) { background: var(--moss); }
-.wire { padding: 0.9rem; display: flex; flex-direction: column; gap: 0.5rem; }
-.wire-title { height: 12px; width: 70%; background: var(--ink); border-radius: 3px; }
-.wire-line { height: 7px; width: 100%; background: rgba(23,19,9,0.22); border-radius: 3px; }
+.wire { padding: 0.75rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.wire-title { height: 10px; width: 70%; background: var(--ink); border-radius: 3px; }
+.wire-line { height: 6px; width: 100%; background: rgba(23,19,9,0.22); border-radius: 3px; }
 .wire-line.short { width: 55%; }
 .wire-cta {
   align-self: flex-start;
-  margin-top: 0.35rem;
-  font-size: 0.6rem;
+  margin-top: 0.3rem;
+  font-size: 0.56rem;
   font-weight: 600;
   background: var(--clay);
   color: var(--ink);
   border: 1.5px solid var(--ink);
   border-radius: 999px;
-  padding: 0.2rem 0.6rem;
+  padding: 0.16rem 0.5rem;
 }
 
 .demo-tag {
   position: absolute;
   z-index: 2;
-  bottom: 0.75rem;
-  left: 0.75rem;
+  bottom: 0.6rem;
+  left: 0.6rem;
   background: var(--card);
   color: var(--ink);
   border: 2px solid var(--ink);
   border-radius: 999px;
-  padding: 0.2rem 0.7rem;
-  font-size: 0.66rem;
+  padding: 0.18rem 0.6rem;
+  font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.proj-body { padding: 1.5rem; }
-.proj-nicho { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; }
-.proj-obj { margin-top: 0.5rem; font-size: 0.95rem; line-height: 1.5; opacity: 0.82; }
-.proj-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+.proj-body { padding: 1.15rem 1.25rem 1.35rem; }
+.proj-nicho { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; line-height: 1.15; }
+.proj-obj { margin-top: 0.4rem; font-size: 0.88rem; line-height: 1.45; opacity: 0.8; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
 .proj-tags li {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
-  padding: 0.28rem 0.65rem;
+  padding: 0.22rem 0.55rem;
   border: 1.5px solid var(--ink);
   border-radius: 999px;
+  opacity: 0.85;
 }
 </style>

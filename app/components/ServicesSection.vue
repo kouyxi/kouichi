@@ -1,37 +1,32 @@
 <script setup lang="ts">
-// TODO: trocar pelo número real de WhatsApp (formato: 55DDDNÚMERO)
-const wa = '556200000000'
-function link(text: string) {
-  return `https://wa.me/${wa}?text=${encodeURIComponent(text)}`
-}
+import { waLink } from '~/data/contato'
+
+const link = waLink
 
 const packages = [
   {
-    name: 'One Page',
-    price: 'R$500–700',
-    forWhom: 'Autônomo ou serviço único que precisa de um canal direto pro WhatsApp.',
-    features: ['1 página responsiva', 'Copy focada em contato', 'Botão de WhatsApp fixo', 'Publicação + 2 ajustes'],
-    prazo: '5–7 dias úteis',
+    name: 'Uma página',
+    forWhom: 'Pra quem vende um serviço só e precisa de um caminho curto até o WhatsApp.',
+    features: ['1 página, boa no celular', 'Texto escrito pra gerar contato', 'Botão de WhatsApp sempre à vista', 'No ar + 2 rodadas de ajuste'],
+    prazo: '5 a 7 dias úteis',
     highlight: false,
-    waText: 'Oi! Tenho interesse no pacote One Page.'
+    waText: 'Oi, Kouichi! Queria um site de uma página. Meu negócio é '
   },
   {
     name: 'Institucional',
-    price: 'R$700–1.200',
-    forWhom: 'Clínica, escritório ou empresa local que precisa passar autoridade.',
-    features: ['Múltiplas seções', 'Prova social + FAQ', 'SEO técnico de base', 'Publicação + 2 ajustes'],
-    prazo: '7–10 dias úteis',
+    forWhom: 'Pra clínica, escritório e consultório, onde o cliente pesquisa bastante antes de escolher.',
+    features: ['Várias seções, uma pergunta por vez', 'Espaço pra prova e dúvidas', 'SEO técnico pra achar no Google', 'No ar + 2 rodadas de ajuste'],
+    prazo: '7 a 10 dias úteis',
     highlight: true,
-    waText: 'Oi! Tenho interesse no pacote Institucional.'
+    waText: 'Oi, Kouichi! Queria um site institucional. Meu negócio é '
   },
   {
     name: 'Completo',
-    price: 'R$1.200+',
-    forWhom: 'Negócio com mais serviços, páginas extras e estrutura mais robusta.',
-    features: ['Várias páginas', 'Integrações sob medida', 'Rastreio de conversão', 'Publicação + 2 ajustes'],
-    prazo: '10–15 dias úteis',
+    forWhom: 'Pra quem tem vários serviços, mais páginas e quer medir de onde vem cada contato.',
+    features: ['Várias páginas', 'Integrações do seu jeito', 'Rastreio de onde vem o contato', 'No ar + 2 rodadas de ajuste'],
+    prazo: '10 a 15 dias úteis',
     highlight: false,
-    waText: 'Oi! Tenho interesse no pacote Completo.'
+    waText: 'Oi, Kouichi! Queria um site completo. Meu negócio é '
   }
 ]
 </script>
@@ -42,12 +37,13 @@ const packages = [
       <header class="sec-head" v-reveal>
         <span class="index">(02)</span>
         <div class="sec-head-main">
-          <p class="eyebrow accent">Serviços &amp; pacotes</p>
-          <h2 class="display-2">O que eu construo pra <em>você vender mais.</em></h2>
+          <p class="eyebrow accent">O que eu faço</p>
+          <h2 class="display-2" data-split-lines>Três tamanhos de <em>site.</em></h2>
         </div>
         <p class="sec-note">
-          Preço aberto de propósito — pra você já saber onde entra antes da conversa.
-          O valor final depende do que o seu negócio precisa incluir.
+          Trabalho melhor com quem vive de cliente novo chegando: clínica, escritório,
+          consultório, prestador de serviço. Se um cliente perdido dói no seu caixa,
+          a gente se entende rápido.
         </p>
       </header>
 
@@ -59,11 +55,10 @@ const packages = [
           :class="{ hot: p.highlight }"
           v-reveal="{ delay: i * 90 }"
         >
-          <span v-if="p.highlight" class="badge">Mais escolhido</span>
+          <span v-if="p.highlight" class="badge">Mais pedido</span>
           <div class="pkg-top">
             <span class="index">0{{ i + 1 }}</span>
             <h3 class="pkg-name">{{ p.name }}</h3>
-            <p class="pkg-price">{{ p.price }}</p>
             <p class="pkg-for">{{ p.forWhom }}</p>
           </div>
 
@@ -72,7 +67,7 @@ const packages = [
           </ul>
 
           <div class="pkg-foot">
-            <span class="pkg-prazo">⏱ {{ p.prazo }}</span>
+            <span class="pkg-prazo">Prazo: {{ p.prazo }}</span>
             <a
               v-magnetic="{ strength: 0.2 }"
               :href="link(p.waText)"
@@ -83,15 +78,16 @@ const packages = [
               :class="p.highlight ? 'btn-cta' : 'btn-outline'"
             >
               <WaIcon class="wa" :size="17" />
-              Falar sobre
+              Pedir orçamento
             </a>
           </div>
         </article>
       </div>
 
       <p class="ajuste-note" v-reveal>
-        Todo pacote inclui <strong>2 rodadas de ajuste</strong>. Depois disso,
-        novas alterações entram como orçamento à parte — combinado por escrito antes de começar.
+        O valor depende do tamanho e eu falo ele na primeira conversa, antes de você
+        se comprometer com qualquer coisa. Todo site inclui <strong>2 rodadas de ajuste</strong>,
+        e o que vier depois vira orçamento à parte, combinado por escrito.
       </p>
     </div>
   </section>
@@ -161,13 +157,6 @@ const packages = [
   font-size: 1.7rem;
   margin-top: 0.35rem;
 }
-.pkg-price {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--clay);
-  margin-top: 0.15rem;
-}
-.pkg.hot .pkg-price { color: var(--clay); }
 .pkg-for { margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.45; opacity: 0.8; }
 
 .pkg-feats {

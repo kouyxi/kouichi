@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Marca: mikan (laranja japonesa), neo-brutalista — contorno grosso, gloss,
+// Marca: mikan (laranja japonesa), neo-brutalista: contorno grosso, gloss,
 // folha oliva e hard-shadow leve. A cor da sombra vem de --mark-shadow
 // (ink por padrão; o footer sobrescreve pra creme, senão sumiria no escuro).
 const leaf = 'M60 47 C 63 34, 79 24, 91 28 C 86 41, 73 49, 60 47 Z'

@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { faqs } from '~/data/faqs'
+import { email } from '~/data/contato'
+
 // TODO: trocar pelo domínio real quando publicar
 const siteUrl = 'https://kouichi.dev'
-const title = 'Kouichi — Sites e landing pages que convertem | Goiânia'
+const title = 'Kouichi | Sites e landing pages que convertem em Goiânia'
 const description =
   'Desenvolvimento de sites e landing pages focados em conversão para negócios de Goiânia e região. Estrutura, copy e design a serviço de gerar contato no WhatsApp.'
 // TODO: gerar uma imagem de compartilhamento real (1200x630) e colocar em /public/og.png
@@ -35,18 +38,55 @@ useHead({
       type: 'application/ld+json',
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'ProfessionalService',
-        name: 'Kouichi — Desenvolvimento Web',
-        description,
-        url: siteUrl,
-        areaServed: { '@type': 'City', name: 'Goiânia' },
-        serviceType: 'Criação de sites e landing pages focados em conversão',
-        priceRange: 'R$500–R$1.200+',
-        knowsLanguage: 'pt-BR',
-        makesOffer: [
-          { '@type': 'Offer', name: 'Landing page (One Page)', priceCurrency: 'BRL', price: '500' },
-          { '@type': 'Offer', name: 'Site institucional', priceCurrency: 'BRL', price: '700' },
-          { '@type': 'Offer', name: 'Site completo', priceCurrency: 'BRL', price: '1200' }
+        '@graph': [
+          {
+            '@type': 'ProfessionalService',
+            '@id': `${siteUrl}/#business`,
+            name: 'Kouichi Desenvolvimento Web',
+            description,
+            url: siteUrl,
+            image: ogImage,
+            telephone: '+5562981277721',
+            email,
+            contactPoint: {
+              '@type': 'ContactPoint',
+              contactType: 'sales',
+              telephone: '+5562981277721',
+              email,
+              availableLanguage: 'pt-BR'
+            },
+            areaServed: [
+              { '@type': 'City', name: 'Goiânia' },
+              { '@type': 'State', name: 'Goiás' }
+            ],
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Goiânia',
+              addressRegion: 'GO',
+              addressCountry: 'BR'
+            },
+            serviceType: 'Criação de sites e landing pages focados em conversão',
+            knowsLanguage: 'pt-BR',
+            founder: { '@type': 'Person', name: 'Kouichi' },
+            hasOfferCatalog: {
+              '@type': 'OfferCatalog',
+              name: 'Sites',
+              itemListElement: [
+                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site de uma página' } },
+                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site institucional' } },
+                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site completo' } }
+              ]
+            }
+          },
+          {
+            '@type': 'FAQPage',
+            '@id': `${siteUrl}/#faq`,
+            mainEntity: faqs.map((f) => ({
+              '@type': 'Question',
+              name: f.q,
+              acceptedAnswer: { '@type': 'Answer', text: f.a }
+            }))
+          }
         ]
       })
     }
@@ -63,6 +103,7 @@ useHead({
       <HeroSection />
       <MarqueeStrip />
       <ServicesSection />
+      <ProcessSection />
       <AboutSection />
       <PortfolioSection />
       <FaqSection />

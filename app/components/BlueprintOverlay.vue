@@ -15,7 +15,7 @@
     <g font-family="Inter, sans-serif" font-size="9" letter-spacing="0.08em" fill="currentColor" opacity="0.7">
       <text x="26" y="52">N.01</text>
       <text x="304" y="440">φ 1.618</text>
-      <text x="212" y="466">KOUICHI — TRAÇADO</text>
+      <text x="212" y="466">KOUICHI / TRAÇADO</text>
     </g>
 
     <path d="M60 300 Q 40 340 70 380 Q 100 410 90 450" stroke="currentColor" stroke-width="1.25" opacity="0.75" />

@@ -1,4 +1,4 @@
-# Kouichi — site
+# Kouichi
 
 Landing page estática (Nuxt 4, pré-renderizada). Foco em conversão para negócios de Goiânia.
 
@@ -16,7 +16,7 @@ npm run generate   # gera .output/public (HTML/CSS/JS puro)
 npx serve .output/public   # preview local do build
 ```
 
-## Deploy — Cloudflare Pages (grátis, sem cold-start, CI do GitHub)
+## Deploy no Cloudflare Pages (grátis, sem cold-start, CI do GitHub)
 
 1. Suba este repositório no GitHub.
 2. Cloudflare Dashboard → **Workers & Pages** → **Create** → **Pages** → **Connect to Git** → escolha o repo.
@@ -30,9 +30,8 @@ npx serve .output/public   # preview local do build
 
 ## TODO antes de divulgar
 
-- [ ] Trocar número de WhatsApp real (buscar `556200000000` no projeto)
-- [ ] Trocar e-mail `contato@kouichi.dev`
+- [x] WhatsApp e e-mail reais (ficam em `app/data/contato.ts`, um lugar só)
 - [ ] Trocar domínio `kouichi.dev` (em `app/app.vue`, `public/robots.txt`, `public/sitemap.xml`)
-- [ ] Imagem do hero: substituir `public/img/hero-placeholder.jpg` (é referência, trocar por arte própria/licenciada)
+- [x] Imagem do hero: foto própria tratada em halftone (`public/img/hero-kouichi.jpg`)
 - [ ] Gerar imagem OG 1200×630 em `public/og.png` (preview ao compartilhar no WhatsApp)
-- [ ] Adicionar métricas (Microsoft Clarity + GA4) — ver passo 3
+- [ ] Adicionar métricas (Microsoft Clarity + GA4), ver passo 3

@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import { waLink } from '~/data/contato'
+
 const links = [
   { label: 'Serviços', href: '#servicos' },
+  { label: 'Como funciona', href: '#processo' },
   { label: 'Sobre', href: '#sobre' },
   { label: 'Portfólio', href: '#portfolio' },
   { label: 'FAQ', href: '#faq' }
 ]
-// TODO: trocar pelo número real de WhatsApp (formato: 55DDDNÚMERO)
-const whatsapp = 'https://wa.me/556200000000'
+const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site.')
 </script>
 
 <template>

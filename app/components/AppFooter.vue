@@ -1,10 +1,11 @@
 <script setup lang="ts">
-// TODO: trocar pelos dados reais
-const whatsapp = 'https://wa.me/556200000000?text=' + encodeURIComponent('Oi! Quero começar meu site.')
-const email = 'contato@kouichi.dev'
+import { waLink, email, cidade, whatsappDisplay } from '~/data/contato'
+
+const whatsapp = waLink('Oi, Kouichi! Quero começar meu site. Meu negócio é ')
 
 const links = [
   { label: 'Serviços', href: '#servicos' },
+  { label: 'Como funciona', href: '#processo' },
   { label: 'Sobre', href: '#sobre' },
   { label: 'Portfólio', href: '#portfolio' },
   { label: 'FAQ', href: '#faq' }
@@ -15,13 +16,13 @@ const year = new Date().getFullYear()
 
 <template>
   <footer id="contato" class="section-ink footer">
-    <div class="craft-grid footer-craft" aria-hidden="true" data-parallax="5" />
+    <div class="craft-grid footer-craft" aria-hidden="true" data-parallax="3" />
     <div class="grain" />
 
     <div class="container footer-close" v-reveal>
-      <span class="index">(06)</span>
-      <p class="eyebrow accent">Vamos conversar</p>
-      <h2 class="close-title">
+      <span class="index">(07)</span>
+      <p class="eyebrow accent">Fale comigo</p>
+      <h2 class="close-title" data-split-lines>
         Seu próximo cliente já está <em>procurando</em> você.
       </h2>
       <div class="close-actions">
@@ -56,9 +57,9 @@ const year = new Date().getFullYear()
         <div class="footer-col">
           <p class="eyebrow accent">Contato</p>
           <ul>
-            <li><a :href="whatsapp" target="_blank" rel="noopener" class="link-sweep">WhatsApp</a></li>
+            <li><a :href="whatsapp" target="_blank" rel="noopener" class="link-sweep">{{ whatsappDisplay }}</a></li>
             <li><a :href="`mailto:${email}`" class="link-sweep">{{ email }}</a></li>
-            <li>Goiânia — GO</li>
+            <li>{{ cidade }}</li>
           </ul>
         </div>
       </div>
@@ -67,7 +68,7 @@ const year = new Date().getFullYear()
     </div>
 
     <div class="container colophon">
-      <p>© {{ year }} Kouichi — design &amp; desenvolvimento próprios.</p>
+      <p>© {{ year }} Kouichi. Design e desenvolvimento próprios.</p>
       <p class="made">Feito em Goiânia, com café.</p>
     </div>
   </footer>

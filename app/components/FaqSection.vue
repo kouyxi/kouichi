@@ -1,44 +1,19 @@
 <script setup lang="ts">
-const faqs = [
-  {
-    q: 'Quanto custa e como funciona o pagamento?',
-    a: 'Os pacotes começam em R$500 (ver seção de pacotes). O pagamento é 50% pra iniciar e 50% na entrega, antes de publicar. Pix à vista é o padrão.'
-  },
-  {
-    q: 'Qual o prazo de entrega?',
-    a: 'De 5 a 15 dias úteis, dependendo do pacote. O prazo começa a contar quando você me envia o material (textos, fotos, dados do negócio) — eu te mando uma lista simples do que preciso.'
-  },
-  {
-    q: 'O que você precisa de mim pra começar?',
-    a: 'Dados reais do negócio: serviços, diferencial de verdade, contato, e fotos próprias se tiver. Sem inventar nada — site com informação real converte mais e evita retrabalho.'
-  },
-  {
-    q: 'E depois de pronto, posso pedir alterações?',
-    a: 'Cada pacote inclui 2 rodadas de ajuste. Depois disso, mudanças novas entram como orçamento à parte, sempre combinado por escrito antes. Ajuste simples começa em R$50.'
-  },
-  {
-    q: 'Preciso comprar domínio e hospedagem?',
-    a: 'Não obrigatoriamente pra primeira versão — o site pode ir ao ar num link gratuito. Se você quiser domínio próprio (seunegocio.com.br), a gente combina isso à parte, sem surpresa no valor.'
-  },
-  {
-    q: 'Já tenho um site, dá pra melhorar em vez de refazer?',
-    a: 'Depende. Se a base for boa, dá pra otimizar pra converter mais. Se estiver travando o resultado, refazer sai mais barato que remendar. Te digo com sinceridade qual dos dois compensa.'
-  }
-]
+import { faqs } from '~/data/faqs'
+import { waLink } from '~/data/contato'
 
-// TODO: trocar pelo número real de WhatsApp
-const whatsapp = 'https://wa.me/556200000000?text=' + encodeURIComponent('Oi! Fiquei com uma dúvida sobre o site.')
+const whatsapp = waLink('Oi, Kouichi! Fiquei com uma dúvida sobre o site.')
 </script>
 
 <template>
   <section id="faq" class="section-light faq">
     <div class="container faq-grid">
       <header class="faq-head" v-reveal>
-        <span class="index">(05)</span>
+        <span class="index">(06)</span>
         <p class="eyebrow accent">Dúvidas</p>
-        <h2 class="display-2">Antes de você <em>perguntar.</em></h2>
+        <h2 class="display-2" data-split-lines>Antes de você <em>perguntar.</em></h2>
         <p class="faq-note">
-          Não achou o que precisava? Manda no WhatsApp — respondo direto.
+          Ficou faltando alguma? Me chama no WhatsApp. Quem responde sou eu, não um robô.
         </p>
         <a :href="whatsapp" target="_blank" rel="noopener" data-track="wa_faq" class="btn btn-cta faq-cta" v-magnetic="{ strength: 0.24 }">
           <WaIcon class="wa" :size="18" />
