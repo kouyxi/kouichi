@@ -13,16 +13,18 @@ useHead({
 
 const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu negócio é ')
 
-// O botão flutuante some no fecho. Lá já existem o CTA gigante e o selo:
-// três chamadas de WhatsApp empilhadas no mesmo canto viram ruído bem no
-// momento em que a pessoa está decidindo.
-const floatVisivel = ref(true)
+// No fecho somem o botão flutuante e o índice de capítulos. O flutuante,
+// porque lá já existem o CTA gigante e o selo, e três chamadas de WhatsApp
+// no mesmo canto viram ruído na hora de decidir. O índice, porque ele é
+// fixo à direita e passava por cima do selo, e nesse ponto não sobrou
+// capítulo nenhum pra navegar.
+const noFecho = ref(false)
 
 onMounted(() => {
   const fecho = document.querySelector('.ct-final')
   if (!fecho) return
   const io = new IntersectionObserver(
-    ([e]) => { floatVisivel.value = !e!.isIntersecting },
+    ([e]) => { noFecho.value = !!e?.isIntersecting },
     { threshold: 0.35 }
   )
   io.observe(fecho)
@@ -31,7 +33,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="lab">
+  <div class="lab" :class="{ 'no-fecho': noFecho }">
     <div class="lab-grao" aria-hidden="true" />
     <LabCursor />
     <LabChapters />
@@ -42,9 +44,9 @@ onMounted(() => {
       rel="noopener"
       data-track="wa_lab_flutuante"
       class="lab-float"
-      :class="{ 'is-oculto': !floatVisivel }"
-      :aria-hidden="!floatVisivel"
-      :tabindex="floatVisivel ? undefined : -1"
+      :class="{ 'is-oculto': noFecho }"
+      :aria-hidden="noFecho"
+      :tabindex="noFecho ? -1 : undefined"
     >
       <WaIcon :size="22" />
       <span class="lab-float-t">WhatsApp</span>
@@ -135,6 +137,12 @@ body:has(.lab) { background: #0E0B04; }
   transform: translateY(1rem) scale(0.9);
   pointer-events: none;
 }
+
+/* O índice de capítulos é fixo à direita e o selo do fecho fica embaixo
+   dele. Some no fecho. Regra sem escopo de propósito: precisa alcançar o
+   .ch, que mora no componente Chapters. */
+.lab .ch { transition: opacity 0.4s var(--ease); }
+.lab.no-fecho .ch { opacity: 0; pointer-events: none; }
 .lab-float-t { display: none; }
 @media (min-width: 640px) { .lab-float-t { display: inline; } }
 </style>

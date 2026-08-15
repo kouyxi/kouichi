@@ -5,7 +5,10 @@ import { waLink, disponibilidade } from '~/data/contato'
 // no ponto de decisão. Perda pesa mais que ganho equivalente, então o
 // contador de vagas trabalha mais que qualquer adjetivo aqui.
 const whatsapp = waLink('Oi, Kouichi! Vi que tem vaga esse mês. Meu negócio é ')
-const texto = `${disponibilidade.toUpperCase()} • FALE COMIGO • `
+
+// Sem o "FALE COMIGO" que existia aqui: 48 letras não cabiam na volta e as
+// largas se sobrepunham. O ícone de WhatsApp no miolo já diz isso.
+const texto = `${disponibilidade.toUpperCase()} • `
 const letras = texto.split('')
 const passo = 360 / letras.length
 </script>
@@ -25,7 +28,7 @@ const passo = 360 / letras.length
         v-for="(c, i) in letras"
         :key="i"
         class="selo-letra"
-        :style="{ transform: `rotate(${i * passo}deg) translateY(-4.55em)` }"
+        :style="{ transform: `rotate(${i * passo}deg) translateY(-5.6em)` }"
       >{{ c }}</span>
     </span>
     <span class="selo-miolo" aria-hidden="true">
@@ -49,7 +52,7 @@ const passo = 360 / letras.length
   position: absolute;
   inset: 0;
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.64rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   animation: seloGira 22s linear infinite;
@@ -58,9 +61,11 @@ const passo = 360 / letras.length
   position: absolute;
   top: 50%;
   left: 50%;
-  transform-origin: 0 0;
-  /* o translateY do inline empurra a letra pro raio; a origem no centro
-     faz cada uma assentar tangente ao círculo */
+  /* As margens negativas põem o CENTRO da caixa da letra no centro do selo.
+     O transform-origin fica no padrão (o centro da caixa), então rotate +
+     translateY descrevem um círculo em volta do miolo. Com origin em 0 0 o
+     eixo cai no canto superior esquerdo da letra e o anel inteiro nasce
+     deslocado meio em pra cima e pra esquerda, que era o defeito. */
   margin: -0.5em 0 0 -0.5em;
   width: 1em;
   height: 1em;
