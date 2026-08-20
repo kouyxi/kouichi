@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Um cliente real e dois conceitos. O card real só carrega o que dá pra
+// Três projetos reais. O card em destaque só carrega o que dá pra
 // confirmar olhando o site dele — nada de história inventada.
 const real = {
   nome: 'Gabo Garcia Gallery',
@@ -9,9 +9,21 @@ const real = {
   tags: ['Portfólio', 'Sanity CMS']
 }
 
-const conceitos = [
-  { nicho: 'Clínica odontológica', objetivo: 'Busca no Google virando agendamento no WhatsApp.' },
-  { nicho: 'Escritório de advocacia', objetivo: 'Passar confiança antes de a pessoa ligar.' }
+const outros = [
+  {
+    nome: 'Tenda Oriental',
+    url: '',
+    shot: '/img/proj-tenda.webp',
+    objetivo: 'Catálogo online da loja: monta o pedido e retira no Setor Oeste.',
+    tags: ['E-commerce', 'Catálogo']
+  },
+  {
+    nome: 'Allegorio',
+    url: '',
+    shot: '/img/proj-allegorio.webp',
+    objetivo: 'Publicação independente sobre moda masculina.',
+    tags: ['Editorial', 'Newsletter']
+  }
 ]
 
 const root = ref<HTMLElement | null>(null)
@@ -50,13 +62,13 @@ onMounted(async () => {
       scrollTrigger: { trigger: el, start: 'top 72%', once: true }
     })
 
-    gsap.from('.wk-concept', {
+    gsap.from('.wk-other', {
       opacity: 0,
       y: 34,
       duration: 0.7,
       stagger: 0.1,
       ease: 'power3.out',
-      scrollTrigger: { trigger: '.wk-concepts', start: 'top 82%', once: true }
+      scrollTrigger: { trigger: '.wk-others', start: 'top 82%', once: true }
     })
   }, el)
 
@@ -72,7 +84,7 @@ onMounted(async () => {
       <h2 class="wk-title">
         <span class="wk-mask"><span class="wk-head-in">Projetos.</span></span>
       </h2>
-      <p class="wk-note">Um cliente real e dois conceitos.</p>
+      <p class="wk-note">Três projetos reais.</p>
     </header>
 
     <a
@@ -102,11 +114,30 @@ onMounted(async () => {
       </ul>
     </div>
 
-    <div class="wk-concepts">
-      <article v-for="c in conceitos" :key="c.nicho" class="wk-concept">
-        <span class="wk-label">Conceito</span>
-        <h3 class="wk-nome">{{ c.nicho }}</h3>
-        <p class="wk-obj">{{ c.objetivo }}</p>
+    <div class="wk-others">
+      <article v-for="o in outros" :key="o.nome" class="wk-other">
+        <component
+          :is="o.url ? 'a' : 'div'"
+          :href="o.url || undefined"
+          :target="o.url ? '_blank' : undefined"
+          :rel="o.url ? 'noopener' : undefined"
+          :data-track="o.url ? `proj_${o.nome.toLowerCase()}` : undefined"
+          class="wk-other-shot"
+        >
+          <img
+            :src="o.shot"
+            :alt="`Site do ${o.nome}, feito por Kouichi`"
+            width="1600"
+            height="1000"
+            loading="lazy"
+            decoding="async"
+          />
+        </component>
+        <h3 class="wk-nome">{{ o.nome }}</h3>
+        <p class="wk-obj">{{ o.objetivo }}</p>
+        <ul class="wk-tags">
+          <li v-for="t in o.tags" :key="t">{{ t }}</li>
+        </ul>
       </article>
     </div>
   </section>
@@ -200,25 +231,32 @@ onMounted(async () => {
   color: var(--lab-dim);
 }
 
-.wk-concepts {
+.wk-others {
   display: grid;
   gap: 1px;
   margin-top: clamp(3rem, 8vh, 5rem);
   background: var(--lab-line);
   border-block: 1px solid var(--lab-line);
 }
-@media (min-width: 760px) { .wk-concepts { grid-template-columns: 1fr 1fr; } }
-.wk-concept {
+@media (min-width: 760px) { .wk-others { grid-template-columns: 1fr 1fr; } }
+.wk-other {
   background: var(--lab-bg);
   padding: clamp(1.75rem, 4vw, 3rem) var(--lab-edge);
 }
-.wk-label {
-  display: inline-block;
-  margin-bottom: 0.9rem;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--lab-accent);
+.wk-other-shot {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--lab-line-2);
+  margin-bottom: 1.1rem;
 }
+.wk-other-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s ease;
+}
+a.wk-other-shot:hover img { transform: scale(1.03); }
 </style>
