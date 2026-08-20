@@ -117,7 +117,7 @@ onMounted(async () => {
           :class="`orbit-${i + 1}`"
         >
           <span class="orbit-inner">
-            <img :src="p.shot" alt="" width="200" height="200" loading="lazy" decoding="async" />
+            <img :src="p.shot" alt="" width="320" height="200" loading="lazy" decoding="async" />
             <span v-if="p.url" class="orbit-live" aria-hidden="true" />
           </span>
         </a>
@@ -178,7 +178,12 @@ onMounted(async () => {
    borda seria cortada antes de aparecer. */
 .intro-portrait {
   position: absolute;
-  z-index: 2;
+  /* Sem z-index aqui: se essa div virasse contexto de empilhamento, a foto
+     (2) e as fotinhos (5) ficariam presas dentro dele e nunca se
+     comparariam de verdade com o título (3) — as fotinhos, principalmente,
+     precisam vencer o título onde cruzarem, senão ficam ali só de enfeite,
+     sem clique. Cada uma define o próprio z-index e disputa direto lá em
+     cima, no contexto do .intro. */
   /* Descida proposital: as linhas do título cruzam o tronco, não o rosto. */
   top: 26%;
   /* recuada da borda: encostada, ela ficava embaixo do índice de capítulos */
@@ -188,6 +193,7 @@ onMounted(async () => {
 }
 .intro-media {
   position: absolute;
+  z-index: 2;
   inset: 0;
   margin: 0;
   overflow: hidden;
@@ -196,11 +202,13 @@ onMounted(async () => {
 }
 .intro-media img { width: 100%; height: 100%; object-fit: cover; }
 
-/* fotinhos dos projetos, penduradas na borda do retrato */
+/* fotinhos dos projetos, penduradas na borda do retrato. z-index acima do
+   título (3): de nada adianta girar em volta da foto se ficam clicáveis só
+   nos trechos onde o título não passa por cima. */
 .intro-orbit {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 5;
   pointer-events: none;
 }
 .orbit-item {
@@ -208,16 +216,16 @@ onMounted(async () => {
   display: block;
   pointer-events: auto;
 }
-.orbit-1 { width: 34%; aspect-ratio: 1; top: -13%; left: -21%; animation: orbFloatA 6.5s ease-in-out infinite; }
-.orbit-2 { width: 23%; aspect-ratio: 1; bottom: 2%; right: -15%; animation: orbFloatB 5.6s ease-in-out infinite 0.4s; }
-.orbit-3 { width: 18%; aspect-ratio: 1; top: 48%; left: -25%; animation: orbFloatC 7.2s ease-in-out infinite 0.9s; }
+.orbit-1 { width: 52%; aspect-ratio: 16 / 10; top: -16%; left: -46%; animation: orbFloatA 6.5s ease-in-out infinite; }
+.orbit-2 { width: 40%; aspect-ratio: 16 / 10; bottom: -8%; right: -34%; animation: orbFloatB 5.6s ease-in-out infinite 0.4s; }
+.orbit-3 { width: 32%; aspect-ratio: 16 / 10; top: 50%; left: -30%; animation: orbFloatC 7.2s ease-in-out infinite 0.9s; }
 
 .orbit-inner {
   position: relative;
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: 999px;
+  border-radius: 5px;
   overflow: hidden;
   background: var(--lab-bg);
   border: 1.5px solid var(--lab-line-2);
@@ -225,7 +233,7 @@ onMounted(async () => {
   transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
 .orbit-item:hover .orbit-inner {
-  transform: scale(1.1);
+  transform: scale(1.06);
   border-color: var(--lab-accent);
   box-shadow: 0 16px 34px -12px rgba(220, 91, 44, 0.45);
 }
@@ -233,20 +241,21 @@ onMounted(async () => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: top center;
   filter: grayscale(1) contrast(1.08);
   transition: filter 0.5s var(--ease), transform 0.6s var(--ease);
 }
 .orbit-item:hover .orbit-inner img { filter: grayscale(0) contrast(1); transform: scale(1.08); }
 
-/* só o projeto no ar ganha o pontinho — é sinal de "de verdade", não decoração */
+/* só o projeto no ar ganha o pontinho — é sinal de "de verdade", não decoração.
+   Tamanho fixo, não %: numa foto retangular grande, uma % do lado vira uma
+   bola enorme. */
 .orbit-live {
   position: absolute;
-  top: 8%;
-  right: 8%;
-  width: 15%;
-  min-width: 8px;
-  aspect-ratio: 1;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 10px;
+  height: 10px;
   border-radius: 999px;
   background: var(--lab-accent);
   box-shadow: 0 0 0 2px var(--lab-bg);
