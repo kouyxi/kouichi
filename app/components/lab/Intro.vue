@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { waLink, cidade, disponibilidade } from '~/data/contato'
+import { projetos } from '~/data/projetos'
 
 const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu negócio é ')
+
+// As fotos que giram em volta do retrato são os mesmos três projetos do
+// bloco (04). Gabo tem link de verdade porque está no ar; os outros dois
+// levam pro card deles, que já avisa que ainda não tem domínio.
+const orbita = projetos.map(p => ({ ...p, href: p.url || '#portfolio' }))
 
 const root = ref<HTMLElement | null>(null)
 
@@ -30,6 +36,18 @@ onMounted(async () => {
       }, 0.15)
       .from('.intro-media img', { scale: 1.35, duration: 1.6, ease: 'power3.out' }, '<')
       .from('.intro-fade', { opacity: 0, y: 18, duration: 0.7, stagger: 0.06 }, '-=0.7')
+      // As fotinhos "estouram" em volta do retrato depois que ele revela.
+      // clearProps depois: sem isso a transform inline do GSAP fica presa
+      // no elemento pra sempre e o :hover (que também mexe em transform)
+      // para de responder.
+      .from('.orbit-inner', {
+        opacity: 0,
+        scale: 0.4,
+        duration: 0.9,
+        stagger: 0.15,
+        ease: 'back.out(1.6)',
+        clearProps: 'transform'
+      }, '-=0.5')
 
     // Saída no scroll: as linhas se separam horizontalmente em direções
     // e velocidades diferentes. É o que "quebra" o bloco de texto — na
@@ -49,6 +67,15 @@ onMounted(async () => {
       ease: 'none',
       scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: 0.6 }
     })
+    // Mais rápido que a foto: a sensação é de as fotinhos flutuarem na
+    // frente dela, não coladas. Anima o grupo, não cada item — cada item já
+    // tem a própria animação de flutuação em CSS, e as duas competindo pela
+    // mesma propriedade travariam uma na outra.
+    gsap.to('.intro-orbit', {
+      yPercent: -30,
+      ease: 'none',
+      scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: 0.6 }
+    })
     gsap.to('.intro-veil', {
       opacity: 1,
       ease: 'none',
@@ -64,16 +91,38 @@ onMounted(async () => {
   <section id="topo" ref="root" class="intro">
     <LabDecor grade="fina" halo="topo-dir" reticula />
 
-    <figure class="intro-media">
-      <img
-        src="/img/hero-kouichi.webp"
-        alt="Kouichi, desenvolvedor de sites, em Goiânia"
-        width="800"
-        height="1000"
-        fetchpriority="high"
-        decoding="async"
-      />
-    </figure>
+    <div class="intro-portrait">
+      <figure class="intro-media">
+        <img
+          src="/img/hero-kouichi.webp"
+          alt="Kouichi, desenvolvedor de sites, em Goiânia"
+          width="800"
+          height="1000"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
+
+      <div class="intro-orbit">
+        <a
+          v-for="(p, i) in orbita"
+          :key="p.nome"
+          :href="p.href"
+          :target="p.url ? '_blank' : undefined"
+          :rel="p.url ? 'noopener' : undefined"
+          :data-track="`orbit_${p.nome.toLowerCase()}`"
+          :aria-label="p.url ? `Ver o site de ${p.nome} (abre em nova aba)` : `Ver o projeto ${p.nome}`"
+          data-cursor="ver"
+          class="orbit-item"
+          :class="`orbit-${i + 1}`"
+        >
+          <span class="orbit-inner">
+            <img :src="p.shot" alt="" width="200" height="200" loading="lazy" decoding="async" />
+            <span v-if="p.url" class="orbit-live" aria-hidden="true" />
+          </span>
+        </a>
+      </div>
+    </div>
 
     <h1 class="intro-title">
       <span class="ln"><span class="ln-in">Seu site</span></span>
@@ -122,8 +171,12 @@ onMounted(async () => {
   isolation: isolate;
 }
 
-/* foto: alta, encostada na direita, atravessada pelas linhas do título */
-.intro-media {
+/* moldura: alta, encostada na direita, atravessada pelas linhas do título.
+   A foto e as fotinhos que giram em volta dividem esse retângulo — a foto
+   fica com overflow: hidden pro próprio recorte dela, e por isso as
+   fotinhos não podiam morar dentro dela: qualquer uma que passasse da
+   borda seria cortada antes de aparecer. */
+.intro-portrait {
   position: absolute;
   z-index: 2;
   /* Descida proposital: as linhas do título cruzam o tronco, não o rosto. */
@@ -132,12 +185,86 @@ onMounted(async () => {
   right: clamp(4.5rem, 9vw, 7.5rem);
   width: min(24vw, 18rem);
   aspect-ratio: 4 / 5;
+}
+.intro-media {
+  position: absolute;
+  inset: 0;
   margin: 0;
   overflow: hidden;
   border: 1px solid var(--lab-line);
   will-change: transform;
 }
 .intro-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* fotinhos dos projetos, penduradas na borda do retrato */
+.intro-orbit {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.orbit-item {
+  position: absolute;
+  display: block;
+  pointer-events: auto;
+}
+.orbit-1 { width: 34%; aspect-ratio: 1; top: -13%; left: -21%; animation: orbFloatA 6.5s ease-in-out infinite; }
+.orbit-2 { width: 23%; aspect-ratio: 1; bottom: 2%; right: -15%; animation: orbFloatB 5.6s ease-in-out infinite 0.4s; }
+.orbit-3 { width: 18%; aspect-ratio: 1; top: 48%; left: -25%; animation: orbFloatC 7.2s ease-in-out infinite 0.9s; }
+
+.orbit-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--lab-bg);
+  border: 1.5px solid var(--lab-line-2);
+  box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.75);
+  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.orbit-item:hover .orbit-inner {
+  transform: scale(1.1);
+  border-color: var(--lab-accent);
+  box-shadow: 0 16px 34px -12px rgba(220, 91, 44, 0.45);
+}
+.orbit-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(1) contrast(1.08);
+  transition: filter 0.5s var(--ease), transform 0.6s var(--ease);
+}
+.orbit-item:hover .orbit-inner img { filter: grayscale(0) contrast(1); transform: scale(1.08); }
+
+/* só o projeto no ar ganha o pontinho — é sinal de "de verdade", não decoração */
+.orbit-live {
+  position: absolute;
+  top: 8%;
+  right: 8%;
+  width: 15%;
+  min-width: 8px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: var(--lab-accent);
+  box-shadow: 0 0 0 2px var(--lab-bg);
+  animation: orbPulse 2.4s infinite;
+}
+
+@keyframes orbFloatA { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes orbFloatB { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes orbFloatC { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes orbPulse {
+  0% { box-shadow: 0 0 0 2px var(--lab-bg), 0 0 0 2px rgba(220, 91, 44, 0.7); }
+  70% { box-shadow: 0 0 0 2px var(--lab-bg), 0 0 0 8px rgba(220, 91, 44, 0); }
+  100% { box-shadow: 0 0 0 2px var(--lab-bg), 0 0 0 0 rgba(220, 91, 44, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-item, .orbit-live { animation: none; }
+}
 
 /* título: escala tipográfica presa ao viewport, sem container */
 .intro-title {
@@ -246,7 +373,10 @@ onMounted(async () => {
 }
 
 @media (max-width: 860px) {
-  .intro-media { top: auto; bottom: 26%; right: var(--lab-edge); width: 38vw; opacity: 0.45; }
+  .intro-portrait { top: auto; bottom: 26%; right: var(--lab-edge); width: 38vw; opacity: 0.45; }
+  /* girar fotinho em volta de uma foto que já encolheu e perdeu opacidade
+     pra dar lugar ao texto é só ruído */
+  .intro-orbit { display: none; }
   .ln-b { padding-left: 4vw; }
   .ln-c { padding-left: 0; }
   .ln-d { padding-left: 12vw; }

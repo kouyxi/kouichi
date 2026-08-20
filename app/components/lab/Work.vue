@@ -1,30 +1,5 @@
 <script setup lang="ts">
-// Três projetos reais. O card em destaque só carrega o que dá pra
-// confirmar olhando o site dele — nada de história inventada.
-const real = {
-  nome: 'Gabo Garcia Gallery',
-  url: 'https://gabogarciagallery.pages.dev/',
-  shot: '/img/proj-gabo.webp',
-  objetivo: 'Vitrine pro trabalho de um ilustrador. No ar e crescendo.',
-  tags: ['Portfólio', 'Sanity CMS']
-}
-
-const outros = [
-  {
-    nome: 'Tenda Oriental',
-    url: '',
-    shot: '/img/proj-tenda.webp',
-    objetivo: 'Catálogo online da loja: monta o pedido e retira no Setor Oeste.',
-    tags: ['E-commerce', 'Catálogo']
-  },
-  {
-    nome: 'Allegorio',
-    url: '',
-    shot: '/img/proj-allegorio.webp',
-    objetivo: 'Publicação independente sobre moda masculina.',
-    tags: ['Editorial', 'Newsletter']
-  }
-]
+import { projetoDestaque as real, outrosProjetos as outros } from '~/data/projetos'
 
 const root = ref<HTMLElement | null>(null)
 
