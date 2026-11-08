@@ -39,14 +39,19 @@ const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu ne
       </div>
 
       <figure class="intro-media">
-        <img
-          src="/img/hero-kouichi.webp"
-          alt="Victor Kouichi, desenvolvedor de sites, em Goiânia"
-          width="800"
-          height="1000"
-          fetchpriority="high"
-          decoding="async"
-        />
+        <!-- AVIF em tons de cinza: 78 KB contra 160 KB do WebP, com a trama
+             de meio-tom intacta (abaixo de q55 os pontos viram borrão).
+             O WebP fica pra quem não lê AVIF. -->
+        <picture>
+          <source srcset="/img/hero-kouichi.avif" type="image/avif" />
+          <img
+            src="/img/hero-kouichi.webp"
+            alt="Victor Kouichi, desenvolvedor de sites, em Goiânia"
+            width="800"
+            height="1000"
+            fetchpriority="high"
+          />
+        </picture>
       </figure>
     </div>
   </section>
@@ -73,7 +78,11 @@ const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu ne
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border: 1px solid var(--lab-line);
+  /* A mesma foto em 20×25 px (228 caracteres): no 4G a foto chega ~1 s depois
+     da primeira pintura, e sem isso a entrada abria uma caixa vazia. */
+  background: url(data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAAAQBQCdASoUABkAPu1ur1IppiQiqAgBMB2JaQAAIvQncXH4Mb4o6fLdUaflLQ4K3uAAAPpDWA+82BM6Z9BGrmOu4MBOnTXost1UsvtY5xSdtY0c+fViTMX2GePGySpGKN+8fRSvh3i7o9BbQXLyU7QastZuAXDoPuqZ2TTdn3uOi+IKlMxjvu1PXt5zBEHMlrbNjnuAAAA=) center 22% / cover no-repeat;
 }
+.intro-media picture { display: block; height: 100%; }
 .intro-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
 
 .intro-quem { font-size: var(--t-s); font-weight: 500; color: var(--lab-dim); }
@@ -138,10 +147,11 @@ const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu ne
   .intro-media { animation: introAbre 1.2s cubic-bezier(0.76, 0, 0.24, 1) both; }
   .intro-media img { animation: introFoto 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) both; }
   .intro-fade { animation: introSobe 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
-  .intro-quem { animation-delay: 0.35s; }
-  .intro-title { animation-delay: 0.43s; }
-  .intro-sub { animation-delay: 0.51s; }
-  .intro-acao { animation-delay: 0.59s; }
+  /* o texto não espera a foto: no celular ela costuma chegar depois */
+  .intro-quem { animation-delay: 0.1s; }
+  .intro-title { animation-delay: 0.16s; }
+  .intro-sub { animation-delay: 0.22s; }
+  .intro-acao { animation-delay: 0.28s; }
 
   /* A foto desce um pouco mais devagar que a página, ligada à rolagem e no
      compositor, sem JS. Navegador sem suporte fica com a foto parada. */
