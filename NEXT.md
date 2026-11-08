@@ -5,8 +5,12 @@ tudo aqui estiver resolvido.
 
 ## Onde está
 
-- Branch `redesign`, tudo commitado, **nada enviado**. O push publica no
-  Cloudflare, então ele é decisão sua.
+- No ar desde 08/11: a `redesign` foi pra `main` com push forçado, por
+  cima de 4 commits de agosto (Tenda Oriental, Allegorio e fotos girando
+  no topo). Eles estão guardados na branch local `projetos-agosto`.
+- Commit novo fica só aqui até você publicar com
+  `git push origin redesign:main`. O push publica no Cloudflare, então ele
+  continua sendo decisão sua.
 - `npm run generate` passa.
 - Feito nesta sessão:
   - Otimização: GSAP e Lenis fora da home, efeitos de rolagem em CSS, foto
@@ -26,12 +30,25 @@ tudo aqui estiver resolvido.
 
 ## Decisões que só você pode tomar
 
-- [ ] **Preço visível.** A recomendação é mostrar "a partir de" em cada
-  tamanho (Uma página, Institucional, Completo), com valor redondo e sem
-  R$ 1.497. Precisa dos seus valores reais: nada de número inventado. A
-  limpeza de site invadido continua "valor combinado antes". Se o preço
-  entrar, a pergunta "Por que eu não vejo preço no site?" do FAQ
-  (`app/data/faqs.ts`) precisa ser reescrita.
+- [x] **Preço do site novo** (08/11): "Até 5 páginas" com R$ 600, preço
+  de começo até o 5º cliente, e "depois, a partir de R$ 900". "Mais de 5
+  páginas" com valor na conversa. A base da escolha está no commit.
+  No 5º cliente, a linha vira "a partir de R$ 900" (`Services.vue` e
+  `faqs.ts`).
+- [ ] **Preço da limpeza:** R$ 300 por site WordPress, R$ 450 depois do 5º,
+  pago depois de conferir. Antes de publicar falta decidir:
+  - o que acontece se o spam voltar depois do pagamento;
+  - como o dono confere: as páginas de spam dando "página não
+    encontrada" e o teste ao vivo do Search Console;
+  - as exceções escritas do lado do preço: loja virtual, mais de um
+    site, invasão que vem da hospedagem.
+- [ ] **Quando o cliente paga a primeira metade do site.** O FAQ diz
+  "metade pra começar", e o site promete "não gostou do layout, não paga".
+  Recomendação: a primeira metade quando o layout for aprovado.
+- [ ] **Diagnóstico grátis** no bloco da limpeza, se ele for feito sem
+  acesso ao site.
+- [ ] **Manutenção mensal (R$ 79):** fica fora do site por enquanto. Falta
+  dizer o que ela cobre, e o valor não é redondo.
 - [ ] **Prova social.** É a maior lacuna da página. Precisa de um
   depoimento real (o do Gabo ou de outro cliente), com nome, negócio e
   foto, e com autorização.
@@ -40,8 +57,9 @@ tudo aqui estiver resolvido.
 
 ## Pronto pra aplicar, falta o seu ok
 
-- [ ] **Recomendação entre os três tamanhos:** um "Na dúvida, é esse" no
-  Institucional. Hoje os três têm o mesmo peso e a pessoa trava.
+- [ ] **Cartões do "Como funciona" sem sobra:** tirar a altura mínima e
+  pôr o selo ("Sai sabendo quanto custa") logo embaixo do texto, como já é
+  no celular. A pilha continua. Prévia feita em 08/11. (`Process.vue`)
 - [ ] **Ajustes de copy:**
   - Feito em 08/11: o parágrafo do "Quem faz" virou "Conserto o que
     quebra...", sem a "porta aberta" (soava como quem testa o site dos
