@@ -8,7 +8,7 @@ export interface Faq {
 export const faqs: Faq[] = [
   {
     q: 'Quanto custa?',
-    a: 'Site de até 5 páginas: R$ 600, preço de começo até o 5º cliente. Depois, a partir de R$ 900. Mais de 5 páginas: valor na primeira conversa. Metade pra começar, metade antes de ir ao ar. Pix.'
+    a: 'Site de até 5 páginas: R$ 600, preço de começo até o 5º cliente. Depois, a partir de R$ 900. Mais de 5 páginas: valor na primeira conversa. Metade quando você aprova o layout, metade antes de ir ao ar. Pix.'
   },
   {
     q: 'Quanto tempo demora?',

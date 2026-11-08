@@ -41,9 +41,8 @@ tudo aqui estiver resolvido.
   o teste ao vivo do Search Console. Se voltar em até 90 dias, limpa de
   novo sem custo. Invasão que volte por algo instalado depois (plugin
   pirata, senha repassada) é caso novo, combinado na conversa.
-- [ ] **Quando o cliente paga a primeira metade do site.** O FAQ diz
-  "metade pra começar", e o site promete "não gostou do layout, não paga".
-  Recomendação: a primeira metade quando o layout for aprovado.
+- [x] **Primeira metade do site** (08/11): só quando o cliente aprova o
+  layout. Assim o "não gostou do layout, não paga" vale sem devolução.
 - [ ] **Diagnóstico grátis** no bloco da limpeza, se ele for feito sem
   acesso ao site.
 - [ ] **Manutenção mensal (R$ 79):** fica fora do site por enquanto. Falta
