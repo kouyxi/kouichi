@@ -95,15 +95,21 @@ onMounted(() => {
   align-items: center;
   gap: 0.45rem;
   font-family: var(--font-display);
-  font-weight: 600;
+  /* a Young Serif só tem o 400; pedir 600 fazia o navegador engrossar no
+     braço, com a letra borrada */
+  font-weight: var(--w-display);
   font-size: 1.2rem;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 .hd-logo .kana { margin-left: 0.15rem; }
-.hd-mark { width: 1.9rem; height: 1.9rem; --clay: var(--lab-accent); --ink: var(--lab-fg); --mark-shadow: transparent; }
+/* .hd-logo na frente de propósito: o .mikan do componente tem a mesma
+   especificidade, e antes do JS chegar o CSS dele vinha depois e ganhava.
+   A marca nascia gigante e encolhia em 2 s, empurrando a página inteira. */
+.hd-logo .hd-mark { width: 1.9rem; height: 1.9rem; --clay: var(--lab-accent); --ink: var(--lab-fg); --mark-shadow: transparent; }
 
 .hd-nav { display: flex; gap: clamp(0.9rem, 2.5vw, 1.6rem); font-size: 0.92rem; }
-.hd-nav a { color: var(--lab-dim); padding-block: 0.25rem; border-bottom: 1px solid transparent; }
+.hd-nav a { white-space: nowrap; color: var(--lab-dim); padding-block: 0.25rem; border-bottom: 1px solid transparent; }
 .hd-nav a:hover { color: var(--lab-fg); border-color: currentColor; }
 
 .hd-prog {
@@ -130,10 +136,19 @@ onMounted(() => {
   white-space: nowrap;
 }
 
-/* no celular ficam a marca, os dois serviços e o ícone: cabe em 375px */
-@media (max-width: 720px) {
+/* Até 960px ficam a marca, os dois serviços e o ícone (cabe em 360px). A
+   barra completa, com os cinco links e o botão escrito, precisa de ~900px:
+   abaixo disso os links quebravam em duas linhas. */
+@media (max-width: 959px) {
   .so-desktop { display: none; }
+  .hd-in { gap: 0.75rem; }
   .hd-nav { font-size: 0.85rem; }
-  .hd-cta { padding: 0.6rem; }
+  /* círculo de 44px, o alvo de toque recomendado */
+  .hd-cta { padding: 0.6rem; min-width: 2.75rem; justify-content: center; }
+}
+/* Celular em pé: com o katakana a linha só cabe a partir de 413px, e antes
+   ele quebrava em duas. Nessa largura ele fica só na etiqueta do rodapé. */
+@media (max-width: 479px) {
+  .hd-logo .kana { display: none; }
 }
 </style>
