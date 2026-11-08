@@ -64,8 +64,8 @@ tudo aqui estiver resolvido.
   - Feito em 08/11: o parágrafo do "Quem faz" virou "Conserto o que
     quebra...", sem a "porta aberta" (soava como quem testa o site dos
     outros) e sem o "estudo o que faz alguém decidir". (`Manifest.vue`)
-  - O botão "Vamos conversar" do fim não diz o que acontece. Trocar por
-    "Me chama no WhatsApp". (`Contact.vue`)
+  - Feito em 08/11: o botão grande do fim virou "Me chama no WhatsApp".
+    (`Contact.vue`)
   - Os princípios "Fato, não adjetivo" e "Se não serve, sai" falam de você,
     não do cliente. Cortar, ou transformar em promessa. (`Manifest.vue`)
   - "Você sabe onde pisa." é enigmático. Mudar é opcional. (`Process.vue`)

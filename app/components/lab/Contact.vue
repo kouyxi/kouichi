@@ -51,7 +51,7 @@ function alternar(i: number) {
         data-track="wa_final"
         class="ct-huge"
       >
-        Vamos conversar
+        Me chama no WhatsApp
       </a>
 
       <div class="ct-baixo">
