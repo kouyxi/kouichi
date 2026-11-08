@@ -19,43 +19,10 @@ const passos = [
     marco: 'Duas rodadas de ajuste inclusas'
   }
 ]
-
-const root = ref<HTMLElement | null>(null)
-
-onMounted(async () => {
-  if (!root.value || prefersReducedMotion()) return
-  const el = root.value
-  const { gsap } = await useGsap()
-
-  const ctx = gsap.context(() => {
-    // As cartas são sticky no CSS: elas param e a de baixo sobe por cima.
-    // O GSAP só cuida do que o sticky não faz — encolher e apagar a carta
-    // que ficou embaixo, pra pilha ganhar profundidade em vez de virar
-    // um monte de retângulos sobrepostos.
-    const cards = gsap.utils.toArray<HTMLElement>('.pr-card')
-    cards.forEach((card, i) => {
-      if (i === cards.length - 1) return
-      gsap.to(card, {
-        scale: 0.92,
-        opacity: 0.35,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: cards[i + 1],
-          start: 'top bottom',
-          end: 'top top',
-          scrub: true
-        }
-      })
-    })
-
-  }, el)
-
-  onBeforeUnmount(() => ctx.revert())
-})
 </script>
 
 <template>
-  <section id="processo" ref="root" class="pr sec">
+  <section id="processo" class="pr sec">
    <div class="sec-in">
     <p class="sec-rotulo">Como funciona</p>
     <div>
@@ -95,7 +62,6 @@ onMounted(async () => {
 .pr-card {
   position: sticky;
   top: calc(14vh + var(--i, 0) * 1.5rem);
-  will-change: transform;
 }
 .pr-card:nth-child(1) { --i: 0; z-index: 1; }
 .pr-card:nth-child(2) { --i: 1; z-index: 2; }
@@ -158,6 +124,23 @@ onMounted(async () => {
   letter-spacing: -0.02em;
   max-width: 34rem;
 }
+
+/* A carta que ficou embaixo encolhe e apaga enquanto a próxima sobe por
+   cima: a pilha ganha profundidade em vez de virar retângulos sobrepostos.
+   Cada carta segue a linha do tempo de visão da seguinte, no compositor,
+   sem JS. Navegador sem suporte fica com a pilha parada, que funciona igual. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .pr-stack { timeline-scope: --pr-2, --pr-3; }
+    .pr-card:nth-child(2) { view-timeline-name: --pr-2; }
+    .pr-card:nth-child(3) { view-timeline-name: --pr-3; }
+    .pr-card:nth-child(1),
+    .pr-card:nth-child(2) { animation: prRecua linear both; animation-range: entry 0% exit 0%; }
+    .pr-card:nth-child(1) { animation-timeline: --pr-2; }
+    .pr-card:nth-child(2) { animation-timeline: --pr-3; }
+  }
+}
+@keyframes prRecua { to { transform: scale(0.92); opacity: 0.35; } }
 
 @media (max-width: 720px) {
   .pr-card-in { grid-template-columns: 1fr; gap: var(--sp-2); padding: var(--sp-3); min-height: auto; }

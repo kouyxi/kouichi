@@ -52,7 +52,6 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
               rel="noopener"
               :data-track="`wa_plano_${t.nome.toLowerCase().replace(/\s+/g, '_')}`"
               class="sv-link"
-              data-cursor="grow"
             >Quero esse</a>
           </li>
         </ul>
@@ -97,7 +96,6 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
           rel="noopener"
           data-track="wa_invadido"
           class="sv-cta"
-          data-cursor="grow"
         >
           <WaIcon :size="18" />
           Falar sobre o meu site

@@ -4,48 +4,15 @@ import { waLink, email, whatsappDisplay, cidade, nomeCompleto } from '~/data/con
 
 const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu negócio é ')
 const aberta = ref<number | null>(0)
-const root = ref<HTMLElement | null>(null)
 const ano = new Date().getFullYear()
 
 function alternar(i: number) {
   aberta.value = aberta.value === i ? null : i
 }
-
-onMounted(async () => {
-  if (!root.value || prefersReducedMotion()) return
-  const el = root.value
-  const { gsap } = await useGsap()
-
-  const ctx = gsap.context(() => {
-    // O nome cresce enquanto a seção sobe: o último gesto da página é a
-    // chamada ficando grande demais pra ser ignorada.
-    gsap.fromTo(
-      '.ct-huge',
-      { scale: 0.82, yPercent: 8 },
-      {
-        scale: 1,
-        yPercent: 0,
-        ease: 'none',
-        scrollTrigger: { trigger: '.ct-final', start: 'top bottom', end: 'top 20%', scrub: 0.6 }
-      }
-    )
-
-    gsap.from('.ct-row', {
-      opacity: 0,
-      y: 20,
-      duration: 0.55,
-      stagger: 0.05,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: '.ct-faq', start: 'top 80%', once: true }
-    })
-  }, el)
-
-  onBeforeUnmount(() => ctx.revert())
-})
 </script>
 
 <template>
-  <section id="contato" ref="root" class="ct">
+  <section id="contato" class="ct">
     <div id="faq" class="ct-faq sec">
      <div class="sec-in">
       <p class="sec-rotulo">Dúvidas</p>
@@ -83,7 +50,6 @@ onMounted(async () => {
         rel="noopener"
         data-track="wa_final"
         class="ct-huge"
-        data-cursor="grow"
       >
         Vamos conversar
       </a>
@@ -175,7 +141,9 @@ onMounted(async () => {
   gap: var(--sp-4);
   padding: var(--sec) var(--lab-edge);
   border-top: 1px solid var(--lab-line);
-  overflow: hidden;
+  /* clip, não hidden: hidden vira contêiner de rolagem e a animação de
+     visão do convite passava a seguir ele, que nunca rola */
+  overflow: clip;
   position: relative;
 }
 .ct-final > * { width: 100%; max-width: var(--lab-wrap); margin-inline: auto; }
@@ -189,9 +157,16 @@ onMounted(async () => {
   letter-spacing: -0.04em;
   transform-origin: left center;
   transition: color 0.4s var(--ease);
-  will-change: transform;
 }
 .ct-huge:hover { color: var(--lab-accent); }
+/* O convite cresce enquanto sobe: o último gesto da página é a chamada
+   ficando grande demais pra ser ignorada. Ligado à rolagem, sem JS. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .ct-huge { animation: ctCresce linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+  }
+}
+@keyframes ctCresce { from { transform: translateY(8%) scale(0.82); } }
 
 .ct-baixo {
   display: flex;

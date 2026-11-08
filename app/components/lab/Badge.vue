@@ -20,7 +20,6 @@ const passo = 360 / letras.length
     rel="noopener"
     data-track="wa_selo"
     class="selo"
-    data-cursor="grow"
     :aria-label="`${disponibilidade}. Falar no WhatsApp`"
   >
     <span class="selo-anel" aria-hidden="true">

@@ -13,26 +13,6 @@ const links = [
   { label: 'Dúvidas', href: '#faq', so: 'desktop' }
 ]
 const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site e queria um orçamento. Meu negócio é ')
-
-// Linha de progresso na base da barra: quanto da página já foi lida. É o
-// índice de capítulos do celular, onde a mikan não cabe.
-const progresso = ref(0)
-onMounted(() => {
-  let agendado = false
-  const medir = () => {
-    agendado = false
-    const total = document.documentElement.scrollHeight - window.innerHeight
-    progresso.value = total > 0 ? Math.min(1, window.scrollY / total) : 0
-  }
-  const onScroll = () => {
-    if (agendado) return
-    agendado = true
-    requestAnimationFrame(medir)
-  }
-  window.addEventListener('scroll', onScroll, { passive: true })
-  medir()
-  onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
-})
 </script>
 
 <template>
@@ -67,7 +47,9 @@ onMounted(() => {
       <span class="so-desktop">Pedir orçamento</span>
     </a>
    </div>
-   <span class="hd-prog" aria-hidden="true" :style="{ transform: `scaleX(${progresso})` }" />
+   <!-- quanto da página já foi lida: o índice de capítulos do celular, onde
+        a mikan não cabe -->
+   <span class="hd-prog" aria-hidden="true" />
   </header>
 </template>
 
@@ -122,6 +104,13 @@ onMounted(() => {
   transform-origin: left;
   transform: scaleX(0);
 }
+/* Preenche com a rolagem da página, no compositor. Antes era um ouvinte de
+   scroll que redesenhava a barra inteira pelo Vue a cada quadro. Sem
+   suporte, a linha simplesmente não aparece. */
+@supports (animation-timeline: scroll()) {
+  .hd-prog { animation: hdProg linear both; animation-timeline: scroll(root); }
+}
+@keyframes hdProg { to { transform: scaleX(1); } }
 .hd-cta {
   display: inline-flex;
   align-items: center;
