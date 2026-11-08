@@ -1,8 +1,9 @@
 <script setup lang="ts">
-// Três regras de trabalho. Não são sequência, então não levam número.
+// Três promessas sobre o site do cliente, não regras minhas. Não são
+// sequência, então não levam número.
 const principios = [
-  { t: 'Fato, não adjetivo', d: 'Se não dá pra provar, não entra.' },
-  { t: 'Se não serve, sai', d: 'Cada coisa na página ajuda alguém a te procurar.' },
+  { t: 'Sem exagero', d: 'Seu site diz o que dá pra provar. Nada de "o melhor de Goiânia".' },
+  { t: 'Nada sobrando', d: 'Cada coisa na página leva alguém até o seu WhatsApp.' },
   { t: 'Combinado antes', d: 'Escopo, prazo e valor fechados antes de começar.' }
 ]
 </script>
