@@ -51,8 +51,9 @@ tudo aqui estiver resolvido.
 - [ ] **Prova social.** É a maior lacuna da página. Precisa de um
   depoimento real (o do Gabo ou de outro cliente), com nome, negócio e
   foto, e com autorização.
-- [ ] **"Aberto para 2 projetos este mês"** (`app/data/contato.ts`). Isso
-  é verdade? Precisa ser atualizado todo mês, ou sai do site.
+- [x] **"Aberto para 2 projetos este mês"** (08/11): é verdade e fica.
+  Atualizar todo dia 1º em `app/data/contato.ts`. Tem lembrete mensal no
+  Google Agenda, que também manda conferir a contagem do preço de começo.
 
 ## Pronto pra aplicar, falta o seu ok
 
