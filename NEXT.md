@@ -35,13 +35,12 @@ tudo aqui estiver resolvido.
   páginas" com valor na conversa. A base da escolha está no commit.
   No 5º cliente, a linha vira "a partir de R$ 900" (`Services.vue` e
   `faqs.ts`).
-- [ ] **Preço da limpeza:** R$ 300 por site WordPress, R$ 450 depois do 5º,
-  pago depois de conferir. Antes de publicar falta decidir:
-  - o que acontece se o spam voltar depois do pagamento;
-  - como o dono confere: as páginas de spam dando "página não
-    encontrada" e o teste ao vivo do Search Console;
-  - as exceções escritas do lado do preço: loja virtual, mais de um
-    site, invasão que vem da hospedagem.
+- [x] **Preço da limpeza** (08/11): R$ 300 por site WordPress, preço de
+  começo até a 5ª limpeza, depois R$ 450. Exceções do lado do preço. Paga
+  depois de conferir as páginas de aposta dando "página não encontrada" e
+  o teste ao vivo do Search Console. Se voltar em até 90 dias, limpa de
+  novo sem custo. Invasão que volte por algo instalado depois (plugin
+  pirata, senha repassada) é caso novo, combinado na conversa.
 - [ ] **Quando o cliente paga a primeira metade do site.** O FAQ diz
   "metade pra começar", e o site promete "não gostou do layout, não paga".
   Recomendação: a primeira metade quando o layout for aprovado.

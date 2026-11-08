@@ -91,9 +91,22 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
           <li>Relatório escrito do que encontrei</li>
         </ul>
 
+        <!-- Preço com o que ele cobre do lado: preço publicado obriga. O
+             "conferir" fica definido porque a busca site: leva dias pra
+             limpar, e sem critério o dono confere por ela e não paga. -->
+        <p class="sv-preco">
+          <strong class="sv-valor">R$ 300</strong>
+          <span class="sv-nota">Por site WordPress. Preço de começo, até a 5ª limpeza. Depois, R$ 450.</span>
+        </p>
+        <p class="sv-excecao">
+          Loja virtual, mais de um site ou invasão que vem da hospedagem: eu aviso o valor antes de seguir.
+        </p>
+
         <p class="sv-regra">
-          Autorização por escrito antes de qualquer acesso. Valor combinado antes.
-          Você paga depois de conferir.
+          Autorização por escrito antes de qualquer acesso. Você paga depois de
+          conferir duas coisas: as páginas de aposta dando "página não encontrada"
+          e o teste ao vivo do Google mostrando o site limpo. Se voltar em até
+          90 dias, eu limpo de novo sem custo.
         </p>
 
         <a
@@ -156,6 +169,8 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
 .sv-comum { margin-top: var(--sp-3); font-size: var(--t-s); line-height: 1.55; color: var(--lab-dim); max-width: 34rem; }
 
 /* site invadido */
+.sv-invadido .sv-preco { margin-top: var(--sp-4); }
+.sv-excecao { margin-top: var(--sp-1); font-size: var(--t-xs); line-height: 1.5; color: var(--lab-dim); max-width: 32rem; }
 .sv-passos { display: grid; gap: var(--sp-1); margin-top: var(--sp-4); }
 .sv-passos li { display: flex; gap: 0.7rem; line-height: 1.45; }
 .sv-passos li::before { content: ''; flex: none; width: 6px; height: 6px; margin-top: 0.6em; border-radius: 999px; background: var(--lab-accent); }
