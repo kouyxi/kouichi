@@ -30,39 +30,43 @@ onMounted(async () => {
 
 <template>
   <section id="topo" ref="root" class="intro claro">
-   <div class="intro-in">
-    <figure class="intro-media">
-      <img
-        src="/img/hero-kouichi.webp"
-        alt="Victor Kouichi, desenvolvedor de sites, em Goiânia"
-        width="800"
-        height="1000"
-        fetchpriority="high"
-        decoding="async"
-      />
-    </figure>
-
-    <div class="intro-txt">
+    <!-- Mesma grade 3/9 das seções: a assinatura ocupa a coluna do rótulo,
+         o texto começa na mesma linha vertical do resto da página e a foto
+         fecha a direita com a altura do bloco inteiro. -->
+    <div class="intro-in">
       <p class="intro-quem intro-fade">Victor Kouichi, desenvolvedor de sites em Goiânia.</p>
-      <h1 class="intro-title intro-fade">Seu site pode fazer o telefone tocar.</h1>
-      <p class="intro-sub intro-fade">
-        Site e landing page pra clínica, escritório e prestador de serviço.
-        Orçamento na primeira conversa, e todo contato chega no seu WhatsApp.
-      </p>
-      <a
-        :href="whatsapp"
-        target="_blank"
-        rel="noopener"
-        data-track="wa_hero"
-        class="intro-cta intro-fade"
-        data-cursor="grow"
-      >
-        <WaIcon :size="18" />
-        Me chamar no WhatsApp
-      </a>
-      <p class="intro-vaga intro-fade"><i aria-hidden="true" />{{ disponibilidade }}</p>
+
+      <div class="intro-txt">
+        <h1 class="intro-title intro-fade">Seu site pode fazer o telefone tocar.</h1>
+        <p class="intro-sub intro-fade">
+          Site e landing page pra clínica, escritório e prestador de serviço.
+          Orçamento na primeira conversa, e todo contato chega no seu WhatsApp.
+        </p>
+        <a
+          :href="whatsapp"
+          target="_blank"
+          rel="noopener"
+          data-track="wa_hero"
+          class="intro-cta intro-fade"
+          data-cursor="grow"
+        >
+          <WaIcon :size="18" />
+          Me chamar no WhatsApp
+        </a>
+        <p class="intro-vaga intro-fade"><i aria-hidden="true" />{{ disponibilidade }}</p>
+      </div>
+
+      <figure class="intro-media">
+        <img
+          src="/img/hero-kouichi.webp"
+          alt="Victor Kouichi, desenvolvedor de sites, em Goiânia"
+          width="800"
+          height="1000"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
     </div>
-   </div>
   </section>
 </template>
 
@@ -76,13 +80,13 @@ onMounted(async () => {
   max-width: var(--lab-wrap);
   margin-inline: auto;
   display: grid;
-  gap: var(--sp-4);
-  align-items: center;
+  gap: var(--sp-3);
 }
 
-/* celular: a foto vem primeiro, em corte horizontal, e o rosto é a
-   primeira coisa na tela; desktop: retrato alto à esquerda do texto */
+/* celular: foto primeiro, em corte horizontal; o rosto é a primeira coisa
+   na tela, antes de qualquer palavra */
 .intro-media {
+  order: -1;
   margin: 0;
   aspect-ratio: 4 / 3;
   overflow: hidden;
@@ -93,15 +97,13 @@ onMounted(async () => {
 
 .intro-quem { font-size: var(--t-s); font-weight: 500; color: var(--lab-dim); }
 .intro-title {
-  margin-top: var(--sp-2);
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--w-display, 500);
   font-size: clamp(2.3rem, 5.2vw, 4.4rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
-  /* equilibra as duas linhas: sem isso sobrava um "o" solto no fim da primeira */
   text-wrap: balance;
-  max-width: 15ch;
+  max-width: 13ch;
 }
 .intro-sub {
   margin-top: var(--sp-3);
@@ -136,18 +138,15 @@ onMounted(async () => {
 .intro-vaga i { width: 6px; height: 6px; border-radius: 999px; background: var(--lab-accent); }
 
 @media (min-width: 900px) {
-  .intro {
-    display: flex;
+  .intro { padding-block: clamp(3rem, 7vh, 5rem); }
+  .intro-in {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr);
+    gap: var(--sp-5);
     align-items: center;
-    /* teto: num monitor alto o topo não precisa de 1400px de respiro */
-    min-height: min(calc(100svh - 3.75rem), 46rem);
-    padding-block: clamp(2rem, 5vh, 4rem);
   }
-  /* mesma divisão 3/9 das seções: a margem esquerda do texto é a mesma
-     linha onde começa o conteúdo da página inteira */
-  .intro-in { width: 100%; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: var(--sp-5); }
-  .intro-media { aspect-ratio: 4 / 5; width: 100%; }
-  .intro-txt { max-width: 40rem; }
+  /* a assinatura desce até a linha do título, como o rótulo das seções */
+  .intro-quem { align-self: start; padding-top: 0.5rem; }
+  .intro-media { order: 0; aspect-ratio: 4 / 5; max-height: 34rem; width: 100%; }
 }
 
 /* sem animação: tudo já nasce no lugar */

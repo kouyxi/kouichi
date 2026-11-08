@@ -123,7 +123,7 @@ onMounted(async () => {
 }
 .ct-q-t {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--w-display, 500);
   font-size: var(--t-1);
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -168,7 +168,7 @@ onMounted(async () => {
 .ct-huge {
   display: block;
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--w-display, 500);
   font-size: clamp(2.8rem, 10vw, 9rem);
   line-height: 0.95;
   letter-spacing: -0.04em;

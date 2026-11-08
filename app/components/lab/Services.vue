@@ -135,7 +135,7 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
   border-bottom: 1px solid var(--lab-line);
 }
 .sv-item-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-.sv-nome { font-family: var(--font-display); font-weight: 500; font-size: var(--t-1); letter-spacing: -0.01em; }
+.sv-nome { font-family: var(--font-display); font-weight: var(--w-display, 500); font-size: var(--t-1); letter-spacing: -0.01em; }
 .sv-prazo { font-size: var(--t-s); color: var(--lab-dim); white-space: nowrap; }
 .sv-para { color: var(--lab-dim); font-size: var(--t-s); line-height: 1.55; max-width: 30rem; }
 .sv-link {

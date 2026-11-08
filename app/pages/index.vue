@@ -117,9 +117,17 @@ const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu ne
 // No topo ele some também: ali já estão o botão do cabeçalho e o do hero.
 const noFecho = ref(false)
 const noTopo = ref(false)
+
+// Teste de fonte de título: ?fonte=young|bricolage|newsreader. Lido no
+// cliente, depois da hidratação, pra não divergir do HTML pré-renderizado.
+// Sai quando a decisão for tomada.
+const fonte = ref('')
 const semFlutuante = computed(() => noFecho.value || noTopo.value)
 
 onMounted(() => {
+  const f = new URLSearchParams(location.search).get('fonte') || ''
+  if (['young', 'bricolage', 'newsreader'].includes(f)) fonte.value = `fonte-${f}`
+
   const alvos: Array<[string, Ref<boolean>]> = [['.ct-final', noFecho], ['#topo', noTopo]]
   const ios = alvos.flatMap(([sel, flag]) => {
     const el = document.querySelector(sel)
@@ -133,7 +141,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="lab" :class="{ 'no-fecho': noFecho }">
+  <div class="lab" :class="[{ 'no-fecho': noFecho }, fonte]">
     <LabHeader />
     <LabChapters />
 
@@ -200,6 +208,11 @@ onMounted(() => {
   overflow-x: clip;
 }
 
+/* teste de fonte de título (ver ?fonte= no script) */
+.lab.fonte-young { --font-display: 'Young Serif', Georgia, serif; --w-display: 400; }
+.lab.fonte-bricolage { --font-display: 'Bricolage Grotesque', system-ui, sans-serif; --w-display: 700; }
+.lab.fonte-newsreader { --font-display: 'Newsreader', Georgia, serif; --w-display: 400; }
+
 /* Cartão: topo e fecho em creme, miolo escuro. Um bloco com .claro inverte
    os tokens e todo componente dentro dele continua lendo as mesmas
    variáveis, então nenhum filho precisa saber em que lado está. */
@@ -238,7 +251,7 @@ body:has(.lab) { background: #F3EAD8; }
 }
 .lab .sec-h2 {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--w-display, 500);
   font-size: var(--t-h2);
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -247,7 +260,7 @@ body:has(.lab) { background: #F3EAD8; }
 }
 .lab .sec-h3 {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--w-display, 500);
   font-size: var(--t-h3);
   line-height: 1.1;
   letter-spacing: -0.025em;

@@ -120,7 +120,7 @@ onMounted(async () => {
 }
 .pr-n {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--w-display, 500);
   font-size: var(--t-h3);
   line-height: 1;
   letter-spacing: -0.03em;
@@ -130,7 +130,7 @@ onMounted(async () => {
 .pr-body { max-width: 34rem; }
 .pr-t {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--w-display, 500);
   font-size: var(--t-h3);
   line-height: 1.1;
   letter-spacing: -0.025em;
@@ -153,7 +153,7 @@ onMounted(async () => {
   padding-top: var(--sp-3);
   border-top: 1px solid var(--lab-line);
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--w-display, 500);
   font-size: var(--t-h3);
   line-height: 1.2;
   letter-spacing: -0.02em;

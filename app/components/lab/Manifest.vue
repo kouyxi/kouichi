@@ -40,7 +40,7 @@ const principios = [
 <style scoped>
 .mf-big {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--w-display, 500);
   font-size: var(--t-h3);
   line-height: 1.3;
   letter-spacing: -0.02em;
@@ -67,6 +67,6 @@ const principios = [
 @media (min-width: 820px) { .mf-princs { grid-template-columns: repeat(3, 1fr); } }
 
 .mf-princ { background: var(--lab-surface); padding: var(--sp-3); }
-.mf-t { font-family: var(--font-display); font-weight: 500; font-size: var(--t-1); letter-spacing: -0.01em; }
+.mf-t { font-family: var(--font-display); font-weight: var(--w-display, 500); font-size: var(--t-1); letter-spacing: -0.01em; }
 .mf-d { margin-top: var(--sp-1); font-size: var(--t-s); line-height: 1.55; color: var(--lab-dim); }
 </style>
