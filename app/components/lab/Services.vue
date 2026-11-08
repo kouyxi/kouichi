@@ -1,265 +1,194 @@
 <script setup lang="ts">
 import { waLink } from '~/data/contato'
 
-// Mesma oferta da home, sem preço. Só o texto foi encurtado pro formato
-// de painel: aqui cada card ocupa quase a tela toda e não aguenta parágrafo.
-const pacotes = [
+// Os três tamanhos de site. O que era repetido nos três ("publicado, 2
+// rodadas, WhatsApp à vista") virou uma linha só embaixo da lista.
+const tamanhos = [
   {
-    n: '01',
     nome: 'Uma página',
     para: 'Você vende um serviço só e precisa de um caminho curto até o WhatsApp.',
-    itens: ['1 página, rápida no celular', 'Texto escrito pra gerar contato', 'Botão de WhatsApp sempre à vista', 'Publicado, com 2 rodadas de ajuste'],
     prazo: '5 a 7 dias úteis',
     wa: 'Oi, Kouichi! Queria um site de uma página. Meu negócio é '
   },
   {
-    n: '02',
     nome: 'Institucional',
     para: 'Clínica, escritório e consultório, onde o cliente pesquisa bastante antes de escolher.',
-    itens: ['Uma seção pra cada dúvida do cliente', 'Lugar pra depoimento e foto do seu trabalho', 'SEO técnico pra achar no Google', 'Publicado, com 2 rodadas de ajuste'],
     prazo: '7 a 10 dias úteis',
     wa: 'Oi, Kouichi! Queria um site institucional. Meu negócio é '
   },
   {
-    n: '03',
     nome: 'Completo',
-    para: 'Você tem vários serviços, mais páginas e quer medir de onde vem cada contato.',
-    itens: ['Uma página pra cada serviço', 'Formulário, agenda ou o que seu negócio já usa', 'Você vê de onde veio cada contato', 'Publicado, com 2 rodadas de ajuste'],
+    para: 'Vários serviços, mais páginas, e você quer saber de onde vem cada contato.',
     prazo: '10 a 15 dias úteis',
     wa: 'Oi, Kouichi! Queria um site completo. Meu negócio é '
   }
 ]
 
-const root = ref<HTMLElement | null>(null)
-const progresso = ref(0)
-
-onMounted(async () => {
-  if (!root.value) return
-  const el = root.value
-  // Abaixo de 860px o pin horizontal briga com o scroll do dedo: vira
-  // uma lista vertical normal, que no celular funciona melhor mesmo.
-  if (prefersReducedMotion() || window.innerWidth < 860) {
-    el.classList.add('is-stacked')
-    return
-  }
-
-  const { gsap } = await useGsap()
-  const ctx = gsap.context(() => {
-    const track = el.querySelector('.sv-track') as HTMLElement
-    if (!track) return
-
-    const distancia = () => track.scrollWidth - window.innerWidth
-
-    const horizontal = gsap.to(track, {
-      x: () => -distancia(),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: el,
-        pin: true,
-        scrub: 0.8,
-        // a altura da rolagem vira a largura do trilho: 1px pra baixo = 1px pro lado
-        end: () => '+=' + distancia(),
-        invalidateOnRefresh: true,
-        onUpdate: (self: any) => { progresso.value = self.progress }
-      }
-    })
-
-    // cada painel entra com a numeração e o conteúdo levemente atrasados
-    gsap.utils.toArray<HTMLElement>('.sv-card').forEach((card) => {
-      gsap.from(card.querySelectorAll('.sv-stagger'), {
-        opacity: 0,
-        y: 26,
-        duration: 0.6,
-        stagger: 0.07,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: card,
-          containerAnimation: horizontal,
-          start: 'left 78%',
-          once: true
-        }
-      })
-    })
-  }, el)
-
-  onBeforeUnmount(() => ctx.revert())
-})
+const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endereço é ')
 </script>
 
 <template>
-  <section id="servicos" ref="root" class="sv">
-    <LabDecor grade="larga" halo="centro-esq" />
-    <div class="sv-track">
-      <header class="sv-panel sv-intro">
-        <span class="lab-index">(02)</span>
-        <h2 class="sv-title">
-          Três<br>tamanhos<br><em>de site.</em>
-        </h2>
-        <p class="sv-note">
-          Trabalho melhor com quem vive de cliente novo chegando.
-          Se um cliente perdido dói no seu caixa, a gente se entende rápido.
+  <section id="servicos" class="sv">
+    <h2 class="sv-h2">O que eu faço</h2>
+
+    <div class="sv-grid">
+      <article class="sv-bloco">
+        <h3 class="sv-t">Site novo pro seu negócio</h3>
+        <p class="sv-p">
+          Pra clínica, escritório e prestador de serviço que vive de cliente novo
+          chegando. Três tamanhos, e o valor eu falo na primeira conversa.
         </p>
-        <span class="sv-hint">Role para o lado</span>
-      </header>
 
-      <article v-for="p in pacotes" :key="p.n" class="sv-panel sv-card">
-        <span class="sv-n sv-stagger">{{ p.n }}</span>
-        <h3 class="sv-nome sv-stagger">{{ p.nome }}</h3>
-        <p class="sv-para sv-stagger">{{ p.para }}</p>
-        <ul class="sv-itens">
-          <li v-for="i in p.itens" :key="i" class="sv-stagger">{{ i }}</li>
+        <ul class="sv-lista">
+          <li v-for="t in tamanhos" :key="t.nome" class="sv-item">
+            <div class="sv-item-cab">
+              <h4 class="sv-nome">{{ t.nome }}</h4>
+              <span class="sv-prazo">{{ t.prazo }}</span>
+            </div>
+            <p class="sv-para">{{ t.para }}</p>
+            <a
+              :href="waLink(t.wa)"
+              target="_blank"
+              rel="noopener"
+              :data-track="`wa_plano_${t.nome.toLowerCase().replace(/\s+/g, '_')}`"
+              class="sv-link"
+              data-cursor="grow"
+            >Quero esse</a>
+          </li>
         </ul>
-        <div class="sv-foot sv-stagger">
-          <span class="sv-prazo">{{ p.prazo }}</span>
-          <a
-            :href="waLink(p.wa)"
-            target="_blank"
-            rel="noopener"
-            :data-track="`wa_plano_${p.nome.toLowerCase().replace(/\s+/g, '_')}`"
-            class="sv-cta"
-            data-cursor="grow"
-          >
-            Quero esse
-            <span class="sv-arrow">→</span>
-          </a>
-        </div>
-      </article>
-    </div>
 
-    <div class="sv-bar" aria-hidden="true">
-      <span class="sv-bar-fill" :style="{ transform: `scaleX(${progresso})` }" />
+        <p class="sv-comum">
+          Todos saem publicados, rápidos no celular, com o botão de WhatsApp
+          sempre à vista e 2 rodadas de ajuste inclusas.
+        </p>
+      </article>
+
+      <!-- Segundo serviço. Sem medo, sem pressa, sem nome de casa de aposta:
+           o dono chega aqui desconfiado, e o que convence é o passo a passo
+           e a regra de pagar depois de conferir. -->
+      <article id="site-invadido" class="sv-bloco sv-invadido">
+        <h3 class="sv-t">Limpeza de site invadido</h3>
+        <p class="sv-p">
+          Às vezes o site de uma empresa aparece no Google com páginas de aposta
+          que o dono nunca criou. É invasão, acontece com site de clínica, de
+          escritório e de loja, e normalmente o dono só descobre quando alguém avisa.
+        </p>
+        <p class="sv-p">
+          Pra conferir sozinho, pesquise no Google
+          <code class="sv-code">site:seudominio.com.br</code>
+          e veja se aparece página que você não reconhece.
+        </p>
+
+        <ul class="sv-passos">
+          <li>Backup antes de mexer em qualquer coisa</li>
+          <li>Limpeza do que foi colocado no site</li>
+          <li>Troca de senhas</li>
+          <li>Atualização do que estava vulnerável</li>
+          <li>Pedido pro Google revisar e tirar as páginas da busca</li>
+          <li>Relatório escrito do que encontrei</li>
+        </ul>
+
+        <p class="sv-regra">
+          Autorização por escrito antes de qualquer acesso. Valor combinado antes.
+          Você paga depois de conferir que o site ficou limpo.
+        </p>
+
+        <a
+          :href="waInvadido"
+          target="_blank"
+          rel="noopener"
+          data-track="wa_invadido"
+          class="sv-cta"
+          data-cursor="grow"
+        >
+          <WaIcon :size="18" />
+          Falar sobre o meu site
+        </a>
+      </article>
     </div>
   </section>
 </template>
 
 <style scoped>
-.sv { position: relative; overflow: hidden; background: var(--lab-bg); }
-.sv-track {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: stretch;
-  height: 100svh;
-  width: max-content;
-  will-change: transform;
-}
-
-.sv-panel {
-  position: relative;
-  flex: 0 0 auto;
-  width: min(86vw, 34rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  padding: clamp(2.5rem, 6vh, 4.5rem) clamp(1.75rem, 4vw, 3.25rem);
-  border-right: 1px solid var(--lab-line);
-}
-
-/* painel de abertura: tipografia grande, sem card */
-.sv-intro { width: min(92vw, 42rem); justify-content: center; }
-.sv-title {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2.8rem, 7.5vw, 6rem);
-  line-height: 0.88;
-  letter-spacing: -0.035em;
-  text-transform: uppercase;
+.sv {
+  padding: clamp(3.5rem, 10vh, 7rem) var(--lab-edge);
+  background: var(--lab-bg);
   color: var(--lab-fg);
 }
-.sv-title em { font-style: italic; color: var(--lab-accent); }
-.sv-note { max-width: 24rem; color: var(--lab-dim); line-height: 1.55; }
-.sv-hint {
+.sv-h2 {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--lab-dim);
+}
+.sv-grid {
+  display: grid;
+  gap: clamp(3rem, 8vh, 5rem);
   margin-top: 1.5rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--lab-accent);
+}
+@media (min-width: 900px) {
+  .sv-grid { grid-template-columns: 1.1fr 1fr; gap: clamp(3rem, 6vw, 6rem); }
 }
 
-/* espalhado, não centralizado: o número ancora no topo e o CTA no pé, então
-   o painel fica emoldurado em vez de flutuar num vazio no meio da tela */
-.sv-card { justify-content: flex-start; }
-.sv-card .sv-itens { margin-top: auto; padding-top: 2rem; }
-.sv-n {
+.sv-t {
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(4rem, 11vw, 9rem);
-  line-height: 0.8;
-  letter-spacing: -0.05em;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--lab-line-2);
+  font-weight: 500;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
 }
-.sv-nome {
-  font-family: var(--font-display);
+.sv-p { margin-top: 1rem; max-width: 34rem; line-height: 1.6; color: var(--lab-dim); }
+.sv-code {
+  font-family: var(--font-body);
   font-weight: 600;
-  font-size: clamp(1.75rem, 3.4vw, 2.6rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
   color: var(--lab-fg);
+  white-space: nowrap;
 }
-.sv-para { max-width: 26rem; color: var(--lab-dim); line-height: 1.55; font-size: 0.95rem; }
-.sv-itens { display: grid; gap: 0.55rem; margin-top: 0.5rem; }
-.sv-itens li {
-  display: flex;
-  gap: 0.7rem;
-  font-size: 0.9rem;
-  color: var(--lab-fg);
-  opacity: 0.86;
-}
-.sv-itens li::before { content: '—'; color: var(--lab-accent); }
 
-.sv-foot {
-  display: flex;
-  align-items: center;
-  /* alinhado à esquerda de propósito: encostado na direita do painel, o CTA
-     ficava embaixo do botão flutuante de WhatsApp no painel da ponta */
-  justify-content: flex-start;
-  gap: 2rem;
-  margin-top: 1.5rem;
-  padding-top: 1.1rem;
-  border-top: 1px solid var(--lab-line);
+/* lista dos tamanhos: hairlines, sem card */
+.sv-lista { margin-top: 2rem; border-top: 1px solid var(--lab-line); }
+.sv-item {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--lab-line);
 }
-.sv-prazo { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lab-dim); }
-.sv-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+.sv-item-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.sv-nome { font-family: var(--font-display); font-weight: 500; font-size: 1.3rem; letter-spacing: -0.01em; }
+.sv-prazo { font-size: 0.85rem; color: var(--lab-dim); white-space: nowrap; }
+.sv-para { color: var(--lab-dim); font-size: 0.95rem; line-height: 1.5; max-width: 30rem; }
+.sv-link {
+  justify-self: start;
+  margin-top: 0.25rem;
   font-weight: 600;
   font-size: 0.92rem;
   color: var(--lab-accent);
+  border-bottom: 1px solid transparent;
 }
-.sv-arrow { transition: transform 0.3s var(--ease); }
-.sv-cta:hover .sv-arrow { transform: translateX(5px); }
+.sv-link:hover { border-color: currentColor; }
+.sv-comum { margin-top: 1.25rem; font-size: 0.9rem; line-height: 1.5; color: var(--lab-dim); max-width: 34rem; }
 
-/* barra de progresso do trecho horizontal */
-.sv-bar {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 2px;
-  background: var(--lab-line);
+/* site invadido */
+.sv-passos { display: grid; gap: 0.55rem; margin-top: 1.5rem; }
+.sv-passos li { display: flex; gap: 0.7rem; line-height: 1.45; }
+.sv-passos li::before { content: ''; flex: none; width: 6px; height: 6px; margin-top: 0.6em; border-radius: 999px; background: var(--lab-accent); }
+.sv-regra {
+  margin-top: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--lab-accent);
+  line-height: 1.55;
+  max-width: 32rem;
 }
-.sv-bar-fill {
-  display: block;
-  height: 100%;
-  background: var(--lab-accent);
-  transform-origin: left;
-  transform: scaleX(0);
+.sv-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid var(--lab-line-2);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
 }
-
-/* fallback: sem pin, vira uma pilha vertical comum */
-.sv.is-stacked { overflow: visible; }
-.sv.is-stacked .sv-track {
-  flex-direction: column;
-  width: 100%;
-  height: auto;
-}
-.sv.is-stacked .sv-panel {
-  width: 100%;
-  border-right: none;
-  border-bottom: 1px solid var(--lab-line);
-  min-height: auto;
-  padding-block: clamp(2.5rem, 8vw, 4rem);
-}
-.sv.is-stacked .sv-bar { display: none; }
+.sv-cta:hover { background: var(--lab-fg); color: var(--lab-bg); }
 </style>

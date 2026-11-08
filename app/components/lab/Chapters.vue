@@ -8,13 +8,14 @@
 // filetes — o índice vertical numerado que toda landing escura tem. A
 // fruta faz o mesmo trabalho (onde estou, quanto falta), só que é a única
 // coisa na página que não caberia em nenhum outro site.
+// `claro`: o capítulo é em creme, e o índice inverte as cores pra não virar
+// um disco escuro flutuando no papel.
 const capitulos = [
-  { id: 'topo', nome: 'Início' },
+  { id: 'topo', nome: 'Início', claro: true },
   { id: 'servicos', nome: 'Serviços' },
   { id: 'processo', nome: 'Processo' },
-  { id: 'portfolio', nome: 'Projetos' },
   { id: 'sobre', nome: 'Sobre' },
-  { id: 'contato', nome: 'Contato' }
+  { id: 'contato', nome: 'Contato', claro: true }
 ]
 
 // Geometria dos gomos. Fatia de 60° a partir do topo, com 5° de folga de cada
@@ -26,8 +27,9 @@ const ponto = (grau: number) => {
   const r = ((grau - 90) * Math.PI) / 180
   return `${(30 + RE * Math.cos(r)).toFixed(2)} ${(30 + RE * Math.sin(r)).toFixed(2)}`
 }
+const FATIA = 360 / capitulos.length
 const gomos = capitulos.map((_, i) =>
-  `M 30 30 L ${ponto(i * 60 + 6)} A ${RE} ${RE} 0 0 1 ${ponto((i + 1) * 60 - 6)} Z`
+  `M 30 30 L ${ponto(i * FATIA + 6)} A ${RE} ${RE} 0 0 1 ${ponto((i + 1) * FATIA - 6)} Z`
 )
 
 const atual = ref(0)
@@ -60,7 +62,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav class="ch" aria-label="Capítulos" @mouseleave="sobre = null">
+  <nav class="ch" :class="{ claro: capitulos[atual]?.claro }" aria-label="Capítulos" @mouseleave="sobre = null">
     <span class="ch-rotulo" aria-hidden="true">{{ rotulo }}</span>
 
     <!-- sem role="presentation": o svg contém os links dos capítulos, e

@@ -48,8 +48,7 @@ onMounted(async () => {
   <section id="contato" ref="root" class="ct">
     <div class="ct-faq">
       <header class="ct-faq-head">
-        <span class="lab-index">(06)</span>
-        <h2 class="ct-faq-title">Perguntas que<br><em>sempre chegam.</em></h2>
+        <h2 class="ct-faq-title">Perguntas que sempre chegam</h2>
       </header>
 
       <ul class="ct-rows">
@@ -61,7 +60,6 @@ onMounted(async () => {
             :aria-controls="`lab-faq-${i}`"
             @click="alternar(i)"
           >
-            <span class="ct-q-n">{{ String(i + 1).padStart(2, '0') }}</span>
             <span class="ct-q-t">{{ f.q }}</span>
             <span class="ct-q-sign" aria-hidden="true" />
           </button>
@@ -72,8 +70,7 @@ onMounted(async () => {
       </ul>
     </div>
 
-    <div class="ct-final">
-      <LabDecor grade="fina" halo="base-centro" />
+    <div class="ct-final claro">
       <p class="ct-kicker">Sem compromisso, respondo no mesmo dia</p>
       <a
         :href="whatsapp"
@@ -84,7 +81,6 @@ onMounted(async () => {
         data-cursor="grow"
       >
         Vamos conversar
-        <span class="ct-arrow" aria-hidden="true">→</span>
       </a>
 
       <div class="ct-baixo">
@@ -99,7 +95,7 @@ onMounted(async () => {
       </div>
 
       <footer class="ct-foot">
-        <span>{{ nomeCompleto }} · {{ cidade }} · {{ ano }}</span>
+        <span>{{ nomeCompleto }}, {{ cidade }}, {{ ano }}</span>
         <NuxtLink to="/lab" class="ct-back" rel="nofollow">Ver a versão anterior</NuxtLink>
       </footer>
     </div>
@@ -115,34 +111,24 @@ onMounted(async () => {
   border-top: 1px solid var(--lab-line);
 }
 .ct-faq-title {
-  margin-top: 1rem;
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2.2rem, 6vw, 4.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.035em;
-  text-transform: uppercase;
+  font-weight: 500;
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
 }
-.ct-faq-title em { font-style: italic; color: var(--lab-accent); }
 
 .ct-rows { margin-top: clamp(2rem, 5vh, 3rem); border-top: 1px solid var(--lab-line); }
 .ct-row { border-bottom: 1px solid var(--lab-line); }
 .ct-q {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 1.25rem;
   width: 100%;
   padding: 1.35rem 0;
   color: inherit;
   text-align: left;
-}
-.ct-q-n {
-  font-family: var(--font-body);
-  font-variant-numeric: tabular-nums;
-  font-size: 0.74rem;
-  letter-spacing: 0.1em;
-  color: var(--lab-accent);
 }
 .ct-q-t {
   font-family: var(--font-display);
@@ -169,12 +155,14 @@ onMounted(async () => {
 .ct-row.is-open .ct-q-sign::after { transform: translateX(50%) scaleY(0); opacity: 0; }
 .ct-row.is-open .ct-q-sign::before { background: var(--lab-accent); }
 
-.ct-a { padding: 0 0 1.5rem calc(0.74rem + 2.5rem); }
+.ct-a { padding: 0 0 1.5rem; }
 .ct-a p { max-width: 44rem; line-height: 1.62; color: var(--lab-dim); }
 
 /* ---- finale ---- */
 .ct-final {
-  min-height: 100svh;
+  background: var(--lab-bg);
+  color: var(--lab-fg);
+  min-height: min(100svh, 48rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -184,28 +172,19 @@ onMounted(async () => {
   overflow: hidden;
   position: relative;
 }
-.ct-final > *:not(.dec) { position: relative; z-index: 1; }
-.ct-kicker {
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--lab-accent);
-}
+.ct-kicker { font-size: 0.9rem; color: var(--lab-dim); }
 .ct-huge {
   display: block;
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2.6rem, 11.5vw, 11rem);
-  line-height: 0.86;
-  letter-spacing: -0.045em;
-  text-transform: uppercase;
+  font-weight: 500;
+  font-size: clamp(2.8rem, 10vw, 9rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
   transform-origin: left center;
   transition: color 0.4s var(--ease);
   will-change: transform;
 }
 .ct-huge:hover { color: var(--lab-accent); }
-.ct-arrow { display: inline-block; transition: transform 0.4s var(--ease); }
-.ct-huge:hover .ct-arrow { transform: translateX(0.12em); }
 
 .ct-baixo {
   display: flex;
@@ -237,15 +216,10 @@ a.ct-line:hover { color: var(--lab-accent); }
   gap: 1rem;
   margin-top: auto;
   padding-top: clamp(2rem, 5vh, 3rem);
-  font-size: 0.74rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.82rem;
   color: var(--lab-dim);
 }
 .ct-back { border-bottom: 1px solid currentColor; }
 .ct-back:hover { color: var(--lab-accent); }
 
-@media (max-width: 620px) {
-  .ct-a { padding-left: 0; }
-}
 </style>

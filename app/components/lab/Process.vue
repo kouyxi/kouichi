@@ -63,12 +63,9 @@ onMounted(async () => {
 
 <template>
   <section id="processo" ref="root" class="pr">
-    <LabDecor grade="fina" tom="claro" halo="nenhum" />
     <header class="pr-head">
-      <span class="lab-index">(03)</span>
       <h2 class="pr-title">
-        <span class="pr-mask"><span class="pr-head-in">Você sabe</span></span>
-        <span class="pr-mask"><span class="pr-head-in">onde <em>pisa</em></span></span>
+        <span class="pr-mask"><span class="pr-head-in">Você sabe onde pisa</span></span>
         <span class="pr-mask"><span class="pr-head-in">em cada etapa.</span></span>
       </h2>
       <p class="pr-note">
@@ -100,30 +97,28 @@ onMounted(async () => {
 .pr {
   position: relative;
   padding: clamp(4rem, 12vh, 8rem) var(--lab-edge) clamp(3rem, 8vh, 6rem);
-  background: var(--lab-fg);
-  color: var(--lab-bg);
+  background: var(--lab-bg);
+  color: var(--lab-fg);
+  border-top: 1px solid var(--lab-line);
 }
 
 .pr-head { position: relative; z-index: 1; max-width: 60rem; margin-bottom: clamp(2.5rem, 6vh, 4rem); }
 .pr-stack, .pr-garantia { position: relative; z-index: 1; }
-.pr-head .lab-index { color: rgba(23, 19, 9, 0.5); }
 .pr-title {
   margin-top: 1rem;
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2.4rem, 7vw, 5.5rem);
-  line-height: 0.9;
-  letter-spacing: -0.035em;
-  text-transform: uppercase;
+  font-weight: 500;
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
 }
-.pr-title em { font-style: italic; color: var(--lab-accent); }
 .pr-mask { display: block; overflow: hidden; padding-bottom: 0.05em; }
 .pr-head-in { display: block; }
 .pr-note {
   margin-top: 1.5rem;
   max-width: 32rem;
   line-height: 1.6;
-  opacity: 0.68;
+  color: var(--lab-dim);
 }
 
 /* pilha: cada carta gruda um pouco mais abaixo que a anterior, então
@@ -146,6 +141,7 @@ onMounted(async () => {
   padding: clamp(1.75rem, 4vw, 3rem);
   background: var(--lab-surface);
   color: var(--lab-fg);
+  border: 1px solid var(--lab-line);
   border-radius: 4px;
   min-height: clamp(15rem, 42vh, 22rem);
 }
@@ -173,15 +169,14 @@ onMounted(async () => {
   border-radius: 999px;
   background: var(--lab-accent);
   color: var(--lab-bg);
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
 }
 
 .pr-garantia {
   margin-top: clamp(3rem, 8vh, 5rem);
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(23, 19, 9, 0.2);
+  border-top: 1px solid var(--lab-line);
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 2.4vw, 1.9rem);
   line-height: 1.25;

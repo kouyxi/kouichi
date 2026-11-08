@@ -16,8 +16,8 @@ useHead({
   title,
   meta: [
     { name: 'description', content: description },
-    // escura: esta página é fundo escuro de ponta a ponta
-    { name: 'theme-color', content: '#0E0B04' },
+    // creme: é a cor do topo e da barra fixa
+    { name: 'theme-color', content: '#F3EAD8' },
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'Kouichi' },
     { property: 'og:title', content: title },
@@ -73,16 +73,20 @@ useHead({
               addressRegion: 'GO',
               addressCountry: 'BR'
             },
-            serviceType: 'Criação de sites e landing pages focados em conversão',
+            serviceType: [
+              'Criação de sites e landing pages focados em conversão',
+              'Limpeza e recuperação de sites invadidos'
+            ],
             knowsLanguage: 'pt-BR',
             founder: { '@type': 'Person', name: nomeCompleto, alternateName: 'Kouichi' },
             hasOfferCatalog: {
               '@type': 'OfferCatalog',
-              name: 'Sites',
+              name: 'Serviços',
               itemListElement: [
                 { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site de uma página' } },
                 { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site institucional' } },
-                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site completo' } }
+                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site completo' } },
+                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Limpeza de site invadido', url: `${siteUrl}/#site-invadido` } }
               ]
             }
           },
@@ -110,24 +114,27 @@ const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu ne
 // no mesmo canto viram ruído na hora de decidir. O índice, porque ele é
 // fixo à direita e passava por cima do selo, e nesse ponto não sobrou
 // capítulo nenhum pra navegar.
+// No topo ele some também: ali já estão o botão do cabeçalho e o do hero.
 const noFecho = ref(false)
+const noTopo = ref(false)
+const semFlutuante = computed(() => noFecho.value || noTopo.value)
 
 onMounted(() => {
-  const fecho = document.querySelector('.ct-final')
-  if (!fecho) return
-  const io = new IntersectionObserver(
-    ([e]) => { noFecho.value = !!e?.isIntersecting },
-    { threshold: 0.35 }
-  )
-  io.observe(fecho)
-  onBeforeUnmount(() => io.disconnect())
+  const alvos: Array<[string, Ref<boolean>]> = [['.ct-final', noFecho], ['#topo', noTopo]]
+  const ios = alvos.flatMap(([sel, flag]) => {
+    const el = document.querySelector(sel)
+    if (!el) return []
+    const io = new IntersectionObserver(([e]) => { flag.value = !!e?.isIntersecting }, { threshold: 0.35 })
+    io.observe(el)
+    return [io]
+  })
+  onBeforeUnmount(() => ios.forEach((io) => io.disconnect()))
 })
 </script>
 
 <template>
   <div class="lab" :class="{ 'no-fecho': noFecho }">
-    <div class="lab-grao" aria-hidden="true" />
-    <LabCursor />
+    <LabHeader />
     <LabChapters />
 
     <a
@@ -136,9 +143,9 @@ onMounted(() => {
       rel="noopener"
       data-track="wa_fab"
       class="lab-float"
-      :class="{ 'is-oculto': noFecho }"
-      :aria-hidden="noFecho"
-      :tabindex="noFecho ? -1 : undefined"
+      :class="{ 'is-oculto': semFlutuante }"
+      :aria-hidden="semFlutuante"
+      :tabindex="semFlutuante ? -1 : undefined"
     >
       <WaIcon :size="22" />
       <span class="lab-float-t">WhatsApp</span>
@@ -146,10 +153,8 @@ onMounted(() => {
 
     <main>
       <LabIntro />
-      <LabVelocity />
       <LabServices />
       <LabProcess />
-      <LabWork />
       <LabManifest />
       <LabContact />
     </main>
@@ -175,40 +180,25 @@ onMounted(() => {
   --lab-line-2: rgba(243, 234, 216, 0.28);
   --lab-edge: clamp(1.15rem, 4vw, 3.5rem);
 
-  /* o fundo não é uma cor chapada: duas manchas muito fracas dão profundidade
-     e tiram a sensação de "preto igual do começo ao fim" */
-  background:
-    radial-gradient(ellipse 90% 50% at 15% 0%, rgba(220, 91, 44, 0.07), transparent 60%),
-    radial-gradient(ellipse 70% 60% at 90% 78%, rgba(111, 131, 71, 0.06), transparent 62%),
-    var(--lab-bg);
+  background: var(--lab-bg);
   color: var(--lab-fg);
   overflow-x: clip;
 }
 
-/* a página é escura de ponta a ponta, inclusive no overscroll */
-body:has(.lab) { background: #0E0B04; }
-
-/* Grão de papel por cima de tudo. É o que mais tira o aspecto de tela
-   chapada, e custa uma textura em SVG, sem imagem nenhuma. */
-.lab-grao {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  pointer-events: none;
-  opacity: 0.055;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+/* Cartão: topo e fecho em creme, miolo escuro. Um bloco com .claro inverte
+   os tokens e todo componente dentro dele continua lendo as mesmas
+   variáveis, então nenhum filho precisa saber em que lado está. */
+.lab .claro {
+  --lab-bg: #F3EAD8;
+  --lab-surface: #FBF6EC;
+  --lab-fg: #0E0B04;
+  --lab-dim: rgba(14, 11, 4, 0.68);
+  --lab-line: rgba(14, 11, 4, 0.16);
+  --lab-line-2: rgba(14, 11, 4, 0.32);
 }
 
-.lab .lab-index {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  color: var(--lab-accent);
-}
+/* o overscroll em cima é creme (barra e topo) e embaixo também (fecho) */
+body:has(.lab) { background: #F3EAD8; }
 
 .lab ::selection { background: var(--lab-accent); color: var(--lab-bg); }
 

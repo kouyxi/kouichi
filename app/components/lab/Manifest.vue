@@ -1,64 +1,18 @@
 <script setup lang="ts">
-const root = ref<HTMLElement | null>(null)
-
+// Três regras de trabalho. Não são sequência, então não levam número.
 const principios = [
-  { n: '01', t: 'Prefiro fato a adjetivo', d: 'Se a gente não consegue provar, não entra no site.' },
-  { n: '02', t: 'Se não serve, sai', d: 'Cada coisa na página tem que ajudar alguém a te procurar.' },
-  { n: '03', t: 'Você sabe onde está pisando', d: 'Escopo, prazo e valor combinados antes.' }
+  { t: 'Prefiro fato a adjetivo', d: 'Se a gente não consegue provar, não entra no site.' },
+  { t: 'Se não serve, sai', d: 'Cada coisa na página tem que ajudar alguém a te procurar.' },
+  { t: 'Você sabe onde está pisando', d: 'Escopo, prazo e valor combinados antes.' }
 ]
-
-onMounted(async () => {
-  if (!root.value || prefersReducedMotion()) return
-  const el = root.value
-  const { gsap, SplitText } = await useGsap()
-  await document.fonts?.ready
-
-  const ctx = gsap.context(() => {
-    const alvo = el.querySelector('.mf-big') as HTMLElement
-    if (!alvo) return
-
-    // Palavra a palavra amarrado ao scroll: o texto acende conforme você
-    // desce, em vez de aparecer todo de uma vez. Como a página está presa
-    // aqui, ler e rolar viram o mesmo gesto.
-    const split = SplitText.create(alvo, { type: 'words', wordsClass: 'mf-word' })
-    gsap.fromTo(
-      split.words,
-      { opacity: 0.12 },
-      {
-        opacity: 1,
-        ease: 'none',
-        stagger: 1,
-        scrollTrigger: {
-          trigger: el,
-          pin: true,
-          start: 'top top',
-          end: '+=110%',
-          scrub: 0.5
-        }
-      }
-    )
-
-    gsap.from('.mf-princ', {
-      opacity: 0,
-      y: 22,
-      duration: 0.6,
-      stagger: 0.08,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: '.mf-princs', start: 'top 88%', once: true }
-    })
-  }, el)
-
-  onBeforeUnmount(() => ctx.revert())
-})
 </script>
 
 <template>
-  <section id="sobre" ref="root" class="mf">
-    <LabDecor grade="fina" halo="centro-esq" reticula />
+  <section id="sobre" class="mf">
     <div class="mf-inner">
-      <span class="lab-index">(05)</span>
+      <h2 class="mf-h2">Quem faz</h2>
       <p class="mf-big">
-        Sou o Kouichi, de Goiânia. Passo o dia procurando onde as coisas
+        Sou o Victor Kouichi, de Goiânia. Passo o dia procurando onde as coisas
         quebram: o formulário que não envia, a página que abre torta no
         celular, a porta aberta que derruba o site num sábado. E estudo o que
         faz alguém decidir, porque uma página faz a pessoa te chamar e a
@@ -72,8 +26,7 @@ onMounted(async () => {
       </p>
 
       <ul class="mf-princs">
-        <li v-for="p in principios" :key="p.n" class="mf-princ">
-          <span class="mf-n">{{ p.n }}</span>
+        <li v-for="p in principios" :key="p.t" class="mf-princ">
           <h3 class="mf-t">{{ p.t }}</h3>
           <p class="mf-d">{{ p.d }}</p>
         </li>
@@ -84,30 +37,26 @@ onMounted(async () => {
 
 <style scoped>
 .mf {
-  position: relative;
-  min-height: 100svh;
-  display: grid;
-  align-content: center;
-  padding: clamp(3.5rem, 10vh, 6rem) var(--lab-edge);
+  padding: clamp(3.5rem, 10vh, 7rem) var(--lab-edge);
   background: var(--lab-bg);
   color: var(--lab-fg);
   border-top: 1px solid var(--lab-line);
 }
-.mf-inner { position: relative; z-index: 1; max-width: 68rem; margin-inline: auto; width: 100%; }
+.mf-inner { max-width: 68rem; margin-inline: auto; width: 100%; }
+.mf-h2 { font-size: 0.86rem; font-weight: 500; color: var(--lab-dim); }
 
 .mf-big {
   margin-top: 1.25rem;
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(1.5rem, 3.6vw, 3.1rem);
-  line-height: 1.18;
+  font-size: clamp(1.35rem, 2.6vw, 2.2rem);
+  line-height: 1.25;
   letter-spacing: -0.02em;
+  max-width: 40rem;
 }
-/* SplitText gera .mf-word; sem isso o espaço entre palavras some no reflow */
-.mf-big :deep(.mf-word) { will-change: opacity; }
 
 .mf-honesto {
-  margin-top: clamp(1.75rem, 4vh, 2.75rem);
+  margin-top: clamp(1.75rem, 4vh, 2.5rem);
   padding-left: 1.25rem;
   border-left: 2px solid var(--lab-accent);
   max-width: 34rem;
@@ -124,12 +73,6 @@ onMounted(async () => {
 }
 @media (min-width: 820px) { .mf-princs { grid-template-columns: repeat(3, 1fr); } }
 .mf-princ { background: var(--lab-surface); padding: 1.5rem; }
-.mf-n {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.3rem;
-  color: var(--lab-accent);
-}
-.mf-t { margin-top: 0.6rem; font-size: 1.02rem; font-weight: 600; }
-.mf-d { margin-top: 0.4rem; font-size: 0.88rem; line-height: 1.5; color: var(--lab-dim); }
+.mf-t { font-family: var(--font-display); font-weight: 500; font-size: 1.15rem; letter-spacing: -0.01em; }
+.mf-d { margin-top: 0.5rem; font-size: 0.92rem; line-height: 1.5; color: var(--lab-dim); }
 </style>

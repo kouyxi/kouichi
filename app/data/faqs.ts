@@ -31,6 +31,10 @@ export const faqs: Faq[] = [
     a: 'Às vezes dá, e nesses casos sai bem mais barato. Me manda o link que eu olho e te falo com honestidade se compensa ajustar ou se remendar vai custar mais caro que começar de novo. Já falei "não precisa refazer" pra gente que veio querendo pagar.'
   },
   {
+    q: 'Meu site apareceu no Google com páginas que eu não criei. Você resolve?',
+    a: 'Resolvo. Isso é invasão, e o caminho é: backup, limpeza, troca de senhas, atualização do que estava vulnerável e pedido pro Google revisar. Antes de qualquer acesso eu peço sua autorização por escrito e combino o valor. Você paga depois de conferir que ficou limpo. Sua hospedagem costuma oferecer esse serviço também, então vale perguntar lá e comparar.'
+  },
+  {
     q: 'Por que eu não vejo preço no site?',
     a: 'Porque tabela de preço sem contexto engana os dois lados. Um site de uma página pra manicure e um institucional de clínica com cinco especialidades não cabem no mesmo número. Prefiro te ouvir cinco minutos e falar um valor que eu consiga sustentar.'
   }
