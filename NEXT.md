@@ -43,9 +43,9 @@ tudo aqui estiver resolvido.
 - [ ] **Recomendação entre os três tamanhos:** um "Na dúvida, é esse" no
   Institucional. Hoje os três têm o mesmo peso e a pessoa trava.
 - [ ] **Ajustes de copy:**
-  - "E estudo o que faz alguém decidir." soa manipulador. Trocar por algo
-    como "...e sei o que faz alguém chamar no WhatsApp em vez de fechar a
-    aba." (`Manifest.vue`)
+  - Feito em 08/11: o parágrafo do "Quem faz" virou "Conserto o que
+    quebra...", sem a "porta aberta" (soava como quem testa o site dos
+    outros) e sem o "estudo o que faz alguém decidir". (`Manifest.vue`)
   - O botão "Vamos conversar" do fim não diz o que acontece. Trocar por
     "Me chama no WhatsApp". (`Contact.vue`)
   - Os princípios "Fato, não adjetivo" e "Se não serve, sai" falam de você,

@@ -13,10 +13,9 @@ const principios = [
       <h2 class="sec-rotulo">Quem faz</h2>
       <div>
       <p class="mf-big">
-        Sou o Victor Kouichi, de Goiânia. Procuro onde as coisas quebram:
-        o formulário que não envia, a página torta no celular, a porta aberta
-        que derruba o site num sábado. E estudo o que faz alguém decidir.
-        Site bonito que não gera contato é despesa.
+        Sou o Victor Kouichi, de Goiânia. Conserto o que quebra: o formulário
+        que não envia, a página torta no celular, o site invadido que começou
+        a mostrar aposta. Site bonito que não gera contato é despesa.
       </p>
 
       <p class="mf-honesto">
