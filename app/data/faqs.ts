@@ -32,6 +32,6 @@ export const faqs: Faq[] = [
   },
   {
     q: 'Meu site apareceu no Google com páginas que eu não criei. Você resolve?',
-    a: 'Resolvo. O diagnóstico é grátis e sem acesso ao site. Depois: backup, limpeza, troca de senhas, atualização do que estava aberto e pedido de revisão ao Google. R$ 300 por site WordPress, preço de começo até a 5ª limpeza. Depois, R$ 450. Loja virtual, mais de um site ou invasão que vem da hospedagem: aviso o valor antes de seguir. Autorização por escrito antes. Você paga no Pix depois de conferir as páginas de aposta dando "página não encontrada" e o teste ao vivo do Google mostrando o site limpo. Se voltar em até 90 dias, limpo de novo sem custo. Muita hospedagem também oferece isso: vale comparar.'
+    a: 'Resolvo. O diagnóstico é grátis e sem acesso ao site. Depois: backup, limpeza, troca de senhas, atualização do que estava aberto e pedido de revisão ao Google. R$ 300 por site WordPress, preço de começo até a 5ª limpeza. Depois, R$ 450. Loja virtual, mais de um site ou invasão que vem da hospedagem: aviso o valor antes de seguir. Autorização por escrito antes. Você paga no Pix depois de conferir as páginas de aposta dando "página não encontrada" e o teste ao vivo do Google mostrando o site limpo. Se voltar em até 90 dias, limpo de novo sem custo. Não vale se a nova invasão vier de plugin instalado depois, senha repassada ou falha da hospedagem. Muita hospedagem também oferece isso: vale comparar.'
   }
 ]

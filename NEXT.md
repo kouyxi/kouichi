@@ -41,8 +41,13 @@ tudo aqui estiver resolvido.
   começo até a 5ª limpeza, depois R$ 450. Exceções do lado do preço. Paga
   depois de conferir as páginas de aposta dando "página não encontrada" e
   o teste ao vivo do Search Console. Se voltar em até 90 dias, limpa de
-  novo sem custo. Invasão que volte por algo instalado depois (plugin
-  pirata, senha repassada) é caso novo, combinado na conversa.
+  novo sem custo, exceto se a nova invasão vier de plugin instalado
+  depois, senha repassada ou falha da hospedagem (publicado no bloco e no
+  FAQ). Se voltar por algo que não foi limpo, a nova limpeza é por sua
+  conta.
+- [ ] **Termo da garantia na autorização escrita.** Garantia contratual
+  tem que ser dada por escrito (CDC art. 50): os 90 dias e as exceções
+  entram no documento que o cliente assina antes do acesso.
 - [x] **Primeira metade do site** (08/11): só quando o cliente aprova o
   layout. Assim o "não gostou do layout, não paga" vale sem devolução.
 - [x] **Diagnóstico grátis** (08/11): no bloco da limpeza e no FAQ, feito

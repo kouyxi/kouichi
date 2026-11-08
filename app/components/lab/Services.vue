@@ -113,7 +113,8 @@ const waInvadido = waLink('Oi, Kouichi! Queria o diagnóstico grátis do meu sit
           Autorização por escrito antes de qualquer acesso. Você paga depois de
           conferir duas coisas: as páginas de aposta dando "página não encontrada"
           e o teste ao vivo do Google mostrando o site limpo. Se voltar em até
-          90 dias, eu limpo de novo sem custo.
+          90 dias, eu limpo de novo sem custo. Não vale se a nova invasão vier de
+          plugin instalado depois, senha repassada ou falha da hospedagem.
         </p>
 
         <a
