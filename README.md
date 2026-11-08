@@ -6,15 +6,20 @@ Landing page estática (Nuxt 4, pré-renderizada). Foco em conversão para negó
 
 | Rota | O que é | Indexada |
 |---|---|---|
-| `/` | Versão imersiva: fundo escuro, tipografia de outdoor, scroll horizontal travado nos serviços, cartas sticky no processo, revelação palavra a palavra no Sobre. Componentes em `app/components/lab/`. | sim, e carrega todo o schema |
+| `/` | Cartão: topo e fecho em creme, miolo escuro. Cabeçalho fixo com a mikan, o nome e os dois serviços (site novo e limpeza de site invadido). Uma entrada animada no topo e as cartas sticky do processo; o resto nasce no lugar. Componentes em `app/components/lab/`. | sim, e carrega todo o schema |
 | `/lab` | Versão anterior, clara e convencional. Guardada como controle de comparação. | não, `noindex` |
 
 O schema de negócio e a FAQPage moram só na `/`: descrevem a mesma
 entidade, e ter os dois em duas URLs é competir consigo mesmo.
 
-Os rótulos de `data-track` são por posição (`wa_hero`, `wa_final`,
-`wa_selo`), iguais nas duas rotas de propósito: o GA4 já separa por
-caminho, então dá pra comparar a mesma posição entre os dois layouts.
+Os rótulos de `data-track` são por posição (`wa_header`, `wa_hero`,
+`wa_plano_*`, `wa_invadido`, `wa_fab`, `wa_final`, `wa_selo`, `wa_numero`),
+iguais nas duas rotas onde a posição existe: o GA4 já separa por caminho,
+então dá pra comparar a mesma posição entre os dois layouts. `wa_invadido`
+é o funil do segundo serviço.
+
+Projetos saiu da home até existir caso real pra mostrar. O componente
+antigo está no histórico (`git show 6c2f63b:app/components/lab/Work.vue`).
 
 ## Rodar local
 
@@ -57,3 +62,6 @@ npx serve .output/public   # preview local do build
 - [ ] Criar o Google Business Profile (pesa mais que qualquer HTML para "site em Goiânia")
 - [ ] Passar os perfis reais (LinkedIn, GitHub) pra entrarem como `sameAs` no schema
 - [ ] Uma frase do Gabo, ou qualquer número do site dele: continua sendo a maior lacuna de prova
+- [ ] DNS no Cloudflare: o domínio não envia e-mail, então TXT `v=spf1 -all` em `kouichi.com.br` e TXT `v=DMARC1; p=reject` em `_dmarc.kouichi.com.br`. Se um dia usar e-mail no domínio, trocar o SPF.
+- [ ] WhatsApp Business: perfil com nome, link do site e CNPJ quando tiver
+- [ ] Página `/site-invadido` (schema Service, no sitemap): só depois que o teste de demanda passar
