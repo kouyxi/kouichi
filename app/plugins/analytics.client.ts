@@ -10,30 +10,42 @@ declare global {
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const { clarityId, gaId } = useRuntimeConfig().public as { clarityId: string; gaId: string }
+  // Só o domínio de produção conta: o npm run dev, os previews do Cloudflare e
+  // testes automatizados entravam nas métricas como se fossem visita de cliente.
+  const producao = /(^|\.)kouichi\.com\.br$/.test(location.hostname)
+  const { clarityId, gaId } = (producao ? useRuntimeConfig().public : { clarityId: '', gaId: '' }) as { clarityId: string; gaId: string }
 
-  // --- Microsoft Clarity ---
+  // As filas nascem já: um clique antes das tags chegarem fica guardado e é
+  // enviado quando elas carregam.
   if (clarityId) {
-    ;(function (c: any, l: Document, a: string, r: string, i: string) {
-      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) }
-      const t = l.createElement(r) as HTMLScriptElement
-      t.async = true
-      t.src = 'https://www.clarity.ms/tag/' + i
-      const y = l.getElementsByTagName(r)[0]
-      y.parentNode!.insertBefore(t, y)
-    })(window, document, 'clarity', 'script', clarityId)
+    const w = window as any
+    w.clarity = w.clarity || function () { (w.clarity.q = w.clarity.q || []).push(arguments) }
   }
-
-  // --- GA4 (gtag) ---
   if (gaId) {
-    const s = document.createElement('script')
-    s.async = true
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId
-    document.head.appendChild(s)
     window.dataLayer = window.dataLayer || []
     window.gtag = function () { window.dataLayer!.push(arguments) }
     window.gtag('js', new Date())
     window.gtag('config', gaId, { anonymize_ip: true })
+  }
+
+  // Os scripts em si só depois da página pronta e de um respiro. São ~200 KB
+  // comprimidos (o GA4 sozinho, 177 KB; o Clarity, 25 KB), mais que todo o
+  // JS do site: no 4G disputavam banda com a foto do topo e processador com
+  // a hidratação, bem na hora em que a pessoa começa a ler.
+  function injetar(src: string) {
+    const s = document.createElement('script')
+    s.async = true
+    s.src = src
+    document.head.appendChild(s)
+  }
+  function carregar() {
+    if (clarityId) injetar('https://www.clarity.ms/tag/' + clarityId)
+    if (gaId) injetar('https://www.googletagmanager.com/gtag/js?id=' + gaId)
+  }
+  const depois = () => ('requestIdleCallback' in window ? requestIdleCallback(carregar, { timeout: 3000 }) : setTimeout(carregar, 1500))
+  if (clarityId || gaId) {
+    if (document.readyState === 'complete') depois()
+    else window.addEventListener('load', depois, { once: true })
   }
 
   // --- helper de evento (no-op gracioso se nada carregado) ---
