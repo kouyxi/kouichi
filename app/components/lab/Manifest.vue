@@ -123,7 +123,7 @@ onMounted(async () => {
   border: 1px solid var(--lab-line);
 }
 @media (min-width: 820px) { .mf-princs { grid-template-columns: repeat(3, 1fr); } }
-.mf-princ { background: var(--lab-bg); padding: 1.5rem; }
+.mf-princ { background: var(--lab-surface); padding: 1.5rem; }
 .mf-n {
   font-family: var(--font-display);
   font-weight: 900;

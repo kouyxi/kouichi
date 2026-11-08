@@ -144,7 +144,7 @@ onMounted(async () => {
   gap: clamp(1.25rem, 4vw, 3rem);
   align-items: start;
   padding: clamp(1.75rem, 4vw, 3rem);
-  background: var(--lab-bg);
+  background: var(--lab-surface);
   color: var(--lab-fg);
   border-radius: 4px;
   min-height: clamp(15rem, 42vh, 22rem);

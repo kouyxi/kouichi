@@ -2,16 +2,39 @@
 // Índice fixo: mostra em que capítulo você está e serve de navegação.
 // Numa página que rola muito e quebra o layout o tempo todo, é o que
 // impede a pessoa de se perder.
+//
+// A forma é a marca: uma mikan cortada, um gomo por capítulo, que vai
+// enchendo conforme você desce. Antes era uma coluna de "01 02 03" com
+// filetes — o índice vertical numerado que toda landing escura tem. A
+// fruta faz o mesmo trabalho (onde estou, quanto falta), só que é a única
+// coisa na página que não caberia em nenhum outro site.
 const capitulos = [
-  { id: 'topo', n: '01', nome: 'Início' },
-  { id: 'servicos', n: '02', nome: 'Serviços' },
-  { id: 'processo', n: '03', nome: 'Processo' },
-  { id: 'portfolio', n: '04', nome: 'Projetos' },
-  { id: 'sobre', n: '05', nome: 'Sobre' },
-  { id: 'contato', n: '06', nome: 'Contato' }
+  { id: 'topo', nome: 'Início' },
+  { id: 'servicos', nome: 'Serviços' },
+  { id: 'processo', nome: 'Processo' },
+  { id: 'portfolio', nome: 'Projetos' },
+  { id: 'sobre', nome: 'Sobre' },
+  { id: 'contato', nome: 'Contato' }
 ]
 
+// Geometria dos gomos. Fatia de 60° a partir do topo, com 5° de folga de cada
+// lado: essa folga é a membrana branca da fruta, e é ela que faz ler como
+// gomo em vez de gráfico de pizza. Os gomos convergem no centro — com um furo
+// no meio virava eixo de roda.
+const RE = 17.5
+const ponto = (grau: number) => {
+  const r = ((grau - 90) * Math.PI) / 180
+  return `${(30 + RE * Math.cos(r)).toFixed(2)} ${(30 + RE * Math.sin(r)).toFixed(2)}`
+}
+const gomos = capitulos.map((_, i) =>
+  `M 30 30 L ${ponto(i * 60 + 6)} A ${RE} ${RE} 0 0 1 ${ponto((i + 1) * 60 - 6)} Z`
+)
+
 const atual = ref(0)
+const sobre = ref<number | null>(null)
+// Só no gomo apontado. Fixo pro capítulo atual, o rótulo sentava em cima da
+// foto do topo — e a fruta já diz onde você está sem precisar do nome.
+const rotulo = computed(() => (sobre.value === null ? '' : capitulos[sobre.value]?.nome ?? ''))
 
 onMounted(() => {
   const secoes = capitulos
@@ -37,21 +60,33 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav class="ch" aria-label="Capítulos">
-    <ul>
-      <li v-for="(c, i) in capitulos" :key="c.id">
-        <a
-          :href="`#${c.id}`"
-          class="ch-link"
-          :class="{ 'is-atual': atual === i }"
-          :aria-current="atual === i ? 'true' : undefined"
-        >
-          <span class="ch-n">{{ c.n }}</span>
-          <span class="ch-nome">{{ c.nome }}</span>
-          <span class="ch-rule" aria-hidden="true" />
-        </a>
-      </li>
-    </ul>
+  <nav class="ch" aria-label="Capítulos" @mouseleave="sobre = null">
+    <span class="ch-rotulo" aria-hidden="true">{{ rotulo }}</span>
+
+    <!-- sem role="presentation": o svg contém os links dos capítulos, e
+         marcá-lo como decorativo esconderia navegação de quem usa leitor -->
+    <svg class="ch-fruta" viewBox="0 0 60 60">
+      <!-- disco escuro: o índice cruza a foto do topo e o print do portfólio,
+           e sem um chão próprio ele some em cima das imagens claras -->
+      <circle class="ch-chao" cx="30" cy="30" r="27" />
+
+      <a
+        v-for="(c, i) in capitulos"
+        :key="c.id"
+        :href="`#${c.id}`"
+        :aria-label="c.nome"
+        :aria-current="atual === i ? 'true' : undefined"
+        class="ch-gomo"
+        :class="{ 'e-feito': i <= atual, 'e-atual': i === atual }"
+        @mouseenter="sobre = i"
+        @focus="sobre = i"
+        @blur="sobre = null"
+      >
+        <path :d="gomos[i]" />
+      </a>
+
+      <circle class="ch-casca" cx="30" cy="30" r="23.5" />
+    </svg>
   </nav>
 </template>
 
@@ -62,38 +97,55 @@ onMounted(() => {
   top: 50%;
   right: clamp(0.75rem, 2vw, 1.75rem);
   transform: translateY(-50%);
-  mix-blend-mode: difference;
-}
-.ch ul { display: grid; gap: 0.7rem; }
-.ch-link {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 0.6rem;
+}
+
+.ch-rotulo {
   font-size: 0.66rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #F3EAD8;
-  opacity: 0.62;
-  transition: opacity 0.35s var(--ease);
-}
-.ch-link:hover, .ch-link.is-atual { opacity: 1; }
-.ch-n { font-variant-numeric: tabular-nums; }
-.ch-nome {
-  max-width: 0;
-  overflow: hidden;
   white-space: nowrap;
-  opacity: 0;
-  transition: max-width 0.4s var(--ease), opacity 0.3s var(--ease);
+  color: var(--lab-fg);
+  opacity: 0.62;
 }
-.ch-link:hover .ch-nome, .ch-link.is-atual .ch-nome { max-width: 7rem; opacity: 1; }
-.ch-rule {
-  width: 1.4rem;
-  height: 1px;
-  background: currentColor;
-  transition: width 0.35s var(--ease);
+
+.ch-fruta {
+  width: clamp(3rem, 4.5vw, 3.6rem);
+  height: auto;
+  overflow: visible;
 }
-.ch-link.is-atual .ch-rule { width: 2.6rem; }
+
+.ch-chao { fill: var(--lab-bg); opacity: 0.7; }
+.ch-casca {
+  fill: none;
+  stroke: var(--lab-line-2);
+  stroke-width: 1;
+}
+
+/* Sem contorno nos gomos: o que os separa é a membrana em negativo. Com
+   traço, as seis linhas convergindo no centro viravam raios de roda e a
+   coisa toda lia como leme de navio. */
+.ch-gomo path {
+  fill: var(--lab-accent);
+  fill-opacity: 0.1;
+  transition: fill-opacity 0.45s var(--ease);
+}
+/* enche o que já foi lido: a fruta se completa até o contato */
+.ch-gomo.e-feito path { fill-opacity: 0.38; }
+.ch-gomo.e-atual path { fill-opacity: 1; }
+.ch-gomo:hover path { fill-opacity: 0.7; }
+
+.ch-gomo { cursor: pointer; }
+.ch-gomo:focus-visible {
+  outline: 2px solid var(--lab-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ch-gomo path { transition: none; }
+}
 
 @media (max-width: 860px) { .ch { display: none; } }
 </style>

@@ -141,7 +141,7 @@ onMounted(async () => {
   width: 100%;
   aspect-ratio: 16 / 8;
   overflow: hidden;
-  background: #000;
+  background: var(--lab-bg);
   border-block: 1px solid var(--lab-line);
 }
 .wk-shot img {
@@ -167,16 +167,19 @@ onMounted(async () => {
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+/* bolinha e anel saem os dois do mesmo `color`: trocar a cor do ponto num
+   lugar só já leva o pulso junto (antes o anel era o hex do acento, copiado). */
 .wk-live i {
   width: 6px; height: 6px;
   border-radius: 999px;
-  background: var(--lab-accent);
+  color: var(--lab-accent);
+  background: currentColor;
   animation: wkPulse 2.4s infinite;
 }
 @keyframes wkPulse {
-  0% { box-shadow: 0 0 0 0 rgba(220, 91, 44, 0.7); }
-  70% { box-shadow: 0 0 0 6px rgba(220, 91, 44, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(220, 91, 44, 0); }
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 70%, transparent); }
+  70% { box-shadow: 0 0 0 6px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
 }
 
 .wk-real {
@@ -209,7 +212,7 @@ onMounted(async () => {
 }
 @media (min-width: 760px) { .wk-concepts { grid-template-columns: 1fr 1fr; } }
 .wk-concept {
-  background: var(--lab-bg);
+  background: var(--lab-surface);
   padding: clamp(1.75rem, 4vw, 3rem) var(--lab-edge);
 }
 .wk-label {

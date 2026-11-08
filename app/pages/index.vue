@@ -162,9 +162,15 @@ onMounted(() => {
    O nome "lab" vem de quando esta era a versão experimental. */
 .lab {
   --lab-bg: #0E0B04;
+  /* Um degrau acima do fundo, quente igual. Os cards da página eram pintados
+     com o próprio --lab-bg, então painel e página tinham exatamente a mesma
+     cor e só o filete de 1px os separava — daí a sensação de chapado. A
+     diferença é de propósito pequena (1.09:1): a graça do layout são as
+     hairlines, não caixas empilhadas. */
+  --lab-surface: #1C1509;
   --lab-fg: #F3EAD8;
   --lab-dim: rgba(243, 234, 216, 0.62);
-  --lab-accent: #DC5B2C;
+  --lab-accent: #E8631F;
   --lab-line: rgba(243, 234, 216, 0.14);
   --lab-line-2: rgba(243, 234, 216, 0.28);
   --lab-edge: clamp(1.15rem, 4vw, 3.5rem);

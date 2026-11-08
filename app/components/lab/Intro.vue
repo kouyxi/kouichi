@@ -3,6 +3,14 @@ import { waLink, cidade, disponibilidade } from '~/data/contato'
 
 const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu negócio é ')
 
+// Imagens que giram em volta do retrato. Basta acrescentar caminhos aqui —
+// o anel redistribui os ângulos sozinho. Com poucas fica ralo: 6 a 8 é onde
+// vira anel de verdade em vez de duas figuras soltas.
+const orbita = [
+  '/img/proj-gabo.webp',
+  '/img/japan-parachoques.webp'
+]
+
 const root = ref<HTMLElement | null>(null)
 
 onMounted(async () => {
@@ -44,7 +52,9 @@ onMounted(async () => {
         scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: 0.6 }
       })
     })
-    gsap.to('.intro-media', {
+    /* parallax no invólucro: só na foto, o anel ficava parado e o conjunto
+       se descolava durante o scroll */
+    gsap.to('.intro-retrato', {
       yPercent: -18,
       ease: 'none',
       scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: 0.6 }
@@ -64,16 +74,34 @@ onMounted(async () => {
   <section id="topo" ref="root" class="intro">
     <LabDecor grade="fina" halo="topo-dir" reticula />
 
-    <figure class="intro-media">
-      <img
-        src="/img/hero-kouichi.webp"
-        alt="Kouichi, desenvolvedor de sites, em Goiânia"
-        width="800"
-        height="1000"
-        fetchpriority="high"
-        decoding="async"
-      />
-    </figure>
+    <!-- Retrato com os trabalhos girando em volta. Decorativo de propósito:
+         são alvos em movimento, clicáveis seria armadilha, e os projetos de
+         verdade ficam na (04). Espaça sozinho quantas imagens houver. -->
+    <div class="intro-retrato">
+      <div class="orb" aria-hidden="true">
+        <span
+          v-for="(f, i) in orbita"
+          :key="f"
+          class="orb-slot"
+          :style="{ '--a': `${(i * 360) / orbita.length}deg` }"
+        >
+          <span class="orb-contra">
+            <span class="orb-quadro"><img :src="f" alt="" loading="lazy" decoding="async" /></span>
+          </span>
+        </span>
+      </div>
+
+      <figure class="intro-media">
+        <img
+          src="/img/hero-kouichi.webp"
+          alt="Kouichi, desenvolvedor de sites, em Goiânia"
+          width="800"
+          height="1000"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
+    </div>
 
     <h1 class="intro-title">
       <span class="ln"><span class="ln-in">Seu site</span></span>
@@ -123,21 +151,77 @@ onMounted(async () => {
 }
 
 /* foto: alta, encostada na direita, atravessada pelas linhas do título */
-.intro-media {
+.intro-retrato {
   position: absolute;
   z-index: 2;
   /* Descida proposital: as linhas do título cruzam o tronco, não o rosto. */
   top: 26%;
-  /* recuada da borda: encostada, ela ficava embaixo do índice de capítulos */
-  right: clamp(4.5rem, 9vw, 7.5rem);
-  width: min(24vw, 18rem);
+  /* Puxado pra dentro em relação ao que era só a foto: o anel se projeta
+     pra fora dela, e no lugar antigo as miniaturas saíam pela direita e
+     batiam no índice de capítulos. */
+  right: clamp(3rem, 17vw, 19rem);
+  /* O retrato encolheu: o que ocupa espaço agora é o conjunto, não a foto. */
+  width: min(19vw, 17rem);
+  display: grid;
+  place-items: center;
+  will-change: transform;
+}
+.intro-media {
+  grid-area: 1 / 1;
+  width: 100%;
   aspect-ratio: 4 / 5;
   margin: 0;
   overflow: hidden;
   border: 1px solid var(--lab-line);
-  will-change: transform;
 }
 .intro-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- anel de trabalhos ----------
+   O raio precisa passar da meia-diagonal do retrato, senão as miniaturas
+   encavalam nele. O giro é lento de propósito: é atmosfera, não carrossel. */
+.orb {
+  grid-area: 1 / 1;
+  position: absolute;
+  inset: 0;
+  --orb-r: clamp(8rem, 14vw, 15.5rem);
+  --orb-t: clamp(4.5rem, 8.5vw, 8.5rem);
+  animation: orbGira 64s linear infinite;
+}
+.orb-slot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* centraliza no ponto do círculo antes de sair pelo ângulo --a */
+  transform: translate(-50%, -50%) rotate(var(--a)) translateY(calc(-1 * var(--orb-r)));
+}
+/* desfaz o ângulo fixo do slot */
+.orb-contra { display: block; transform: rotate(calc(-1 * var(--a))); }
+/* desfaz o giro animado do anel: as duas animações têm a mesma duração,
+   então a miniatura fica de pé o tempo todo enquanto orbita */
+.orb-quadro {
+  display: block;
+  width: var(--orb-t);
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--lab-line-2);
+  background: var(--lab-surface);
+  opacity: 0.72;
+  /* O retrato é preto e branco e a paleta tem duas cores. Colorida, cada
+     miniatura trazia rosa e verde próprios e brigava com o laranja. Em
+     cinza o anel vira atmosfera, e a cor dos projetos aparece inteira
+     onde ela vale, na (04). */
+  filter: grayscale(1) contrast(1.06);
+  animation: orbContra 64s linear infinite;
+}
+.orb-quadro img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+/* Abaixo disso o anel encosta no índice de capítulos, e no celular ele
+   cobriria o título — a miniatura de 4rem não se lê mesmo. Some, e sobra
+   o retrato, que é como a hero era antes. */
+@media (max-width: 1024px) { .orb { display: none; } }
+
+@keyframes orbGira { to { transform: rotate(360deg); } }
+@keyframes orbContra { to { transform: rotate(-360deg); } }
 
 /* título: escala tipográfica presa ao viewport, sem container */
 .intro-title {
@@ -246,7 +330,11 @@ onMounted(async () => {
 }
 
 @media (max-width: 860px) {
-  .intro-media { top: auto; bottom: 26%; right: var(--lab-edge); width: 38vw; opacity: 0.45; }
+  .intro-retrato { top: auto; bottom: 26%; right: var(--lab-edge); width: 38vw; }
+  .intro-media { opacity: 0.45; }
+  /* no celular a foto é fundo desbotado atrás do título; o anel não cabe
+     sem cobrir o texto, e miniatura de 4rem não se lê mesmo */
+  .orb { display: none; }
   .ln-b { padding-left: 4vw; }
   .ln-c { padding-left: 0; }
   .ln-d { padding-left: 12vw; }
@@ -255,6 +343,7 @@ onMounted(async () => {
 
 /* sem animação: tudo já nasce no lugar */
 .intro.is-static .intro-media,
+.intro.is-static .orb,
 .intro.is-static .ln-in,
 .intro.is-static .intro-fade {
   opacity: 1;
