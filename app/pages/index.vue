@@ -301,6 +301,15 @@ body:has(.lab) { background: #F3EAD8; }
   .lab :is(.intro-cta, .hd-cta, .lab-float):hover { transform: none; }
 }
 
+/* katakana do nome: fonte do sistema, miúdo, na cor apagada */
+.lab .kana {
+  font-family: system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans CJK JP', sans-serif;
+  font-size: 0.68em;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--lab-dim);
+}
+
 /* foco visível em tudo que é clicável, na cor da marca */
 .lab :is(a, button, summary):focus-visible { outline: 2px solid var(--lab-accent); outline-offset: 3px; }
 /* âncora para por baixo da barra fixa, não embaixo dela */

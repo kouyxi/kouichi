@@ -99,8 +99,15 @@ onMounted(async () => {
         <LabBadge class="ct-selo" />
       </div>
 
+      <!-- Rodapé como etiqueta costurada na peça: quem fez, onde, quando.
+           Borda fina, texto pequeno, nada além do que uma etiqueta diz. -->
       <footer class="ct-foot">
-        <span>{{ nomeCompleto }}, {{ cidade }}, {{ ano }}</span>
+        <dl class="ct-tag">
+          <div class="ct-tag-kana"><span class="kana" lang="ja">コウイチ</span></div>
+          <div><dt>Feito por</dt><dd>{{ nomeCompleto }}</dd></div>
+          <div><dt>Em</dt><dd>{{ cidade }}</dd></div>
+          <div><dt>Ano</dt><dd>{{ ano }}</dd></div>
+        </dl>
       </footer>
     </div>
   </section>
@@ -209,15 +216,17 @@ onMounted(async () => {
 a.ct-line:hover { color: var(--lab-accent); }
 .ct-mute { color: var(--lab-dim); }
 
-.ct-foot {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: var(--sp-5);
-  padding-top: var(--sp-3);
-  font-size: var(--t-xs);
+.ct-foot { margin-top: var(--sp-5); font-size: var(--t-xs); }
+.ct-tag {
+  display: inline-block;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--lab-line-2);
   color: var(--lab-dim);
 }
+.ct-tag > div { display: flex; gap: 1rem; margin-top: 0.35rem; }
+.ct-tag-kana { padding-bottom: 0.4rem; margin-top: 0 !important; border-bottom: 1px solid var(--lab-line); }
+.ct-tag dt { flex: none; width: 4.5rem; margin: 0; }
+.ct-tag dd { margin: 0; color: var(--lab-fg); }
 
 </style>

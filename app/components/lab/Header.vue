@@ -41,6 +41,9 @@ onMounted(() => {
     <a href="#topo" class="hd-logo" aria-label="Kouichi, início">
       <MikanMark class="hd-mark" />
       <span>Kouichi</span>
+      <!-- o nome em katakana: etiqueta, não tradução; fonte do sistema,
+           que já tem kana em qualquer celular -->
+      <span class="kana" lang="ja" aria-hidden="true">コウイチ</span>
     </a>
 
     <nav class="hd-nav" aria-label="Seções">
@@ -96,6 +99,7 @@ onMounted(() => {
   font-size: 1.2rem;
   letter-spacing: -0.01em;
 }
+.hd-logo .kana { margin-left: 0.15rem; }
 .hd-mark { width: 1.9rem; height: 1.9rem; --clay: var(--lab-accent); --ink: var(--lab-fg); --mark-shadow: transparent; }
 
 .hd-nav { display: flex; gap: clamp(0.9rem, 2.5vw, 1.6rem); font-size: 0.92rem; }
