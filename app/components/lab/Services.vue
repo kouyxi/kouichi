@@ -73,7 +73,7 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
         </p>
         <p class="sv-p">
           Confira você mesmo: pesquise no Google
-          <code class="sv-code">site:seudominio.com.br</code>.
+          <code class="sv-code">site:seudominio.com.br aposta</code>.
         </p>
 
         <ul class="sv-passos">
