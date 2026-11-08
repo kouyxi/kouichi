@@ -9,6 +9,9 @@ export const whatsappDisplay = '+55 62 98127-7721'
 
 export const email = 'victorkouichi40@gmail.com'
 
+/** Nome completo, pra rodapé e schema. Sem CNPJ por enquanto: pessoa física. */
+export const nomeCompleto = 'Victor Kouichi Ramos Kodama'
+
 export const cidade = 'Goiânia, GO'
 
 /**

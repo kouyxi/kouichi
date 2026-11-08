@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { faqs } from '~/data/faqs'
-import { email, waLink } from '~/data/contato'
+import { email, nomeCompleto, waLink } from '~/data/contato'
 
 const siteUrl = 'https://kouichi.com.br'
 const title = 'Kouichi | Sites e landing pages que convertem em Goiânia'
@@ -75,7 +75,7 @@ useHead({
             },
             serviceType: 'Criação de sites e landing pages focados em conversão',
             knowsLanguage: 'pt-BR',
-            founder: { '@type': 'Person', name: 'Kouichi' },
+            founder: { '@type': 'Person', name: nomeCompleto, alternateName: 'Kouichi' },
             hasOfferCatalog: {
               '@type': 'OfferCatalog',
               name: 'Sites',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { faqs } from '~/data/faqs'
-import { waLink, email, whatsappDisplay, cidade } from '~/data/contato'
+import { waLink, email, whatsappDisplay, cidade, nomeCompleto } from '~/data/contato'
 
 const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu negócio é ')
 const aberta = ref<number | null>(0)
@@ -99,7 +99,7 @@ onMounted(async () => {
       </div>
 
       <footer class="ct-foot">
-        <span>Kouichi, {{ ano }}</span>
+        <span>{{ nomeCompleto }} · {{ cidade }} · {{ ano }}</span>
         <NuxtLink to="/lab" class="ct-back" rel="nofollow">Ver a versão anterior</NuxtLink>
       </footer>
     </div>
