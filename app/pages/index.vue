@@ -87,9 +87,8 @@ useHead({
               '@type': 'OfferCatalog',
               name: 'Serviços',
               itemListElement: [
-                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site de uma página' } },
-                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site institucional' } },
-                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site completo' } },
+                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site de até 5 páginas' } },
+                { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Site com mais de 5 páginas' } },
                 { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Limpeza de site invadido', url: `${siteUrl}/#site-invadido` } }
               ]
             }

@@ -1,26 +1,29 @@
 <script setup lang="ts">
 import { waLink } from '~/data/contato'
 
-// Os três tamanhos de site. O que era repetido nos três ("publicado, 2
-// rodadas, WhatsApp à vista") virou uma linha só embaixo da lista.
+// Dois tamanhos, só o primeiro com preço: é o único número que existe.
+// O segundo tem o mesmo peso e botão próprio, porque oferta sozinha faz a
+// pessoa sair pra comparar (Mochon 2013; Evangelidis et al. 2023). O
+// "depois" usa o menor valor, que é a referência plausível (Krishna et al.
+// 2002), e o limite é regra fixa: contador esquecido vira mentira.
+// O que vale pros dois ("publicado, 2 rodadas") fica numa linha embaixo.
 const tamanhos = [
   {
-    nome: 'Uma página',
-    para: 'Um serviço, um caminho curto até o WhatsApp.',
-    prazo: '5 a 7 dias úteis',
-    wa: 'Oi, Kouichi! Queria um site de uma página. Meu negócio é '
+    id: 'ate_5_paginas',
+    nome: 'Até 5 páginas',
+    para: 'Um serviço ou poucos. Um caminho curto até o WhatsApp.',
+    prazo: '5 a 10 dias úteis',
+    valor: 'R$ 600',
+    nota: 'Preço de começo, até o 5º cliente. Depois, a partir de R$ 900.',
+    wa: 'Oi, Kouichi! Queria um site de até 5 páginas. Meu negócio é '
   },
   {
-    nome: 'Institucional',
-    para: 'Pra quem o cliente pesquisa antes de escolher.',
-    prazo: '7 a 10 dias úteis',
-    wa: 'Oi, Kouichi! Queria um site institucional. Meu negócio é '
-  },
-  {
-    nome: 'Completo',
+    id: 'mais_de_5_paginas',
+    nome: 'Mais de 5 páginas',
     para: 'Vários serviços, várias páginas. Você vê de onde vem cada contato.',
     prazo: '10 a 15 dias úteis',
-    wa: 'Oi, Kouichi! Queria um site completo. Meu negócio é '
+    nota: 'Valor na primeira conversa.',
+    wa: 'Oi, Kouichi! Queria um site com mais de 5 páginas. Meu negócio é '
   }
 ]
 
@@ -35,29 +38,32 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
     <div class="sv-grid">
       <article class="sv-bloco">
         <h2 class="sec-h3">Site novo</h2>
-        <p class="sv-p">
-          Pra quem vive de cliente novo chegando. Três tamanhos. Valor na primeira conversa.
-        </p>
+        <p class="sv-p">Pra quem vive de cliente novo chegando.</p>
 
         <ul class="sv-lista">
-          <li v-for="t in tamanhos" :key="t.nome" class="sv-item">
+          <li v-for="t in tamanhos" :key="t.id" class="sv-item">
             <div class="sv-item-cab">
               <h4 class="sv-nome">{{ t.nome }}</h4>
               <span class="sv-prazo">{{ t.prazo }}</span>
             </div>
             <p class="sv-para">{{ t.para }}</p>
+            <p class="sv-preco">
+              <strong v-if="t.valor" class="sv-valor">{{ t.valor }}</strong>
+              <span class="sv-nota">{{ t.nota }}</span>
+            </p>
             <a
               :href="waLink(t.wa)"
               target="_blank"
               rel="noopener"
-              :data-track="`wa_plano_${t.nome.toLowerCase().replace(/\s+/g, '_')}`"
+              :data-track="`wa_plano_${t.id}`"
               class="sv-link"
             >Quero esse</a>
           </li>
         </ul>
 
         <p class="sv-comum">
-          Tudo publicado, rápido no celular, WhatsApp à vista. Duas rodadas de ajuste inclusas.
+          Tudo publicado, rápido no celular, WhatsApp à vista. Duas rodadas de ajuste
+          inclusas. Domínio próprio, se quiser, é à parte.
         </p>
       </article>
 
@@ -133,6 +139,10 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
 .sv-nome { font-family: var(--font-display); font-weight: var(--w-display, 500); font-size: var(--t-1); letter-spacing: -0.01em; }
 .sv-prazo { font-size: var(--t-s); color: var(--lab-dim); white-space: nowrap; }
 .sv-para { color: var(--lab-dim); font-size: var(--t-s); line-height: 1.55; max-width: 30rem; }
+/* o valor na fonte de título, a regra do preço miúda do lado */
+.sv-preco { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.6rem; margin-top: var(--sp-1); }
+.sv-valor { font-family: var(--font-display); font-weight: var(--w-display, 500); font-size: var(--t-1); letter-spacing: -0.01em; }
+.sv-nota { font-size: var(--t-xs); line-height: 1.5; color: var(--lab-dim); }
 .sv-link {
   justify-self: start;
   margin-top: var(--sp-1);

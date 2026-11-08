@@ -8,7 +8,7 @@ export interface Faq {
 export const faqs: Faq[] = [
   {
     q: 'Quanto custa?',
-    a: 'Depende do tamanho, e eu falo o valor na primeira conversa. Metade pra começar, metade antes de ir ao ar. Pix.'
+    a: 'Site de até 5 páginas: R$ 600, preço de começo até o 5º cliente. Depois, a partir de R$ 900. Mais de 5 páginas: valor na primeira conversa. Metade pra começar, metade antes de ir ao ar. Pix.'
   },
   {
     q: 'Quanto tempo demora?',
@@ -33,9 +33,5 @@ export const faqs: Faq[] = [
   {
     q: 'Meu site apareceu no Google com páginas que eu não criei. Você resolve?',
     a: 'Resolvo. Backup, limpeza, troca de senhas, atualização do que estava aberto e pedido de revisão ao Google. Autorização por escrito e valor combinado antes. Você paga depois de conferir. Sua hospedagem também oferece isso: vale comparar.'
-  },
-  {
-    q: 'Por que eu não vejo preço no site?',
-    a: 'Porque tabela sem contexto engana os dois lados. Uma página pra manicure e um site de clínica com cinco especialidades não cabem no mesmo número. Cinco minutos de conversa e eu te falo um valor que sustento.'
   }
 ]
