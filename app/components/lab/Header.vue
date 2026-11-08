@@ -9,7 +9,8 @@ const links = [
   { label: 'Sites', href: '#servicos' },
   { label: 'Site invadido', href: '#site-invadido' },
   { label: 'Como funciona', href: '#processo', so: 'desktop' },
-  { label: 'Quem faz', href: '#sobre', so: 'desktop' }
+  { label: 'Quem faz', href: '#sobre', so: 'desktop' },
+  { label: 'Dúvidas', href: '#faq', so: 'desktop' }
 ]
 const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site e queria um orçamento. Meu negócio é ')
 

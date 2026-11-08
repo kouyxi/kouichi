@@ -6,19 +6,19 @@ import { waLink } from '~/data/contato'
 const tamanhos = [
   {
     nome: 'Uma página',
-    para: 'Você vende um serviço só e precisa de um caminho curto até o WhatsApp.',
+    para: 'Um serviço, um caminho curto até o WhatsApp.',
     prazo: '5 a 7 dias úteis',
     wa: 'Oi, Kouichi! Queria um site de uma página. Meu negócio é '
   },
   {
     nome: 'Institucional',
-    para: 'Clínica, escritório e consultório, onde o cliente pesquisa bastante antes de escolher.',
+    para: 'Pra quem o cliente pesquisa antes de escolher.',
     prazo: '7 a 10 dias úteis',
     wa: 'Oi, Kouichi! Queria um site institucional. Meu negócio é '
   },
   {
     nome: 'Completo',
-    para: 'Vários serviços, mais páginas, e você quer saber de onde vem cada contato.',
+    para: 'Vários serviços, várias páginas. Você vê de onde vem cada contato.',
     prazo: '10 a 15 dias úteis',
     wa: 'Oi, Kouichi! Queria um site completo. Meu negócio é '
   }
@@ -30,14 +30,13 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
 <template>
   <section id="servicos" class="sv sec">
    <div class="sec-in">
-    <p class="sec-rotulo">O que eu faço</p>
+    <p class="sec-rotulo">Serviços</p>
 
     <div class="sv-grid">
       <article class="sv-bloco">
-        <h2 class="sec-h3">Site novo pro seu negócio</h2>
+        <h2 class="sec-h3">Site novo</h2>
         <p class="sv-p">
-          Pra clínica, escritório e prestador de serviço que vive de cliente novo
-          chegando. Três tamanhos, e o valor eu falo na primeira conversa.
+          Pra quem vive de cliente novo chegando. Três tamanhos. Valor na primeira conversa.
         </p>
 
         <ul class="sv-lista">
@@ -59,8 +58,7 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
         </ul>
 
         <p class="sv-comum">
-          Todos saem publicados, rápidos no celular, com o botão de WhatsApp
-          sempre à vista e 2 rodadas de ajuste inclusas.
+          Tudo publicado, rápido no celular, WhatsApp à vista. Duas rodadas de ajuste inclusas.
         </p>
       </article>
 
@@ -70,28 +68,27 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
       <article id="site-invadido" class="sv-bloco sv-invadido">
         <h2 class="sec-h3">Limpeza de site invadido</h2>
         <p class="sv-p">
-          Às vezes o site de uma empresa aparece no Google com páginas de aposta
-          que o dono nunca criou. É invasão, acontece com site de clínica, de
-          escritório e de loja, e normalmente o dono só descobre quando alguém avisa.
+          Seu site apareceu no Google com páginas de aposta que você nunca criou?
+          É invasão. Acontece com clínica, escritório e loja, e o dono costuma ser
+          o último a saber.
         </p>
         <p class="sv-p">
-          Pra conferir sozinho, pesquise no Google
-          <code class="sv-code">site:seudominio.com.br</code>
-          e veja se aparece página que você não reconhece.
+          Confira você mesmo: pesquise no Google
+          <code class="sv-code">site:seudominio.com.br</code>.
         </p>
 
         <ul class="sv-passos">
-          <li>Backup antes de mexer em qualquer coisa</li>
-          <li>Limpeza do que foi colocado no site</li>
+          <li>Backup antes de tudo</li>
+          <li>Limpeza</li>
           <li>Troca de senhas</li>
-          <li>Atualização do que estava vulnerável</li>
-          <li>Pedido pro Google revisar e tirar as páginas da busca</li>
+          <li>Atualização do que estava aberto</li>
+          <li>Pedido de revisão ao Google</li>
           <li>Relatório escrito do que encontrei</li>
         </ul>
 
         <p class="sv-regra">
           Autorização por escrito antes de qualquer acesso. Valor combinado antes.
-          Você paga depois de conferir que o site ficou limpo.
+          Você paga depois de conferir.
         </p>
 
         <a

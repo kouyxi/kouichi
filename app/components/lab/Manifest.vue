@@ -1,9 +1,9 @@
 <script setup lang="ts">
 // Três regras de trabalho. Não são sequência, então não levam número.
 const principios = [
-  { t: 'Prefiro fato a adjetivo', d: 'Se a gente não consegue provar, não entra no site.' },
-  { t: 'Se não serve, sai', d: 'Cada coisa na página tem que ajudar alguém a te procurar.' },
-  { t: 'Você sabe onde está pisando', d: 'Escopo, prazo e valor combinados antes.' }
+  { t: 'Fato, não adjetivo', d: 'Se não dá pra provar, não entra.' },
+  { t: 'Se não serve, sai', d: 'Cada coisa na página ajuda alguém a te procurar.' },
+  { t: 'Combinado antes', d: 'Escopo, prazo e valor fechados antes de começar.' }
 ]
 </script>
 
@@ -13,17 +13,16 @@ const principios = [
       <h2 class="sec-rotulo">Quem faz</h2>
       <div>
       <p class="mf-big">
-        Sou o Victor Kouichi, de Goiânia. Passo o dia procurando onde as coisas
-        quebram: o formulário que não envia, a página que abre torta no
-        celular, a porta aberta que derruba o site num sábado. E estudo o que
-        faz alguém decidir, porque uma página faz a pessoa te chamar e a
-        outra faz ela fechar a aba. Site bonito que não gera contato é despesa.
+        Sou o Victor Kouichi, de Goiânia. Procuro onde as coisas quebram:
+        o formulário que não envia, a página torta no celular, a porta aberta
+        que derruba o site num sábado. E estudo o que faz alguém decidir.
+        Site bonito que não gera contato é despesa.
       </p>
 
       <p class="mf-honesto">
-        Minha carteira ainda é curta. É por isso que eu topo prazo curto, valor
-        justo e a regra de você não pagar se o layout não te agradar: estou
-        construindo reputação, e isso joga a seu favor.
+        Minha carteira é curta. Por isso prazo curto, valor justo e a regra de
+        não pagar se não gostar do layout. Estou construindo reputação.
+        Isso joga a seu favor.
       </p>
 
       <ul class="mf-princs">

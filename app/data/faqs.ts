@@ -8,34 +8,34 @@ export interface Faq {
 export const faqs: Faq[] = [
   {
     q: 'Quanto custa?',
-    a: 'Depende do tamanho do site, e eu falo o valor logo na primeira conversa. Não gosto de enrolar quem só quer saber se cabe no bolso. O pagamento é metade pra começar e metade quando o site fica pronto, antes de ir ao ar. Pix é o mais fácil pros dois lados.'
+    a: 'Depende do tamanho, e eu falo o valor na primeira conversa. Metade pra começar, metade antes de ir ao ar. Pix.'
   },
   {
     q: 'Quanto tempo demora?',
-    a: 'Entre 5 e 15 dias úteis, dependendo do tamanho. O relógio começa quando você me manda o material, e eu te passo uma lista curta do que preciso pra não te deixar adivinhando.'
+    a: 'De 5 a 15 dias úteis. O relógio começa quando o material chega, e eu te mando a lista do que preciso.'
   },
   {
     q: 'O que você precisa de mim?',
-    a: 'Me conta o que você faz, pra quem, e o que te diferencia de quem trabalha na mesma rua. Se tiver fotos suas, melhor ainda. Foto de banco de imagem todo mundo reconhece, e site com informação de verdade dá menos retrabalho lá na frente.'
+    a: 'O que você faz, pra quem, e o que te diferencia de quem está na mesma rua. Fotos suas, se tiver. Foto de banco todo mundo reconhece.'
   },
   {
     q: 'Depois de pronto, posso pedir alteração?',
-    a: 'Pode, e já vem com 2 rodadas inclusas. Depois disso a gente conversa sobre o que mudou e eu te passo o valor antes de mexer em qualquer coisa. Você nunca vai receber uma cobrança que não combinamos.'
+    a: 'Pode. Duas rodadas já estão inclusas. Depois disso, eu passo o valor antes de mexer. Nenhuma cobrança que a gente não combinou.'
   },
   {
     q: 'Preciso comprar domínio e hospedagem?',
-    a: 'Pra primeira versão, não. O site pode ir ao ar num link gratuito e você já começa a usar. Quando quiser o seunegocio.com.br, a gente resolve isso à parte e você sabe o custo antes de decidir.'
+    a: 'Não pra começar. O site vai ao ar num link gratuito. Quando quiser o seunegocio.com.br, a gente resolve à parte, com o custo na mesa antes.'
   },
   {
     q: 'Já tenho site. Dá pra melhorar em vez de refazer?',
-    a: 'Às vezes dá, e nesses casos sai bem mais barato. Me manda o link que eu olho e te falo com honestidade se compensa ajustar ou se remendar vai custar mais caro que começar de novo. Já falei "não precisa refazer" pra gente que veio querendo pagar.'
+    a: 'Às vezes dá, e sai bem mais barato. Me manda o link. Já falei "não precisa refazer" pra quem veio querendo pagar.'
   },
   {
     q: 'Meu site apareceu no Google com páginas que eu não criei. Você resolve?',
-    a: 'Resolvo. Isso é invasão, e o caminho é: backup, limpeza, troca de senhas, atualização do que estava vulnerável e pedido pro Google revisar. Antes de qualquer acesso eu peço sua autorização por escrito e combino o valor. Você paga depois de conferir que ficou limpo. Sua hospedagem costuma oferecer esse serviço também, então vale perguntar lá e comparar.'
+    a: 'Resolvo. Backup, limpeza, troca de senhas, atualização do que estava aberto e pedido de revisão ao Google. Autorização por escrito e valor combinado antes. Você paga depois de conferir. Sua hospedagem também oferece isso: vale comparar.'
   },
   {
     q: 'Por que eu não vejo preço no site?',
-    a: 'Porque tabela de preço sem contexto engana os dois lados. Um site de uma página pra manicure e um institucional de clínica com cinco especialidades não cabem no mesmo número. Prefiro te ouvir cinco minutos e falar um valor que eu consiga sustentar.'
+    a: 'Porque tabela sem contexto engana os dois lados. Uma página pra manicure e um site de clínica com cinco especialidades não cabem no mesmo número. Cinco minutos de conversa e eu te falo um valor que sustento.'
   }
 ]

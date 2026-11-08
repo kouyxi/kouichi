@@ -42,13 +42,13 @@ onMounted(async () => {
          o texto começa na mesma linha vertical do resto da página e a foto
          fecha a direita com a altura do bloco inteiro. -->
     <div class="intro-in">
-      <p class="intro-quem intro-fade">Victor Kouichi, desenvolvedor de sites em Goiânia.</p>
+      <p class="intro-quem intro-fade">Victor Kouichi, desenvolvedor de sites. Goiânia.</p>
 
       <div class="intro-txt">
-        <h1 class="intro-title intro-fade">Seu site pode fazer o telefone tocar.</h1>
+        <h1 class="intro-title intro-fade">Site que faz o telefone tocar.</h1>
         <p class="intro-sub intro-fade">
-          Site e landing page pra clínica, escritório e prestador de serviço.
-          Pronto em 5 a 15 dias úteis, e cada contato de cliente cai direto no seu WhatsApp.
+          Pra clínica, escritório e prestador de serviço. Pronto em 5 a 15 dias úteis.
+          Cada cliente cai direto no seu WhatsApp.
         </p>
         <!-- O botão diz o que acontece ao clicar; as duas linhas embaixo
              respondem "quanto demora" e "o que me compromete", que é o que
@@ -66,7 +66,7 @@ onMounted(async () => {
             <WaIcon :size="18" />
             Pedir orçamento no WhatsApp
           </a>
-          <p class="intro-gatilho">Respondo no mesmo dia, sem compromisso.</p>
+          <p class="intro-gatilho">Respondo no mesmo dia. Sem compromisso.</p>
           <p class="intro-vaga"><i class="pulso" aria-hidden="true" />{{ disponibilidade }}</p>
         </div>
       </div>

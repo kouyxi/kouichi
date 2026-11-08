@@ -3,20 +3,20 @@ const passos = [
   {
     n: '01',
     t: 'A gente conversa',
-    d: 'Você me conta o que o seu negócio faz e quem você quer atender. Eu te digo o tamanho de site que resolve, o prazo e o valor. Se eu achar que você não precisa de site agora, eu falo.',
-    marco: 'Sai daqui sabendo quanto custa'
+    d: 'Você conta o que faz e pra quem. Eu digo tamanho, prazo e valor. Se não precisar de site, eu falo.',
+    marco: 'Sai sabendo quanto custa'
   },
   {
     n: '02',
-    t: 'Eu mostro o layout',
-    d: 'Antes de programar qualquer coisa, você vê como o site vai ficar. É aqui que a gente ajusta o que não ficou do seu jeito, quantas vezes precisar.',
-    marco: 'Só depois do seu ok eu sigo'
+    t: 'Você vê o layout',
+    d: 'Antes de uma linha de código, você vê o site. Ajusta até ficar do seu jeito.',
+    marco: 'Só sigo com o seu ok'
   },
   {
     n: '03',
-    t: 'Coloco no ar',
-    d: 'Site publicado, funcionando no celular, botão de WhatsApp no lugar. Te mostro como acompanhar quantas pessoas estão chamando você.',
-    marco: 'Mais 2 rodadas de ajuste inclusas'
+    t: 'No ar',
+    d: 'Publicado, rápido no celular, WhatsApp no lugar. Você aprende a ver quem está chamando.',
+    marco: 'Duas rodadas de ajuste inclusas'
   }
 ]
 
@@ -57,14 +57,11 @@ onMounted(async () => {
 <template>
   <section id="processo" ref="root" class="pr sec">
    <div class="sec-in">
-    <p class="sec-rotulo">Como funciona um site novo</p>
+    <p class="sec-rotulo">Como funciona</p>
     <div>
     <header class="pr-head">
-      <h2 class="sec-h2">Você sabe onde pisa em cada etapa.</h2>
-      <p class="sec-lead">
-        A parte que mais trava gente na hora de contratar site é não saber o que vem
-        depois do "pode fazer". Então aqui vai, sem letra miúda.
-      </p>
+      <h2 class="sec-h2">Você sabe onde pisa.</h2>
+      <p class="sec-lead">Três etapas. Você aprova cada uma. Sem letra miúda.</p>
     </header>
 
     <ol class="pr-stack">
@@ -81,7 +78,7 @@ onMounted(async () => {
     </ol>
 
     <p class="pr-garantia">
-      Se o layout não te agradar, você não paga e a gente encerra ali.
+      Não gostou do layout? Não paga. Encerramos ali.
     </p>
     </div>
    </div>

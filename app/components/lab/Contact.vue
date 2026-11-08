@@ -46,11 +46,11 @@ onMounted(async () => {
 
 <template>
   <section id="contato" ref="root" class="ct">
-    <div class="ct-faq sec">
+    <div id="faq" class="ct-faq sec">
      <div class="sec-in">
-      <p class="sec-rotulo">Antes de chamar</p>
+      <p class="sec-rotulo">Dúvidas</p>
       <div>
-      <h2 class="sec-h2">Perguntas que sempre chegam</h2>
+      <h2 class="sec-h2">O que todo mundo pergunta.</h2>
 
       <ul class="ct-rows">
         <li v-for="(f, i) in faqs" :key="f.q" class="ct-row" :class="{ 'is-open': aberta === i }">
@@ -76,7 +76,7 @@ onMounted(async () => {
     </div>
 
     <div class="ct-final claro">
-      <p class="ct-kicker">Sem compromisso, respondo no mesmo dia</p>
+      <p class="ct-kicker">Sem compromisso. Respondo no mesmo dia.</p>
       <a
         :href="whatsapp"
         target="_blank"
