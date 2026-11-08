@@ -16,6 +16,7 @@ const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site e queria um orçamento. 
 
 <template>
   <header class="hd claro">
+   <div class="hd-in">
     <a href="#topo" class="hd-logo" aria-label="Kouichi, início">
       <MikanMark class="hd-mark" />
       <span>Kouichi</span>
@@ -41,6 +42,7 @@ const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site e queria um orçamento. 
       <WaIcon :size="18" />
       <span class="so-desktop">Pedir orçamento</span>
     </a>
+   </div>
   </header>
 </template>
 
@@ -49,14 +51,19 @@ const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site e queria um orçamento. 
   position: sticky;
   top: 0;
   z-index: 60;
+  padding: 0 var(--lab-edge);
+  background: var(--lab-bg);
+  color: var(--lab-fg);
+  border-bottom: 1px solid var(--lab-line);
+}
+.hd-in {
+  max-width: var(--lab-wrap);
+  margin-inline: auto;
+  min-height: 3.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.65rem var(--lab-edge);
-  background: var(--lab-bg);
-  color: var(--lab-fg);
-  border-bottom: 1px solid var(--lab-line);
 }
 .hd-logo {
   display: inline-flex;

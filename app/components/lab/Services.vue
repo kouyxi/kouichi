@@ -28,12 +28,13 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
 </script>
 
 <template>
-  <section id="servicos" class="sv">
-    <h2 class="sv-h2">O que eu faço</h2>
+  <section id="servicos" class="sv sec">
+   <div class="sec-in">
+    <p class="sec-rotulo">O que eu faço</p>
 
     <div class="sv-grid">
       <article class="sv-bloco">
-        <h3 class="sv-t">Site novo pro seu negócio</h3>
+        <h2 class="sec-h3">Site novo pro seu negócio</h2>
         <p class="sv-p">
           Pra clínica, escritório e prestador de serviço que vive de cliente novo
           chegando. Três tamanhos, e o valor eu falo na primeira conversa.
@@ -67,7 +68,7 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
            o dono chega aqui desconfiado, e o que convence é o passo a passo
            e a regra de pagar depois de conferir. -->
       <article id="site-invadido" class="sv-bloco sv-invadido">
-        <h3 class="sv-t">Limpeza de site invadido</h3>
+        <h2 class="sec-h3">Limpeza de site invadido</h2>
         <p class="sv-p">
           Às vezes o site de uma empresa aparece no Google com páginas de aposta
           que o dono nunca criou. É invasão, acontece com site de clínica, de
@@ -106,37 +107,18 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
         </a>
       </article>
     </div>
+   </div>
   </section>
 </template>
 
 <style scoped>
-.sv {
-  padding: clamp(3.5rem, 10vh, 7rem) var(--lab-edge);
-  background: var(--lab-bg);
-  color: var(--lab-fg);
-}
-.sv-h2 {
-  font-size: 0.86rem;
-  font-weight: 500;
-  color: var(--lab-dim);
-}
-.sv-grid {
-  display: grid;
-  gap: clamp(3rem, 8vh, 5rem);
-  margin-top: 1.5rem;
-}
-@media (min-width: 900px) {
-  .sv-grid { grid-template-columns: 1.1fr 1fr; gap: clamp(3rem, 6vw, 6rem); }
+.sv-grid { display: grid; gap: var(--sp-5); }
+@media (min-width: 1100px) {
+  .sv-grid { grid-template-columns: 1.1fr 1fr; gap: var(--sp-5); }
 }
 
-.sv-t {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(1.7rem, 3vw, 2.4rem);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
-}
-.sv-p { margin-top: 1rem; max-width: 34rem; line-height: 1.6; color: var(--lab-dim); }
+.sv-p { margin-top: var(--sp-3); max-width: 34rem; line-height: 1.6; color: var(--lab-dim); }
+.sv-p + .sv-p { margin-top: var(--sp-2); }
 .sv-code {
   font-family: var(--font-body);
   font-weight: 600;
@@ -145,34 +127,35 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
 }
 
 /* lista dos tamanhos: hairlines, sem card */
-.sv-lista { margin-top: 2rem; border-top: 1px solid var(--lab-line); }
+.sv-lista { margin-top: var(--sp-4); border-top: 1px solid var(--lab-line); }
 .sv-item {
   display: grid;
-  gap: 0.4rem;
-  padding: 1.25rem 0;
+  gap: var(--sp-1);
+  padding: var(--sp-3) 0;
   border-bottom: 1px solid var(--lab-line);
 }
 .sv-item-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-.sv-nome { font-family: var(--font-display); font-weight: 500; font-size: 1.3rem; letter-spacing: -0.01em; }
-.sv-prazo { font-size: 0.85rem; color: var(--lab-dim); white-space: nowrap; }
-.sv-para { color: var(--lab-dim); font-size: 0.95rem; line-height: 1.5; max-width: 30rem; }
+.sv-nome { font-family: var(--font-display); font-weight: 500; font-size: var(--t-1); letter-spacing: -0.01em; }
+.sv-prazo { font-size: var(--t-s); color: var(--lab-dim); white-space: nowrap; }
+.sv-para { color: var(--lab-dim); font-size: var(--t-s); line-height: 1.55; max-width: 30rem; }
 .sv-link {
   justify-self: start;
-  margin-top: 0.25rem;
+  margin-top: var(--sp-1);
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: var(--t-s);
   color: var(--lab-accent);
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid currentColor;
+  transition: color 0.3s var(--ease);
 }
-.sv-link:hover { border-color: currentColor; }
-.sv-comum { margin-top: 1.25rem; font-size: 0.9rem; line-height: 1.5; color: var(--lab-dim); max-width: 34rem; }
+.sv-link:hover { color: var(--lab-fg); }
+.sv-comum { margin-top: var(--sp-3); font-size: var(--t-s); line-height: 1.55; color: var(--lab-dim); max-width: 34rem; }
 
 /* site invadido */
-.sv-passos { display: grid; gap: 0.55rem; margin-top: 1.5rem; }
+.sv-passos { display: grid; gap: var(--sp-1); margin-top: var(--sp-4); }
 .sv-passos li { display: flex; gap: 0.7rem; line-height: 1.45; }
 .sv-passos li::before { content: ''; flex: none; width: 6px; height: 6px; margin-top: 0.6em; border-radius: 999px; background: var(--lab-accent); }
 .sv-regra {
-  margin-top: 1.5rem;
+  margin-top: var(--sp-4);
   padding-left: 1rem;
   border-left: 2px solid var(--lab-accent);
   line-height: 1.55;
@@ -182,8 +165,8 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  margin-top: 1.75rem;
-  padding: 0.85rem 1.5rem;
+  margin-top: var(--sp-4);
+  padding: 0.9rem 1.6rem;
   border: 1px solid var(--lab-line-2);
   border-radius: 999px;
   font-weight: 600;

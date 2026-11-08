@@ -48,13 +48,6 @@ onMounted(async () => {
       })
     })
 
-    gsap.from('.pr-head-in', {
-      yPercent: 105,
-      duration: 0.9,
-      stagger: 0.08,
-      ease: 'expo.out',
-      scrollTrigger: { trigger: el, start: 'top 70%', once: true }
-    })
   }, el)
 
   onBeforeUnmount(() => ctx.revert())
@@ -62,13 +55,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section id="processo" ref="root" class="pr">
+  <section id="processo" ref="root" class="pr sec">
+   <div class="sec-in">
+    <p class="sec-rotulo">Como funciona um site novo</p>
+    <div>
     <header class="pr-head">
-      <h2 class="pr-title">
-        <span class="pr-mask"><span class="pr-head-in">Você sabe onde pisa</span></span>
-        <span class="pr-mask"><span class="pr-head-in">em cada etapa.</span></span>
-      </h2>
-      <p class="pr-note">
+      <h2 class="sec-h2">Você sabe onde pisa em cada etapa.</h2>
+      <p class="sec-lead">
         A parte que mais trava gente na hora de contratar site é não saber o que vem
         depois do "pode fazer". Então aqui vai, sem letra miúda.
       </p>
@@ -81,8 +74,8 @@ onMounted(async () => {
           <div class="pr-body">
             <h3 class="pr-t">{{ p.t }}</h3>
             <p class="pr-d">{{ p.d }}</p>
-            <span class="pr-marco">{{ p.marco }}</span>
           </div>
+          <span class="pr-marco">{{ p.marco }}</span>
         </div>
       </li>
     </ol>
@@ -90,41 +83,18 @@ onMounted(async () => {
     <p class="pr-garantia">
       Se o layout não te agradar, você não paga e a gente encerra ali.
     </p>
+    </div>
+   </div>
   </section>
 </template>
 
 <style scoped>
-.pr {
-  position: relative;
-  padding: clamp(4rem, 12vh, 8rem) var(--lab-edge) clamp(3rem, 8vh, 6rem);
-  background: var(--lab-bg);
-  color: var(--lab-fg);
-  border-top: 1px solid var(--lab-line);
-}
-
-.pr-head { position: relative; z-index: 1; max-width: 60rem; margin-bottom: clamp(2.5rem, 6vh, 4rem); }
-.pr-stack, .pr-garantia { position: relative; z-index: 1; }
-.pr-title {
-  margin-top: 1rem;
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(2rem, 4.4vw, 3.4rem);
-  line-height: 1.02;
-  letter-spacing: -0.03em;
-}
-.pr-mask { display: block; overflow: hidden; padding-bottom: 0.05em; }
-.pr-head-in { display: block; }
-.pr-note {
-  margin-top: 1.5rem;
-  max-width: 32rem;
-  line-height: 1.6;
-  color: var(--lab-dim);
-}
+.pr-head { margin-bottom: var(--sp-4); }
 
 /* pilha: cada carta gruda um pouco mais abaixo que a anterior, então
    as bordas superiores ficam visíveis como abas de fichário */
 /* o reset global zera só ul; sem isso o ol imprime "1." ao lado das cartas */
-.pr-stack { display: grid; gap: clamp(1.5rem, 4vh, 3rem); list-style: none; padding: 0; margin: 0; }
+.pr-stack { display: grid; gap: var(--sp-3); list-style: none; padding: 0; margin: 0; }
 .pr-card {
   position: sticky;
   top: calc(14vh + var(--i, 0) * 1.5rem);
@@ -134,56 +104,64 @@ onMounted(async () => {
 .pr-card:nth-child(2) { --i: 1; z-index: 2; }
 .pr-card:nth-child(3) { --i: 2; z-index: 3; }
 
+/* número numa coluna fixa, texto na outra: os três títulos alinham entre
+   si e com a margem do conteúdo da seção */
 .pr-card-in {
-  display: flex;
-  gap: clamp(1.25rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+  gap: var(--sp-3);
   align-items: start;
-  padding: clamp(1.75rem, 4vw, 3rem);
+  padding: var(--sp-4) var(--sp-4) var(--sp-4) var(--sp-3);
   background: var(--lab-surface);
   color: var(--lab-fg);
   border: 1px solid var(--lab-line);
   border-radius: 4px;
-  min-height: clamp(15rem, 42vh, 22rem);
+  min-height: clamp(12rem, 34vh, 17rem);
 }
 .pr-n {
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2.5rem, 7vw, 6rem);
-  line-height: 0.8;
-  letter-spacing: -0.05em;
+  font-weight: 500;
+  font-size: var(--t-h3);
+  line-height: 1;
+  letter-spacing: -0.03em;
   color: var(--lab-accent);
+  font-variant-numeric: tabular-nums;
 }
 .pr-body { max-width: 34rem; }
 .pr-t {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-size: var(--t-h3);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
 }
-.pr-d { margin-top: 0.9rem; line-height: 1.6; color: var(--lab-dim); }
+.pr-d { margin-top: var(--sp-2); line-height: 1.6; color: var(--lab-dim); }
+/* o marco é o que você leva da etapa, não um botão: fica em contorno */
 .pr-marco {
   display: inline-block;
-  margin-top: 1.25rem;
+  align-self: end;
+  white-space: nowrap;
   padding: 0.35rem 0.85rem;
+  border: 1px solid var(--lab-line-2);
   border-radius: 999px;
-  background: var(--lab-accent);
-  color: var(--lab-bg);
-  font-size: 0.8rem;
+  font-size: var(--t-xs);
   font-weight: 600;
 }
 
 .pr-garantia {
-  margin-top: clamp(3rem, 8vh, 5rem);
-  padding-top: 1.5rem;
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-3);
   border-top: 1px solid var(--lab-line);
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 2.4vw, 1.9rem);
-  line-height: 1.25;
-  max-width: 40rem;
+  font-weight: 500;
+  font-size: var(--t-h3);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  max-width: 34rem;
 }
 
 @media (max-width: 720px) {
-  .pr-card-in { flex-direction: column; min-height: auto; }
+  .pr-card-in { grid-template-columns: 1fr; gap: var(--sp-2); padding: var(--sp-3); min-height: auto; }
+  .pr-marco { justify-self: start; margin-top: var(--sp-1); white-space: normal; }
 }
 </style>

@@ -46,10 +46,11 @@ onMounted(async () => {
 
 <template>
   <section id="contato" ref="root" class="ct">
-    <div class="ct-faq">
-      <header class="ct-faq-head">
-        <h2 class="ct-faq-title">Perguntas que sempre chegam</h2>
-      </header>
+    <div class="ct-faq sec">
+     <div class="sec-in">
+      <p class="sec-rotulo">Antes de chamar</p>
+      <div>
+      <h2 class="sec-h2">Perguntas que sempre chegam</h2>
 
       <ul class="ct-rows">
         <li v-for="(f, i) in faqs" :key="f.q" class="ct-row" :class="{ 'is-open': aberta === i }">
@@ -68,6 +69,8 @@ onMounted(async () => {
           </div>
         </li>
       </ul>
+      </div>
+     </div>
     </div>
 
     <div class="ct-final claro">
@@ -106,35 +109,23 @@ onMounted(async () => {
 .ct { background: var(--lab-bg); color: var(--lab-fg); }
 
 /* ---- FAQ ---- */
-.ct-faq {
-  padding: clamp(4rem, 12vh, 7rem) var(--lab-edge) clamp(3rem, 8vh, 5rem);
-  border-top: 1px solid var(--lab-line);
-}
-.ct-faq-title {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(2rem, 4.4vw, 3.4rem);
-  line-height: 1.02;
-  letter-spacing: -0.03em;
-}
-
-.ct-rows { margin-top: clamp(2rem, 5vh, 3rem); border-top: 1px solid var(--lab-line); }
+.ct-rows { margin-top: var(--sp-4); border-top: 1px solid var(--lab-line); }
 .ct-row { border-bottom: 1px solid var(--lab-line); }
 .ct-q {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  gap: 1.25rem;
+  gap: var(--sp-3);
   width: 100%;
-  padding: 1.35rem 0;
+  padding: var(--sp-3) 0;
   color: inherit;
   text-align: left;
 }
 .ct-q-t {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(1.05rem, 2.1vw, 1.55rem);
-  line-height: 1.2;
+  font-size: var(--t-1);
+  line-height: 1.25;
   letter-spacing: -0.01em;
 }
 .ct-q-sign {
@@ -155,8 +146,8 @@ onMounted(async () => {
 .ct-row.is-open .ct-q-sign::after { transform: translateX(50%) scaleY(0); opacity: 0; }
 .ct-row.is-open .ct-q-sign::before { background: var(--lab-accent); }
 
-.ct-a { padding: 0 0 1.5rem; }
-.ct-a p { max-width: 44rem; line-height: 1.62; color: var(--lab-dim); }
+.ct-a { padding: 0 0 var(--sp-3); }
+.ct-a p { max-width: 40rem; line-height: 1.62; color: var(--lab-dim); }
 
 /* ---- finale ---- */
 .ct-final {
@@ -166,13 +157,14 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: clamp(1.5rem, 4vh, 2.5rem);
-  padding: clamp(3rem, 8vh, 5rem) var(--lab-edge);
+  gap: var(--sp-4);
+  padding: var(--sec) var(--lab-edge);
   border-top: 1px solid var(--lab-line);
   overflow: hidden;
   position: relative;
 }
-.ct-kicker { font-size: 0.9rem; color: var(--lab-dim); }
+.ct-final > * { width: 100%; max-width: var(--lab-wrap); margin-inline: auto; }
+.ct-kicker { font-size: var(--t-s); font-weight: 500; color: var(--lab-dim); }
 .ct-huge {
   display: block;
   font-family: var(--font-display);
@@ -190,15 +182,15 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  padding-top: clamp(1.5rem, 4vh, 2.5rem);
+  gap: var(--sp-4);
+  padding-top: var(--sp-4);
   border-top: 1px solid var(--lab-line);
 }
 .ct-lines {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 2.5rem;
-  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  gap: var(--sp-2) var(--sp-4);
+  font-size: var(--t-1);
 }
 /* o selo é o único elemento à direita aqui; abaixo de 700px ele vai pra baixo
    das linhas de contato, senão espreme o e-mail */
@@ -214,9 +206,9 @@ a.ct-line:hover { color: var(--lab-accent); }
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: auto;
-  padding-top: clamp(2rem, 5vh, 3rem);
-  font-size: 0.82rem;
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-3);
+  font-size: var(--t-xs);
   color: var(--lab-dim);
 }
 .ct-back { border-bottom: 1px solid currentColor; }

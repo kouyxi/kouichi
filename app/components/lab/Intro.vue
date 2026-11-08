@@ -30,6 +30,7 @@ onMounted(async () => {
 
 <template>
   <section id="topo" ref="root" class="intro claro">
+   <div class="intro-in">
     <figure class="intro-media">
       <img
         src="/img/hero-kouichi.webp"
@@ -61,17 +62,22 @@ onMounted(async () => {
       </a>
       <p class="intro-vaga intro-fade"><i aria-hidden="true" />{{ disponibilidade }}</p>
     </div>
+   </div>
   </section>
 </template>
 
 <style scoped>
 .intro {
-  display: grid;
-  gap: clamp(1.5rem, 4vh, 2.5rem);
-  align-items: center;
   padding: clamp(1.5rem, 4vh, 3rem) var(--lab-edge) clamp(3rem, 8vh, 5rem);
   background: var(--lab-bg);
   color: var(--lab-fg);
+}
+.intro-in {
+  max-width: var(--lab-wrap);
+  margin-inline: auto;
+  display: grid;
+  gap: var(--sp-4);
+  align-items: center;
 }
 
 /* celular: a foto vem primeiro, em corte horizontal, e o rosto é a
@@ -85,28 +91,30 @@ onMounted(async () => {
 }
 .intro-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
 
-.intro-quem { font-size: 0.86rem; color: var(--lab-dim); }
+.intro-quem { font-size: var(--t-s); font-weight: 500; color: var(--lab-dim); }
 .intro-title {
-  margin-top: 0.75rem;
+  margin-top: var(--sp-2);
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(2.3rem, 5.6vw, 4.6rem);
+  font-size: clamp(2.3rem, 5.2vw, 4.4rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
-  max-width: 14ch;
+  /* equilibra as duas linhas: sem isso sobrava um "o" solto no fim da primeira */
+  text-wrap: balance;
+  max-width: 15ch;
 }
 .intro-sub {
-  margin-top: 1.25rem;
+  margin-top: var(--sp-3);
   max-width: 30rem;
   font-size: clamp(1rem, 1.2vw, 1.12rem);
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--lab-dim);
 }
 .intro-cta {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  margin-top: 1.75rem;
+  margin-top: var(--sp-4);
   padding: 0.9rem 1.6rem;
   background: var(--lab-accent);
   color: #0E0B04;
@@ -121,21 +129,25 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 1.5rem;
-  font-size: 0.82rem;
+  margin-top: var(--sp-3);
+  font-size: var(--t-s);
   color: var(--lab-dim);
 }
 .intro-vaga i { width: 6px; height: 6px; border-radius: 999px; background: var(--lab-accent); }
 
-@media (min-width: 860px) {
+@media (min-width: 900px) {
   .intro {
-    grid-template-columns: 5fr 7fr;
-    gap: clamp(2.5rem, 5vw, 5rem);
+    display: flex;
+    align-items: center;
     /* teto: num monitor alto o topo não precisa de 1400px de respiro */
-    min-height: min(calc(100svh - 3.75rem), 52rem);
+    min-height: min(calc(100svh - 3.75rem), 46rem);
     padding-block: clamp(2rem, 5vh, 4rem);
   }
-  .intro-media { aspect-ratio: 4 / 5; max-height: 72svh; justify-self: end; width: 100%; max-width: 26rem; }
+  /* mesma divisão 3/9 das seções: a margem esquerda do texto é a mesma
+     linha onde começa o conteúdo da página inteira */
+  .intro-in { width: 100%; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: var(--sp-5); }
+  .intro-media { aspect-ratio: 4 / 5; width: 100%; }
+  .intro-txt { max-width: 40rem; }
 }
 
 /* sem animação: tudo já nasce no lugar */

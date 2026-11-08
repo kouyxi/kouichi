@@ -180,6 +180,21 @@ onMounted(() => {
   --lab-line-2: rgba(243, 234, 216, 0.28);
   --lab-edge: clamp(1.15rem, 4vw, 3.5rem);
 
+  /* Sistema: uma largura, um ritmo de respiro e uma escala de tipo (1.25).
+     Cada seção lê daqui, então nada é medido no olho. */
+  --lab-wrap: 76rem;
+  --sec: clamp(4rem, 10vh, 7rem);
+  --sp-1: 0.5rem;
+  --sp-2: 1rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2.5rem;
+  --sp-5: 4rem;
+  --t-xs: 0.8rem;
+  --t-s: 0.9rem;
+  --t-1: 1.25rem;
+  --t-h3: clamp(1.5625rem, 2.5vw, 1.95rem);
+  --t-h2: clamp(1.95rem, 3.4vw, 3.05rem);
+
   background: var(--lab-bg);
   color: var(--lab-fg);
   overflow-x: clip;
@@ -199,6 +214,54 @@ onMounted(() => {
 
 /* o overscroll em cima é creme (barra e topo) e embaixo também (fecho) */
 body:has(.lab) { background: #F3EAD8; }
+
+/* Seção padrão: rótulo numa coluna estreita à esquerda, conteúdo à direita.
+   É a mesma proporção do topo (foto 5, texto 7), então a margem esquerda
+   do conteúdo cai sempre no mesmo lugar da página pra baixo. */
+.lab .sec {
+  padding: var(--sec) var(--lab-edge);
+  border-top: 1px solid var(--lab-line);
+  background: var(--lab-bg);
+  color: var(--lab-fg);
+}
+.lab .sec-in {
+  max-width: var(--lab-wrap);
+  margin-inline: auto;
+  display: grid;
+  gap: var(--sp-3);
+}
+.lab .sec-rotulo { font-size: var(--t-s); font-weight: 500; color: var(--lab-dim); }
+@media (min-width: 900px) {
+  .lab .sec-in { grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: var(--sp-5); align-items: start; }
+  /* o rótulo acompanha a leitura, como margem de livro */
+  .lab .sec-rotulo { position: sticky; top: 5rem; }
+}
+.lab .sec-h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--t-h2);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+.lab .sec-h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--t-h3);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.lab .sec-lead { margin-top: var(--sp-3); max-width: 34rem; line-height: 1.6; color: var(--lab-dim); }
+
+/* sem palavra solta no fim do parágrafo */
+.lab p { text-wrap: pretty; }
+
+/* foco visível em tudo que é clicável, na cor da marca */
+.lab :is(a, button, summary):focus-visible { outline: 2px solid var(--lab-accent); outline-offset: 3px; }
+/* âncora para por baixo da barra fixa, não embaixo dela */
+.lab [id] { scroll-margin-top: 4.5rem; }
 
 .lab ::selection { background: var(--lab-accent); color: var(--lab-bg); }
 
