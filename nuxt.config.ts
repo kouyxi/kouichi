@@ -21,12 +21,10 @@ export default defineNuxtConfig({
   fonts: {
     // self-hosted at build time (no external Google request → faster LCP, privacy-friendly)
     families: [
-      { name: 'Fraunces', provider: 'google', weights: [400, 500, 600, 700, 900], styles: ['normal', 'italic'] },
-      // Candidatas em teste pro título (?fonte=young|bricolage|newsreader na home).
-      // O navegador só baixa a família que o CSS ativo usar.
+      // Título da home. Um peso só: a hierarquia vem de tamanho e cor.
       { name: 'Young Serif', provider: 'google', weights: [400] },
-      { name: 'Bricolage Grotesque', provider: 'google', weights: [700] },
-      { name: 'Newsreader', provider: 'google', weights: [400, 500] },
+      // Fraunces fica só pelo /lab, que é a versão de controle.
+      { name: 'Fraunces', provider: 'google', weights: [400, 500, 600, 700, 900], styles: ['normal', 'italic'] },
       { name: 'Space Grotesk', provider: 'google', weights: [400, 500, 600, 700] }
     ]
   },

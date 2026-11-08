@@ -118,16 +118,9 @@ const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu ne
 const noFecho = ref(false)
 const noTopo = ref(false)
 
-// Teste de fonte de título: ?fonte=young|bricolage|newsreader. Lido no
-// cliente, depois da hidratação, pra não divergir do HTML pré-renderizado.
-// Sai quando a decisão for tomada.
-const fonte = ref('')
 const semFlutuante = computed(() => noFecho.value || noTopo.value)
 
 onMounted(() => {
-  const f = new URLSearchParams(location.search).get('fonte') || ''
-  if (['young', 'bricolage', 'newsreader'].includes(f)) fonte.value = `fonte-${f}`
-
   const alvos: Array<[string, Ref<boolean>]> = [['.ct-final', noFecho], ['#topo', noTopo]]
   const ios = alvos.flatMap(([sel, flag]) => {
     const el = document.querySelector(sel)
@@ -141,7 +134,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="lab" :class="[{ 'no-fecho': noFecho }, fonte]">
+  <div class="lab" :class="{ 'no-fecho': noFecho }">
     <LabHeader />
     <LabChapters />
 
@@ -188,6 +181,11 @@ onMounted(() => {
   --lab-line-2: rgba(243, 234, 216, 0.28);
   --lab-edge: clamp(1.15rem, 4vw, 3.5rem);
 
+  /* Young Serif: um peso só, gorda e arredondada como a mikan. Um degrau
+     abaixo da escala da Fraunces, porque ela ocupa mais caixa no mesmo corpo. */
+  --font-display: 'Young Serif', Georgia, serif;
+  --w-display: 400;
+
   /* Sistema: uma largura, um ritmo de respiro e uma escala de tipo (1.25).
      Cada seção lê daqui, então nada é medido no olho. */
   --lab-wrap: 76rem;
@@ -200,18 +198,13 @@ onMounted(() => {
   --t-xs: 0.8rem;
   --t-s: 0.9rem;
   --t-1: 1.25rem;
-  --t-h3: clamp(1.5625rem, 2.5vw, 1.95rem);
-  --t-h2: clamp(1.95rem, 3.4vw, 3.05rem);
+  --t-h3: clamp(1.4rem, 2.2vw, 1.75rem);
+  --t-h2: clamp(1.75rem, 3vw, 2.6rem);
 
   background: var(--lab-bg);
   color: var(--lab-fg);
   overflow-x: clip;
 }
-
-/* teste de fonte de título (ver ?fonte= no script) */
-.lab.fonte-young { --font-display: 'Young Serif', Georgia, serif; --w-display: 400; }
-.lab.fonte-bricolage { --font-display: 'Bricolage Grotesque', system-ui, sans-serif; --w-display: 700; }
-.lab.fonte-newsreader { --font-display: 'Newsreader', Georgia, serif; --w-display: 400; }
 
 /* Cartão: topo e fecho em creme, miolo escuro. Um bloco com .claro inverte
    os tokens e todo componente dentro dele continua lendo as mesmas

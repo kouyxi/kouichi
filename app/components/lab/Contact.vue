@@ -99,7 +99,6 @@ onMounted(async () => {
 
       <footer class="ct-foot">
         <span>{{ nomeCompleto }}, {{ cidade }}, {{ ano }}</span>
-        <NuxtLink to="/lab" class="ct-back" rel="nofollow">Ver a versão anterior</NuxtLink>
       </footer>
     </div>
   </section>
@@ -211,7 +210,5 @@ a.ct-line:hover { color: var(--lab-accent); }
   font-size: var(--t-xs);
   color: var(--lab-dim);
 }
-.ct-back { border-bottom: 1px solid currentColor; }
-.ct-back:hover { color: var(--lab-accent); }
 
 </style>
