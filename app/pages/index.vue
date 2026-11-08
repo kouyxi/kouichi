@@ -116,7 +116,9 @@ const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu ne
 // capítulo nenhum pra navegar.
 // No topo ele some também: ali já estão o botão do cabeçalho e o do hero.
 const noFecho = ref(false)
-const noTopo = ref(false)
+// começa true: o HTML é gerado no topo, e com false o botão aparecia antes
+// do JS e sumia quando ele chegava
+const noTopo = ref(true)
 
 const semFlutuante = computed(() => noFecho.value || noTopo.value)
 

@@ -2,42 +2,10 @@
 import { waLink, disponibilidade } from '~/data/contato'
 
 const whatsapp = waLink('Oi, Kouichi! Vi seu site e queria um orçamento. Meu negócio é ')
-
-const root = ref<HTMLElement | null>(null)
-
-onMounted(async () => {
-  if (!root.value) return
-  const el = root.value
-
-  if (prefersReducedMotion()) {
-    el.classList.add('is-static')
-    return
-  }
-
-  const { gsap } = await useGsap()
-  const ctx = gsap.context(() => {
-    // A única entrada coreografada da página: a foto abre de baixo pra cima
-    // e o texto sobe atrás dela. Tudo o que vem depois nasce no lugar.
-    const tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
-    tl.from('.intro-media', { clipPath: 'inset(100% 0% 0% 0%)', duration: 1.2, ease: 'power4.inOut' })
-      .from('.intro-media img', { scale: 1.25, duration: 1.5, ease: 'power3.out' }, '<')
-      .from('.intro-fade', { opacity: 0, y: 22, duration: 0.8, stagger: 0.08 }, 0.35)
-
-    // A foto desce um pouco mais devagar que a página: profundidade ligada
-    // ao scroll, não um efeito que dispara sozinho.
-    gsap.to('.intro-media', {
-      yPercent: 8,
-      ease: 'none',
-      scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: 0.5 }
-    })
-  }, el)
-
-  onBeforeUnmount(() => ctx.revert())
-})
 </script>
 
 <template>
-  <section id="topo" ref="root" class="intro claro">
+  <section id="topo" class="intro claro">
     <!-- Mesma grade 3/9 das seções: a assinatura ocupa a coluna do rótulo,
          o texto começa na mesma linha vertical do resto da página e a foto
          fecha a direita com a altura do bloco inteiro. -->
@@ -61,7 +29,6 @@ onMounted(async () => {
             rel="noopener"
             data-track="wa_hero"
             class="intro-cta"
-            data-cursor="grow"
           >
             <WaIcon :size="18" />
             Pedir orçamento no WhatsApp
@@ -106,7 +73,6 @@ onMounted(async () => {
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border: 1px solid var(--lab-line);
-  will-change: clip-path;
 }
 .intro-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
 
@@ -164,7 +130,31 @@ onMounted(async () => {
   .intro-media { order: 0; aspect-ratio: 4 / 5; max-height: 34rem; width: 100%; }
 }
 
-/* sem animação: tudo já nasce no lugar */
-.intro.is-static .intro-media,
-.intro.is-static .intro-fade { opacity: 1; transform: none; clip-path: none; }
+/* A única entrada coreografada da página: a foto abre de baixo pra cima e o
+   texto sobe atrás dela. Em CSS, roda no primeiro quadro. Antes era GSAP,
+   que no 4G só chegava ~2 s depois: a página aparecia, sumia e entrava de
+   novo. Quem pediu menos movimento recebe tudo parado. */
+@media (prefers-reduced-motion: no-preference) {
+  .intro-media { animation: introAbre 1.2s cubic-bezier(0.76, 0, 0.24, 1) both; }
+  .intro-media img { animation: introFoto 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) both; }
+  .intro-fade { animation: introSobe 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .intro-quem { animation-delay: 0.35s; }
+  .intro-title { animation-delay: 0.43s; }
+  .intro-sub { animation-delay: 0.51s; }
+  .intro-acao { animation-delay: 0.59s; }
+
+  /* A foto desce um pouco mais devagar que a página, ligada à rolagem e no
+     compositor, sem JS. Navegador sem suporte fica com a foto parada. */
+  @supports (animation-timeline: scroll()) {
+    .intro-media {
+      animation: introAbre 1.2s cubic-bezier(0.76, 0, 0.24, 1) both, introDesce linear both;
+      animation-timeline: auto, scroll(root);
+      animation-range: normal, 0 100vh;
+    }
+  }
+}
+@keyframes introAbre { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+@keyframes introFoto { from { transform: scale(1.25); } }
+@keyframes introSobe { from { opacity: 0; transform: translateY(22px); } }
+@keyframes introDesce { to { transform: translateY(8%); } }
 </style>
