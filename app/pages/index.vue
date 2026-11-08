@@ -6,10 +6,11 @@ const siteUrl = 'https://kouichi.com.br'
 const title = 'Kouichi | Sites e landing pages que convertem em Goiânia'
 // Escrita na mesma voz do site, não em terceira pessoa corporativa: é o que
 // a pessoa lê no Google antes de decidir clicar, e vinha falando "copy" e
-// "estrutura", que o cliente dele não usa. 150 caracteres, dentro do que o
-// Google mostra sem cortar.
+// "estrutura", que o cliente dele não usa. Fala dos dois serviços e não diz
+// o valor: quando o preço de começo acabar, este texto continua certo.
+// 155 caracteres, perto do que o Google mostra sem cortar.
 const description =
-  'Site e landing page pra clínica, escritório e prestador de serviço em Goiânia. Feito pra gerar contato no WhatsApp, com orçamento na primeira conversa.'
+  'Site novo e limpeza de site invadido por páginas de aposta, pra clínica, escritório e prestador de serviço em Goiânia. Preço no site, conversa no WhatsApp.'
 // JPEG: é foto, e o WhatsApp costuma descartar imagem acima de ~300 KB.
 // O nome mudou de og.png: força WhatsApp e Facebook a buscarem a nova.
 const ogImage = `${siteUrl}/og.jpg`
