@@ -44,6 +44,14 @@ export default defineNuxtConfig({
     }
   },
 
+  // Página única, sem navegação entre rotas no cliente: os dados vão
+  // dentro do HTML (sem o _payload.json) e o manifesto de builds sai (era
+  // mais um request na carga e uma consulta a cada hora).
+  experimental: {
+    payloadExtraction: false,
+    appManifest: false
+  },
+
   app: {
     head: {
       htmlAttrs: { lang: 'pt-BR' }

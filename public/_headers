@@ -1,0 +1,7 @@
+# Cloudflare Pages. Arquivos com hash no nome nunca mudam de conteúdo: se
+# mudar, muda o nome. Então a visita de volta não precisa nem perguntar ao
+# servidor. O HTML e o /img continuam no padrão (revalida a cada visita).
+/_nuxt/*
+  Cache-Control: public, max-age=31536000, immutable
+/_fonts/*
+  Cache-Control: public, max-age=31536000, immutable
