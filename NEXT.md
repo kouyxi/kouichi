@@ -57,7 +57,7 @@ tudo aqui estiver resolvido.
 
 ## Pronto pra aplicar, falta o seu ok
 
-- [ ] **Cartões do "Como funciona" sem sobra:** tirar a altura mínima e
+- [x] **Cartões do "Como funciona" sem sobra** (feito em 08/11): tirar a altura mínima e
   pôr o selo ("Sai sabendo quanto custa") logo embaixo do texto, como já é
   no celular. A pilha continua. Prévia feita em 08/11. (`Process.vue`)
 - [ ] **Ajustes de copy:**

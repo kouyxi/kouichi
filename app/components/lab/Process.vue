@@ -68,18 +68,18 @@ const passos = [
 .pr-card:nth-child(3) { --i: 2; z-index: 3; }
 
 /* número numa coluna fixa, texto na outra: os três títulos alinham entre
-   si e com a margem do conteúdo da seção */
+   si e com a margem do conteúdo da seção. O cartão tem a altura do texto:
+   com altura mínima sobrava meio cartão vazio dentro da borda. */
 .pr-card-in {
   display: grid;
-  grid-template-columns: 3.5rem minmax(0, 1fr) auto;
-  gap: var(--sp-3);
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: var(--sp-2) var(--sp-3);
   align-items: start;
   padding: var(--sp-4) var(--sp-4) var(--sp-4) var(--sp-3);
   background: var(--lab-surface);
   color: var(--lab-fg);
   border: 1px solid var(--lab-line);
   border-radius: 4px;
-  min-height: clamp(12rem, 34vh, 17rem);
 }
 .pr-n {
   font-family: var(--font-display);
@@ -99,10 +99,12 @@ const passos = [
   letter-spacing: -0.025em;
 }
 .pr-d { margin-top: var(--sp-2); line-height: 1.6; color: var(--lab-dim); }
-/* o marco é o que você leva da etapa, não um botão: fica em contorno */
+/* o marco é o que você leva da etapa, não um botão: fica em contorno,
+   logo embaixo do texto dela */
 .pr-marco {
   display: inline-block;
-  align-self: end;
+  grid-column: 2;
+  justify-self: start;
   white-space: nowrap;
   padding: 0.35rem 0.85rem;
   border: 1px solid var(--lab-line-2);
@@ -143,7 +145,7 @@ const passos = [
 @keyframes prRecua { to { transform: scale(0.92); opacity: 0.35; } }
 
 @media (max-width: 720px) {
-  .pr-card-in { grid-template-columns: 1fr; gap: var(--sp-2); padding: var(--sp-3); min-height: auto; }
-  .pr-marco { justify-self: start; margin-top: var(--sp-1); white-space: normal; }
+  .pr-card-in { grid-template-columns: 1fr; padding: var(--sp-3); }
+  .pr-marco { grid-column: auto; margin-top: var(--sp-1); white-space: normal; }
 }
 </style>
