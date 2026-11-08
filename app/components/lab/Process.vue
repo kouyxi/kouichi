@@ -148,10 +148,12 @@ onMounted(async () => {
   font-weight: 600;
 }
 
+/* Filete laranja à esquerda: é a marca de compromisso do site inteiro, a
+   mesma da regra do site invadido e do "minha carteira ainda é curta". */
 .pr-garantia {
   margin-top: var(--sp-5);
-  padding-top: var(--sp-3);
-  border-top: 1px solid var(--lab-line);
+  padding-left: var(--sp-3);
+  border-left: 2px solid var(--lab-accent);
   font-family: var(--font-display);
   font-weight: var(--w-display, 500);
   font-size: var(--t-h3);

@@ -12,6 +12,26 @@ const links = [
   { label: 'Quem faz', href: '#sobre', so: 'desktop' }
 ]
 const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site e queria um orçamento. Meu negócio é ')
+
+// Linha de progresso na base da barra: quanto da página já foi lida. É o
+// índice de capítulos do celular, onde a mikan não cabe.
+const progresso = ref(0)
+onMounted(() => {
+  let agendado = false
+  const medir = () => {
+    agendado = false
+    const total = document.documentElement.scrollHeight - window.innerHeight
+    progresso.value = total > 0 ? Math.min(1, window.scrollY / total) : 0
+  }
+  const onScroll = () => {
+    if (agendado) return
+    agendado = true
+    requestAnimationFrame(medir)
+  }
+  window.addEventListener('scroll', onScroll, { passive: true })
+  medir()
+  onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
+})
 </script>
 
 <template>
@@ -43,6 +63,7 @@ const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site e queria um orçamento. 
       <span class="so-desktop">Pedir orçamento</span>
     </a>
    </div>
+   <span class="hd-prog" aria-hidden="true" :style="{ transform: `scaleX(${progresso})` }" />
   </header>
 </template>
 
@@ -80,10 +101,21 @@ const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site e queria um orçamento. 
 .hd-nav a { color: var(--lab-dim); padding-block: 0.25rem; border-bottom: 1px solid transparent; }
 .hd-nav a:hover { color: var(--lab-fg); border-color: currentColor; }
 
+.hd-prog {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--lab-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+}
 .hd-cta {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  min-height: 2.75rem;
   padding: 0.6rem 1rem;
   border-radius: 999px;
   background: var(--lab-accent);
@@ -92,7 +124,6 @@ const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site e queria um orçamento. 
   font-size: 0.88rem;
   white-space: nowrap;
 }
-.hd-cta:hover { background: var(--lab-fg); color: var(--lab-bg); }
 
 /* no celular ficam a marca, os dois serviços e o ícone: cabe em 375px */
 @media (max-width: 720px) {

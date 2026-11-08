@@ -264,6 +264,43 @@ body:has(.lab) { background: #F3EAD8; }
 /* sem palavra solta no fim do parágrafo */
 .lab p { text-wrap: pretty; }
 
+/* Botão primário: um comportamento só em toda a página. Hover físico
+   (sobe e ganha sombra), não troca de cor; pressionar devolve ao lugar. */
+.lab :is(.intro-cta, .hd-cta, .lab-float, .ct-huge) {
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), color 0.25s var(--ease);
+}
+.lab :is(.intro-cta, .hd-cta, .lab-float):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -10px rgba(232, 99, 31, 0.6);
+}
+.lab :is(.intro-cta, .hd-cta, .lab-float):active { transform: translateY(0); box-shadow: none; }
+
+/* ponto pulsando: a vaga está aberta agora, não num texto antigo */
+.lab .pulso {
+  position: relative;
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--lab-accent);
+}
+.lab .pulso::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  border: 1.5px solid var(--lab-accent);
+  animation: labPulso 2.4s var(--ease) infinite;
+}
+@keyframes labPulso {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lab .pulso::after { animation: none; opacity: 0.5; }
+  .lab :is(.intro-cta, .hd-cta, .lab-float):hover { transform: none; }
+}
+
 /* foco visível em tudo que é clicável, na cor da marca */
 .lab :is(a, button, summary):focus-visible { outline: 2px solid var(--lab-accent); outline-offset: 3px; }
 /* âncora para por baixo da barra fixa, não embaixo dela */

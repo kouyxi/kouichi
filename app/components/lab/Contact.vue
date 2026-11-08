@@ -64,8 +64,10 @@ onMounted(async () => {
             <span class="ct-q-t">{{ f.q }}</span>
             <span class="ct-q-sign" aria-hidden="true" />
           </button>
-          <div :id="`lab-faq-${i}`" class="ct-a" :hidden="aberta !== i">
-            <p>{{ f.a }}</p>
+          <!-- grid-template-rows 0fr → 1fr: a resposta abre deslizando, sem
+               medir altura em JS. Responde ao toque da pessoa, não ao scroll. -->
+          <div :id="`lab-faq-${i}`" class="ct-a" :aria-hidden="aberta !== i" :inert="aberta !== i">
+            <div class="ct-a-in"><p>{{ f.a }}</p></div>
           </div>
         </li>
       </ul>
@@ -145,8 +147,15 @@ onMounted(async () => {
 .ct-row.is-open .ct-q-sign::after { transform: translateX(50%) scaleY(0); opacity: 0; }
 .ct-row.is-open .ct-q-sign::before { background: var(--lab-accent); }
 
-.ct-a { padding: 0 0 var(--sp-3); }
-.ct-a p { max-width: 40rem; line-height: 1.62; color: var(--lab-dim); }
+.ct-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s var(--ease);
+}
+.ct-row.is-open .ct-a { grid-template-rows: 1fr; }
+.ct-a-in { overflow: hidden; }
+.ct-a p { max-width: 40rem; padding-bottom: var(--sp-3); line-height: 1.62; color: var(--lab-dim); }
+@media (prefers-reduced-motion: reduce) { .ct-a { transition: none; } }
 
 /* ---- finale ---- */
 .ct-final {

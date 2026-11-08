@@ -22,6 +22,14 @@ onMounted(async () => {
     tl.from('.intro-media', { clipPath: 'inset(100% 0% 0% 0%)', duration: 1.2, ease: 'power4.inOut' })
       .from('.intro-media img', { scale: 1.25, duration: 1.5, ease: 'power3.out' }, '<')
       .from('.intro-fade', { opacity: 0, y: 22, duration: 0.8, stagger: 0.08 }, 0.35)
+
+    // A foto desce um pouco mais devagar que a página: profundidade ligada
+    // ao scroll, não um efeito que dispara sozinho.
+    gsap.to('.intro-media', {
+      yPercent: 8,
+      ease: 'none',
+      scrollTrigger: { trigger: el, start: 'top top', end: 'bottom top', scrub: 0.5 }
+    })
   }, el)
 
   onBeforeUnmount(() => ctx.revert())
@@ -40,20 +48,27 @@ onMounted(async () => {
         <h1 class="intro-title intro-fade">Seu site pode fazer o telefone tocar.</h1>
         <p class="intro-sub intro-fade">
           Site e landing page pra clínica, escritório e prestador de serviço.
-          Orçamento na primeira conversa, e todo contato chega no seu WhatsApp.
+          Pronto em 5 a 15 dias úteis, e cada contato de cliente cai direto no seu WhatsApp.
         </p>
-        <a
-          :href="whatsapp"
-          target="_blank"
-          rel="noopener"
-          data-track="wa_hero"
-          class="intro-cta intro-fade"
-          data-cursor="grow"
-        >
-          <WaIcon :size="18" />
-          Me chamar no WhatsApp
-        </a>
-        <p class="intro-vaga intro-fade"><i aria-hidden="true" />{{ disponibilidade }}</p>
+        <!-- O botão diz o que acontece ao clicar; as duas linhas embaixo
+             respondem "quanto demora" e "o que me compromete", que é o que
+             a pessoa pergunta antes de apertar. A vaga é escassez real, e
+             pulsa de leve: sinal de "está no ar agora". -->
+        <div class="intro-acao intro-fade">
+          <a
+            :href="whatsapp"
+            target="_blank"
+            rel="noopener"
+            data-track="wa_hero"
+            class="intro-cta"
+            data-cursor="grow"
+          >
+            <WaIcon :size="18" />
+            Pedir orçamento no WhatsApp
+          </a>
+          <p class="intro-gatilho">Respondo no mesmo dia, sem compromisso.</p>
+          <p class="intro-vaga"><i class="pulso" aria-hidden="true" />{{ disponibilidade }}</p>
+        </div>
       </div>
 
       <figure class="intro-media">
@@ -99,11 +114,13 @@ onMounted(async () => {
 .intro-title {
   font-family: var(--font-display);
   font-weight: var(--w-display, 500);
-  font-size: clamp(2.3rem, 5.2vw, 4.4rem);
+  font-size: clamp(2.3rem, 4.6vw, 4rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
   text-wrap: balance;
-  max-width: 13ch;
+  /* três linhas equilibradas no desktop, duas no celular; com a coluna do
+     meio em 5/12 a Young Serif não cabe em duas linhas sem encolher demais */
+  max-width: 14ch;
 }
 .intro-sub {
   margin-top: var(--sp-3);
@@ -112,30 +129,28 @@ onMounted(async () => {
   line-height: 1.6;
   color: var(--lab-dim);
 }
+.intro-acao { margin-top: var(--sp-4); }
 .intro-cta {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  margin-top: var(--sp-4);
+  min-height: 3rem;
   padding: 0.9rem 1.6rem;
   background: var(--lab-accent);
   color: #0E0B04;
   font-weight: 600;
   font-size: 0.95rem;
   border-radius: 999px;
-  transition: transform 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
 }
-.intro-cta:hover { transform: translateY(-2px); background: var(--lab-fg); color: var(--lab-bg); }
-
+.intro-gatilho { margin-top: var(--sp-2); font-size: var(--t-s); color: var(--lab-dim); }
 .intro-vaga {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: var(--sp-3);
+  gap: 0.6rem;
+  margin-top: var(--sp-1);
   font-size: var(--t-s);
   color: var(--lab-dim);
 }
-.intro-vaga i { width: 6px; height: 6px; border-radius: 999px; background: var(--lab-accent); }
 
 @media (min-width: 900px) {
   .intro { padding-block: clamp(3rem, 7vh, 5rem); }
