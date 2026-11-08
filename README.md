@@ -20,10 +20,18 @@ então dá pra comparar a mesma posição entre os dois layouts. `wa_invadido`
 
 ## Desempenho da home
 
-Medido em 4G lento simulado (150 ms, 1,6 Mbps, CPU 4x), mediana de 3:
-LCP 1,7 s, CLS 0, 205 KB em 12 requests, ~1 ms de CPU por segundo com a
-página parada. GA4 e Clarity (~200 KB) entram depois do `load` e só em
-`kouichi.com.br`.
+Medido em 4G lento simulado (150 ms, 1,6 Mbps, CPU 4x, a mesma
+configuração do PageSpeed no celular), mediana de 3:
+
+- **No ar** (08/11, Lighthouse 12.8 contra `kouichi.com.br`): nota 96,
+  FCP 1,7 s, LCP 2,5 s, CLS 0, 231 KB em 18 requests. O LCP é a marca do
+  cabeçalho esperando a Young Serif: o título e a foto do topo entram com
+  fade, e o Chrome não conta os dois. O Cloudflare injeta o script do
+  e-mail e o beacon do Web Analytics.
+- **Local**, sem o Cloudflare: LCP 1,7 s, CLS 0, 205 KB em 12 requests,
+  ~1 ms de CPU por segundo com a página parada.
+
+GA4 e Clarity (~200 KB) entram depois do `load` e só em `kouichi.com.br`.
 
 - **Trocar a foto do topo:** o navegador usa o AVIF, não o WebP. Gere os
   dois (`avifenc -q 55 --yuv 400 foto.png hero-kouichi.avif`; abaixo de

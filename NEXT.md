@@ -75,11 +75,16 @@ tudo aqui estiver resolvido.
 
 ## Depois do deploy
 
-- [ ] Rodar o PageSpeed Insights em `kouichi.com.br` pra ter o número real.
-- [ ] Com esse número, a prova pelo próprio site: "Este site abre em X s
-  num 4G. Teste você mesmo." (mesma ideia do teste `site:`)
-- [ ] Conferir o card no WhatsApp mandando o link pra você mesmo. A imagem
-  agora é `/og.jpg`.
+- [x] Número real (08/11): a API do PageSpeed estava sem cota, então rodei
+  o mesmo Lighthouse dele contra o site no ar. Nota 96, LCP 2,5 s, CLS 0.
+  O detalhe está no README.
+- [ ] A prova pelo próprio site ("Este site abre em X s num 4G. Teste você
+  mesmo.") fica de fora por enquanto. Com LCP de 2,5 s não dá pra dizer
+  "menos de 2 s", e quem testa no PageSpeed vê um número que varia. Volta
+  se o LCP cair: o título e a foto do topo entram com fade, e por isso o
+  Chrome mede a marca do cabeçalho esperando a fonte.
+- [ ] Conferir o card no WhatsApp mandando o link pra você mesmo. A parte
+  técnica está certa: `/og.jpg` responde, 1200×630, 120 KB.
 
 ## Pendências manuais, fora do código
 
@@ -91,3 +96,5 @@ Estão no README, em "Depende de você":
 - DNS SPF/DMARC no Cloudflare.
 - WhatsApp Business.
 - Página `/site-invadido`: só depois que o teste de demanda passar.
+- Opcional: desligar o Web Analytics do Cloudflare. O GA4 e o Clarity já
+  medem, e ele soma 2 requests e 10 KB.
