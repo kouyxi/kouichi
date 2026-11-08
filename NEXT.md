@@ -24,8 +24,10 @@ tudo aqui estiver resolvido.
 
 1. Agentes **auditam em paralelo e só devolvem relatório**: copy, vieses e
    conversão, design e acessibilidade, desempenho. Nenhum deles edita código.
-2. O orquestrador junta os relatórios, tira repetição e conflito, e traz
-   **uma decisão por vez**.
+2. O orquestrador junta os relatórios, tira repetição e conflito e
+   **aplica a própria recomendação** (pedido do Victor em 08/11). Só
+   pergunta quando falta informação que só ele tem: preço real, se algo é
+   verdade, depoimento, acesso a conta. Publicar (push) continua com ele.
 3. As edições saem numa linha só, em commits pequenos em português.
 
 ## Decisões que só você pode tomar
@@ -68,7 +70,8 @@ tudo aqui estiver resolvido.
     (`Contact.vue`)
   - Feito em 08/11: os princípios viraram promessas pro cliente: "Sem
     exagero", "Nada sobrando" e "Combinado antes". (`Manifest.vue`)
-  - "Você sabe onde pisa." é enigmático. Mudar é opcional. (`Process.vue`)
+  - "Você sabe onde pisa." fica (08/11): é expressão comum, e a linha de
+    baixo já explica. (`Process.vue`)
 
 ## Depois do deploy
 
