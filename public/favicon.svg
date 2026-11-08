@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
-  <ellipse cx="60" cy="74" rx="38" ry="34" fill="#DC5B2C" stroke="#171309" stroke-width="5"/>
-  <ellipse cx="46" cy="61" rx="9" ry="5.5" fill="#F6EFDF" transform="rotate(-32 46 61)"/>
-  <path d="M60 47 C 63 34, 79 24, 91 28 C 86 41, 73 49, 60 47 Z" fill="#6F8347" stroke="#171309" stroke-width="4"/>
-  <path d="M63 45 L84 31" stroke="#171309" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <circle cx="56" cy="46" r="3.6" fill="#171309"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 4 56 56"><style>.t{fill:#0E0B04}@media (prefers-color-scheme:dark){.t{fill:#F3EAD8}}</style><path d="M32 18C46.9 18 56 25.8 56 38.5S46.9 59 32 59 8 51.2 8 38.5 17.1 18 32 18Z" fill="#E8631F"/><path class="t" d="M28 19.6C28.6 15.9 35.4 15.9 36 19.6Z"/><path class="t" d="M33.5 17C35.5 10 43 5 51 5.5 49 12.5 42 17.5 33.5 17Z"/></svg>

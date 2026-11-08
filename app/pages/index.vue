@@ -10,7 +10,9 @@ const title = 'Kouichi | Sites e landing pages que convertem em Goiânia'
 // Google mostra sem cortar.
 const description =
   'Site e landing page pra clínica, escritório e prestador de serviço em Goiânia. Feito pra gerar contato no WhatsApp, com orçamento na primeira conversa.'
-const ogImage = `${siteUrl}/og.png`
+// JPEG: é foto, e o WhatsApp costuma descartar imagem acima de ~300 KB.
+// O nome mudou de og.png: força WhatsApp e Facebook a buscarem a nova.
+const ogImage = `${siteUrl}/og.jpg`
 
 useHead({
   title,
@@ -28,7 +30,7 @@ useHead({
     // card, e o WhatsApp é justamente por onde o link vai circular.
     { property: 'og:image:width', content: '1200' },
     { property: 'og:image:height', content: '630' },
-    { property: 'og:image:alt', content: 'Kouichi, sites que geram contato em Goiânia' },
+    { property: 'og:image:alt', content: 'Victor Kouichi ao lado do título: Site que faz o telefone tocar.' },
     { property: 'og:locale', content: 'pt_BR' },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: title },

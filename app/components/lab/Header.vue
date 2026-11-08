@@ -85,10 +85,7 @@ const whatsapp = waLink('Oi, Kouichi! Vim pelo seu site e queria um orçamento. 
   white-space: nowrap;
 }
 .hd-logo .kana { margin-left: 0.15rem; }
-/* .hd-logo na frente de propósito: o .mikan do componente tem a mesma
-   especificidade, e antes do JS chegar o CSS dele vinha depois e ganhava.
-   A marca nascia gigante e encolhia em 2 s, empurrando a página inteira. */
-.hd-logo .hd-mark { width: 1.9rem; height: 1.9rem; --clay: var(--lab-accent); --ink: var(--lab-fg); --mark-shadow: transparent; }
+.hd-mark { width: 1.9rem; height: 1.9rem; --clay: var(--lab-accent); }
 
 .hd-nav { display: flex; gap: clamp(0.9rem, 2.5vw, 1.6rem); font-size: 0.92rem; }
 .hd-nav a { white-space: nowrap; color: var(--lab-dim); padding-block: 0.25rem; border-bottom: 1px solid transparent; }

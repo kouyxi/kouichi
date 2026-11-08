@@ -66,7 +66,7 @@ npx serve .output/public   # preview local do build
 - [x] WhatsApp e e-mail reais (ficam em `app/data/contato.ts`, um lugar só)
 - [x] Domínio real `kouichi.com.br` (em `app/pages/index.vue`, `public/robots.txt`, `public/sitemap.xml`)
 - [x] Imagem do hero: foto própria tratada em halftone (`public/img/hero-kouichi.avif`, com o `.webp` de reserva)
-- [x] Imagem OG 1200×630 em `public/og.png` (preview ao compartilhar no WhatsApp)
+- [x] Imagem OG 1200×630 em `public/og.jpg` (preview ao compartilhar no WhatsApp; 119 KB, abaixo do limite de ~300 KB do WhatsApp)
 - [x] Métricas instaladas (Microsoft Clarity + GA4), com clique de CTA e profundidade de rolagem; só contam visitas em `kouichi.com.br`
 
 ## Depende de você, não dá pra fazer pelo código
