@@ -27,7 +27,7 @@ const tamanhos = [
   }
 ]
 
-const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endereço é ')
+const waInvadido = waLink('Oi, Kouichi! Queria o diagnóstico grátis do meu site. O endereço é ')
 </script>
 
 <template>
@@ -81,6 +81,13 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
           Confira você mesmo: pesquise no Google
           <code class="sv-code">site:seudominio.com.br aposta</code>.
         </p>
+        <!-- O primeiro passo de quem só desconfia, sem custo. "Sem acesso"
+             porque é feito só com o que aparece no Google: o bloco promete
+             autorização por escrito antes de qualquer acesso. -->
+        <p class="sv-p">
+          <strong class="sv-forte">Diagnóstico grátis, sem acesso ao site:</strong>
+          te mando o que achei e o passo a passo pra resolver sozinho, se quiser.
+        </p>
 
         <ul class="sv-passos">
           <li>Backup antes de tudo</li>
@@ -117,7 +124,7 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
           class="sv-cta"
         >
           <WaIcon :size="18" />
-          Falar sobre o meu site
+          Pedir diagnóstico grátis
         </a>
       </article>
     </div>
@@ -133,6 +140,7 @@ const waInvadido = waLink('Oi, Kouichi! Acho que meu site foi invadido. O endere
 
 .sv-p { margin-top: var(--sp-3); max-width: 34rem; line-height: 1.6; color: var(--lab-dim); }
 .sv-p + .sv-p { margin-top: var(--sp-2); }
+.sv-forte { font-weight: 600; color: var(--lab-fg); }
 .sv-code {
   font-family: var(--font-body);
   font-weight: 600;

@@ -43,8 +43,9 @@ tudo aqui estiver resolvido.
   pirata, senha repassada) é caso novo, combinado na conversa.
 - [x] **Primeira metade do site** (08/11): só quando o cliente aprova o
   layout. Assim o "não gostou do layout, não paga" vale sem devolução.
-- [ ] **Diagnóstico grátis** no bloco da limpeza, se ele for feito sem
-  acesso ao site.
+- [x] **Diagnóstico grátis** (08/11): no bloco da limpeza e no FAQ, feito
+  só com o que aparece no Google, sem acesso ao site. O botão virou "Pedir
+  diagnóstico grátis".
 - [ ] **Manutenção mensal (R$ 79):** fica fora do site por enquanto. Falta
   dizer o que ela cobre, e o valor não é redondo.
 - [ ] **Prova social.** É a maior lacuna da página. Precisa de um
